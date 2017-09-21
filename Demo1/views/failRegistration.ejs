@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Failed Registration</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+     <title>Index Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+ <center>   <h1>Failed Registration</h1> </center>
+ <% errorstr = "ER_DUP_ENTRY: Duplicate entry '"+data1+"' for key 'PRIMARY'" ;
+ console.log(errorstr); %>
+    <% if(error.message===errorstr) {  %>
+    
+   <center> <strong>Error :</strong> Username Already Exists please choose a different one. </center>
+    
+    <% } %>
+    
+    
+    
+    <center><a class="btn btn-lg btn-danger" href="/register" role="button">Try Again</a></p></center>
+    
+  </body>
+</html>

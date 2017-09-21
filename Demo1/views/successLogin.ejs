@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Successful Login</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+  
+  <div class="jumbotron">
+  
+     <center><p class="lead"><strong>You have Logged In.</strong></p></center>         
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       <% for (var i in data) {  %>
+       
+         <td><%= data[i].username %></td>
+        <td><%= data[i].firstname %></td>
+        <td><%= data[i].lastname %></td>
+         <td><%= data[i].email %></td>
+        <% } %>
+      </tr>
+      </tbody>
+  </table>
+</div>
+
+</body>
+</html>
+    
