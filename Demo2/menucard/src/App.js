@@ -1,19 +1,36 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import SplitPane from 'react-split-pane';
+import React, {Component} from 'react';
+
+import MyToDo from './components/MyToDo';
 
 class App extends Component {
-  render() {
-    return (
-     
-        <SplitPane split="vertical" minSize="50" defaultSize="100">
-       <div></div>
-       <div></div>
-   </SplitPane>
-       
-    );
-  }
+
+    // handleAddTodo = (newItem) => {
+    //     this.setState((state) => {
+    //         state.todos.push({
+    //             todo: newItem,
+    //             status: 'active'
+    //         });
+    //     });
+    // };
+    //
+    // handleDone = (changedTodo) => {
+    //     this.setState((state) => {
+    //        state.todos = state.todos.map((item) => {
+    //            if(item.todo === changedTodo){
+    //                item.status = 'done';
+    //            }
+    //
+    //            return item;
+    //        })
+    //     });
+    // };
+
+    render() {
+
+        return (
+            <MyToDo/>
+        );
+    }
 }
 
 export default App;
