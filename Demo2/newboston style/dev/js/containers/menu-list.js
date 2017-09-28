@@ -6,8 +6,10 @@ import {Button, Jumbotron} from 'react-bootstrap';
 
 class MenuList extends Component{
 
+
  renderList() {
         return this.props.menu.map((menu) => {
+
             return (
                 <Jumbotron className ="container-fluid">
                 <div className = 'col-sm-5'>{menu.name} </div>
@@ -25,9 +27,9 @@ class MenuList extends Component{
 
 render() {
 return(
-      <ul>
+      <div>
       {this.renderList()}
-      </ul>
+      </div>
 
 	);
 
@@ -36,6 +38,8 @@ return(
 }
 
 function mapStateToProps(state) {
+  console.log("inside menu props");
+  
     return {
         menu: state.menu
     };
