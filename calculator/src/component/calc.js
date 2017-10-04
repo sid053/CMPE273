@@ -1,9 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react';
 import '../index.css'
 
+  const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
 
-class Calculator extends React.Component {
+const headers = {
+    'Accept': 'application/json'
+};
+
+class Calculator extends Component {
   
   state = {
    
@@ -13,6 +17,29 @@ class Calculator extends React.Component {
    oldnum : 0
 
   }
+  //fetch method
+
+
+
+doLogin(payload){
+ 
+   console.log("inside sending method");
+    fetch(`${api}/add`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+}
+ 
 
   //function to input digit
 
@@ -20,11 +47,11 @@ class Calculator extends React.Component {
 
    const displayValue = this.state.displayValue ;
    const waiting = this.state.waiting;
-
+   //const str = "1+2+3*2";
+   //console.log(parseInt("123+2+3"));
    if(!waiting){
-    //console.log("inside first value")
-   if (displayValue === 0){
  
+   if (displayValue === 0){
     this.setState( {
      displayValue : String(digit)
      } )
@@ -33,7 +60,6 @@ class Calculator extends React.Component {
     this.setState( {
       displayValue : displayValue+digit})
     }
-   //console.log(displayValue);
    }
  
    else{
@@ -43,7 +69,7 @@ class Calculator extends React.Component {
       waiting : false 
     })
    console.log("previous number")
-   console.log(this.state.oldnum)
+   console.log(this.state)
 
    }
 
@@ -68,9 +94,13 @@ displayValue : displayValue + '.'
 //function for clear display
 
 clearDisplay(){
-  console.log("inside clear display");
+
+console.log("inside clear display");
 this.setState({
-  displayValue : 0
+  displayValue : 0,
+  waiting : false,
+  oldnum : 0,
+  operator : null
 })
 
  }
@@ -101,27 +131,26 @@ const {displayValue} = this.state ;
 const num = parseFloat(displayValue);
 
 this.setState({displayValue : String(num/100)})
-
-
-
 }
 
-performOperation(operator){
+//perform operation 
 
+performOperation(operator){
+if(operator==='=' && this.state.waiting){
+  console.log("Eror , this is not allowed")
+}
+else{
 this.setState({
   operator : operator ,
   waiting : true,
   oldnum : this.state.displayValue
 })
-
-
-
+}
 }
 
 
-  render() {
-
-    const {displayValue} = this.state ;
+render() {
+  const {displayValue} = this.state ;
     return (
       <div className="calculator">
         <div className="calculator-display">{displayValue}</div>
@@ -147,11 +176,11 @@ this.setState({
             </div>
           </div>
           <div className="operator-keys">
-            <button className="calculator-key key-divide" onClick={()=> this.performOperation('/')}>/</button>
+            <button className="calculator-key key-divide" onClick={()=> this.performOperation('/')} >/</button>
             <button className="calculator-key key-multiply" onClick={()=> this.performOperation('*')} >×</button>
-            <button className="calculator-key key-subtract"  onClick={()=> this.performOperation('-')}>−</button>
-            <button className="calculator-key key-add"  onClick={()=> this.performOperation('+')}>+</button>
-            <button className="calculator-key key-equals" onClick={()=> this.performOperation('=')}>=</button>
+            <button className="calculator-key key-subtract"  onClick={()=> this.performOperation('-')} >−</button>
+            <button className="calculator-key key-add"  onClick={()=> this.performOperation('+')} >+</button>
+            <button className="calculator-key key-equals" onClick={()=> this.performOperation('=')} >=</button>
           </div>
         </div>
       </div>
