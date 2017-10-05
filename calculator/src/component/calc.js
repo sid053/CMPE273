@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import '../index.css'
-
-  const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001/calculate'
-
-const headers = {
-    'Accept': 'application/json'
-};
-
+import * as API from './API'
+const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001/calculate'
+  
 class Calculator extends Component {
   
   state = {
@@ -24,30 +20,65 @@ class Calculator extends Component {
 calculate(){
  
    console.log("inside calculator method");
-
-
+  const displayValue = this.state.displayValue ;
+  const oldnum = this.state.oldnum ;
+  var str ;
    switch(this.state.operator){
      
     case '+' :
         console.log("sending post method with add");
         console.log(this.state);
-   //  fetch(`${api}/add`, {
-   //      method: 'POST',
-   //      headers: {
-   //          ...headers,
-   //          'Content-Type': 'application/json'
-   //      },
-   //      body: JSON.stringify(this.state)
-   //  }).then(res => {
-   //       console.log("after send");
-   //      return res.status;
-   //  })
-   //      .catch(error => {
-   //          console.log("This is error");
-   //          return error;
-   //      });
+         str = api+'/add' ;
+        console.log(API)
+
+        break;
+
+    case '-':
+        
+        console.log("sending post method with add");
+       
+         str =api+'/sub'
+        console.log(API)
+        console.log("inside calculate with subtract");
+        break ;
+
+    case '*':
+        
+        console.log("sending post method with add");
+       
+         str =api+'/multiply'
+        console.log(API)
+        console.log("inside calculate with subtract");
+        break ;    
+
+    case '/':
+        
+        console.log("sending post method with add");
+       
+         str =api+'/divide'
+        console.log(API)
+        console.log("inside calculate with subtract");
+        break ;
+   
  
- }
+ }     //switch case getting over
+
+API.solve(this.state , str)
+            .then((res) => {
+               console.log(res.variable);
+              
+                     console.log(res.variable);
+                    this.setState({
+                        displayValue:res.variable
+                    });
+                   
+                
+            });
+
+ 
+
+
+ 
 
 }
  
@@ -147,13 +178,15 @@ this.setState({displayValue : String(num/100)})
 //perform operation 
 
 performOperation(operator){
+
 if(operator==='=' && this.state.waiting){
   console.log("Eror , this is not allowed")
 }
 
 else if (operator==='=' && !this.state.waiting){
   //console.log("Eror , this is not allowed")
-  calculate();
+  {
+    this.calculate()};
 }
 else{  
 this.setState({
@@ -162,6 +195,8 @@ this.setState({
   oldnum : this.state.displayValue
 })
 }
+
+
 }
 
 
