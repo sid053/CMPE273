@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../index.css'
 
-  const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
+  const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001/calculate'
 
 const headers = {
     'Accept': 'application/json'
@@ -21,23 +21,34 @@ class Calculator extends Component {
 
 
 
-doLogin(payload){
+calculate(){
  
-   console.log("inside sending method");
-    fetch(`${api}/add`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    }).then(res => {
-        return res.status;
-    })
-        .catch(error => {
-            console.log("This is error");
-            return error;
-        });
+   console.log("inside calculator method");
+
+
+   switch(this.state.operator){
+     
+    case '+' :
+        console.log("sending post method with add");
+        console.log(this.state);
+   //  fetch(`${api}/add`, {
+   //      method: 'POST',
+   //      headers: {
+   //          ...headers,
+   //          'Content-Type': 'application/json'
+   //      },
+   //      body: JSON.stringify(this.state)
+   //  }).then(res => {
+   //       console.log("after send");
+   //      return res.status;
+   //  })
+   //      .catch(error => {
+   //          console.log("This is error");
+   //          return error;
+   //      });
+ 
+ }
+
 }
  
 
@@ -139,7 +150,12 @@ performOperation(operator){
 if(operator==='=' && this.state.waiting){
   console.log("Eror , this is not allowed")
 }
-else{
+
+else if (operator==='=' && !this.state.waiting){
+  //console.log("Eror , this is not allowed")
+  calculate();
+}
+else{  
 this.setState({
   operator : operator ,
   waiting : true,
