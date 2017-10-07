@@ -10,14 +10,14 @@ class Calculator extends Component {
    displayValue : 0,
    operator : null,
    waiting : false,
-   oldnum : 0
+   oldnum : null
 
   }
   //fetch method
 
 
 
-calculate(){
+calculate(operator){
  
    console.log("inside calculator method");
   const displayValue = this.state.displayValue ;
@@ -62,6 +62,9 @@ calculate(){
    
  
  }     //switch case getting over
+ 
+ 
+
 
 API.solve(this.state , str)
             .then((res) => {
@@ -71,16 +74,30 @@ API.solve(this.state , str)
                     this.setState({
                         displayValue:res.variable
                     });
+
+
+                    if(operator!== '='){
+
+                        this.setState({operator : operator,
+                        oldnum :displayValue,
+                      waiting : true})
+ 
+                      }
+
+                    else{
+                        this.setState({operator : null ,
+                        oldnum : null,
+                        waiting :false})
+                        }
+
                    
                 
             });
 
- 
-
 
  
-
 }
+
  
 
   //function to input digit
@@ -116,6 +133,9 @@ API.solve(this.state , str)
    }
 
 }
+
+
+
 
 
 
@@ -169,7 +189,7 @@ else{
 
 calcPercentage(){
 
-const {displayValue} = this.state ;
+const {displayValue} = this.state.displayValue ;
 const num = parseFloat(displayValue);
 
 this.setState({displayValue : String(num/100)})
@@ -177,16 +197,17 @@ this.setState({displayValue : String(num/100)})
 
 //perform operation 
 
-performOperation(operator){
 
+performOperation(operator){
+const oldnum = this.state.oldnum ;
 if(operator==='=' && this.state.waiting){
   console.log("Eror , this is not allowed")
 }
 
-else if (operator==='=' && !this.state.waiting){
+else if (!this.state.waiting && oldnum !== null){
   //console.log("Eror , this is not allowed")
   {
-    this.calculate()};
+    this.calculate(operator)};
 }
 else{  
 this.setState({
