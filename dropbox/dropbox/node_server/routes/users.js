@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+var mysql = require('./mysql');
+var home = require('./home');
 
 var users = [
     {
@@ -53,5 +54,8 @@ router.post('/doLogin', function (req, res, next) {
     // }
 
 });
+
+router.post('/doRegister', home.afterRegister);
+
 
 module.exports = router;

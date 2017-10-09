@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {Button} from 'react-bootstrap'
 
-class Login extends Component {
+class SignIn extends Component {
 
     static propTypes = {
         handleSubmit: PropTypes.func.isRequired
@@ -57,12 +58,11 @@ class Login extends Component {
                             />
                         </div>
                         <div className="form-group">
-                            <button
-                                className="btn btn-primary"
-                                type="button"
+                            <Button
+                                bsStyle="primary"
                                 onClick={() => this.props.handleSubmit(this.state)}>
                                 Submit
-                            </button>
+                            </Button>
                         </div>
                     </form>
                 </div>
@@ -71,4 +71,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default SignIn;

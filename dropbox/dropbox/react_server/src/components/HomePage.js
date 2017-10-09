@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import * as API from '../api/API';
-import Login from "./Login";
+import SignIn from "./SignIn";
 import Message from "./Message";
 import Welcome from "./Welcome";
 import Upload from "./Upload" ;
+import SignUp from "./SignUp";
+import {Button} from "react-bootstrap";
 
 class NewerHomePage extends Component {
 
@@ -39,25 +41,44 @@ class NewerHomePage extends Component {
                 <Route exact path="/" render={() => (
                     <div>
                         <Message message="You have landed on my App !!"/>
-                        <button className="btn btn-success" onClick={() => {
-                            this.props.history.push("/login");
+                       <div className="col-md-6">   <Button bsStyle="primary" onClick={() => {
+                            this.props.history.push("/SignIn");
                         }}>
-                            Login
-                        </button>
+                            SignIn
+                        </Button>
+                        </div>
+                        <div className="col-md-6">
+                        <Button bsStyle="primary" onClick={() => {
+                            this.props.history.push("/SignUp");
+                        }}>
+                            SignUp
+                        </Button>
+                        </div>
                     </div>
+                  
+
+
                 )}/>
 
-               {/* <Route exact path="/login" render={() => (
+                <Route exact path="/SignIn" render={() => (
                     <div>
-                        <Login handleSubmit={this.handleSubmit}/>
+                        <SignIn handleSubmit={this.handleSubmit}/>
                         <Message message={this.state.message}/>
                     </div>
-                )}/>   */}
+                )}/> 
+
+                <Route exact path="/SignUp" render={() => (
+                    <div>
+                        <SignUp handleSubmit={this.handleSubmit}/>
+                        <Message message={this.state.message}/>
+                    </div>
+                )}/> 
+
                 <Route exact path="/welcome" render={() => (
                     <Welcome username={this.state.username}/>
                 )}/>
 
-                <Route exact path="/login" render={() => (
+                <Route exact path="/Upload" render={() => (
                     <Upload/>
                 )}/>
 

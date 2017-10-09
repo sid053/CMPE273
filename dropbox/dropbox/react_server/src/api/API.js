@@ -21,6 +21,26 @@ export const doLogin = (payload) =>
             return error;
         });
 
+export const doRegister = (payload) =>
+
+    fetch(`${api}/users/doRegister`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    })
+        .catch(error => {
+            console.log("This is error");
+            return error;
+        });
+
+
+
+
 
 export const getImages = () =>
     fetch(`${api}/files/`)
