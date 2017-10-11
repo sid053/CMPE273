@@ -35,6 +35,23 @@ class NewerHomePage extends Component {
             });
     };
 
+
+    handleRegister = (userdata) => {
+        API.doRegister(userdata)
+            .then((status) => {
+                console.log("inside handleRegister");
+                if (status === 201) {
+                    console.log("after Register");
+                    this.props.history.push("/SignIn");
+                } else if (status === 401) {
+                    this.setState({
+                        isLoggedIn: false,
+                        message: "Wrong username or password. Try again..!!"
+                    });
+                }
+            });
+    };
+
     render() {
         return (
             <div className="container-fluid">
@@ -69,7 +86,7 @@ class NewerHomePage extends Component {
 
                 <Route exact path="/SignUp" render={() => (
                     <div>
-                        <SignUp handleSubmit={this.handleSubmit}/>
+                        <SignUp handleRegister={this.handleRegister}/>
                         <Message message={this.state.message}/>
                     </div>
                 )}/> 
@@ -79,7 +96,7 @@ class NewerHomePage extends Component {
                 )}/>
 
                 <Route exact path="/Upload" render={() => (
-                    <Upload/>
+                    <Upload username = {this.state.username}/>
                 )}/>
 
 

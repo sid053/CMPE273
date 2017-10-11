@@ -29,15 +29,22 @@ class ImageGridList extends Component {
 
     render(){
         const classes = this.props;
+        console.log("This is the classes") ;
+        console.log(classes) ;
 
         return (
             <div className={classes.root}>
                     <GridList cellHeight={250} className={classes.gridList} cols={10}>
                         {this.props.images.map(tile => (
+                                
                             <GridListTile key={tile.img} cols={tile.cols || 1}>
-                                <img src={'http://localhost:3001/'+tile.img} alt={'myimage'}/>
+                            <img src={'http://localhost:3001/'+tile.img} alt={'myimage'}/>
+                                
                             </GridListTile>
-                        ))}
+
+                        ))
+
+                    }
                     </GridList>
             </div>
         );

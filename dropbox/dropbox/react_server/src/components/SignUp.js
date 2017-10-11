@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Button} from 'react-bootstrap';
-import * as API from '../api/API';
-
 class SignUp extends Component {
 
     static propTypes = {
-        handleSubmit: PropTypes.func.isRequired
+        handleRegister: PropTypes.func.isRequired
     };
 
     state = {
@@ -17,23 +15,6 @@ class SignUp extends Component {
 
     };
 
-   handleRegister = (userdata) => {
-        API.doRegister(userdata)
-            .then((status) => {
-                console.log("inside handleRegister");
-                if (status === 201) {
-                    console.log("after Register");
-                    this.props.history.push("/SignIn");
-                } else if (status === 401) {
-                    this.setState({
-                        isLoggedIn: false,
-                        message: "Wrong username or password. Try again..!!"
-                    });
-                }
-            });
-    };
-
-    
     componentWillMount(){
         this.setState({
             username: '',
@@ -49,7 +30,7 @@ class SignUp extends Component {
             <div className="container">
             <div className="row main">
                   <div className="main-login main-center">
-                    <form className="form-horizontal" method="post" action="#">
+                    <form className="form-horizontal">
                         
                         <div className="form-group">
                             <label for="name" className="cols-sm-2 control-label">Your Name</label>
@@ -121,7 +102,7 @@ class SignUp extends Component {
                         <div className="form-group ">
                             <Button
                                 bsStyle="primary"
-                                onClick={() => this.handleRegister(this.state)}> Register</Button>
+                                onClick={() => this.props.handleRegister(this.state)}> Register</Button>
                         </div>
                       
                     </form>

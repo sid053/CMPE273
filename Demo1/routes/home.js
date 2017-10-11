@@ -63,32 +63,13 @@ function afterSignIn(req,res)
 		{
 			if(results.length > 0){
 				console.log("valid Login");
-				ejs.renderFile('./views/successLogin.ejs', { data: results } , function(err, result) {
-			        // render on success
-			        if (!err) {
-			            res.end(result);
-			        }
-			        // render or error
-			        else {
-			            res.end('An error occurred');
-			            console.log(err);
-			        }
-			    });
-			}
+				res.status(201).send();
+				
+			      }
 			else {    
 				
 				console.log("Invalid Login");
-				ejs.renderFile('./views/failLogin.ejs',function(err, result) {
-			        // render on success
-			        if (!err) {
-			            res.end(result);
-			        }
-			        // render or error
-			        else {
-			            res.end('An error occurred');
-			            console.log(err);
-			        }
-			    });
+				res.status(401).send();
 			}
 		}  
 	},getUser);

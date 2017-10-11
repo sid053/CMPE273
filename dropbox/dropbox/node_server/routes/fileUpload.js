@@ -5,7 +5,10 @@ var glob = require('glob');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/uploads/')
+        console.log("inside multer");
+        console.log()
+        console.log('./UserFiles/'+req.body.username)
+        cb(null, './UserFiles/'+req.body.username)
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + '.jpeg')
@@ -17,8 +20,10 @@ var upload = multer({storage:storage});
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     var resArr = [];
-
-    glob("public/uploads/*.jpeg", function (er, files) {
+    console.log("Inside get all files");
+    console.log(req);
+    var filepath = "UserFiles/"+req.body.username+"*.jpeg" ;
+    glob(filepath, function (er, files) {
 
         var resArr = files.map(function (file) {
             var imgJSON = {};
@@ -34,8 +39,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/upload', upload.single('mypic'), function (req, res, next) {
-    console.log(req.body);
+    //console.log(req.body);
+    //console.log(req.username);
+    console.log(req.body.username);
     console.log(req.file);
+
     res.status(204).end();
 });
 

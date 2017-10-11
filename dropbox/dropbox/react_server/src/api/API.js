@@ -21,6 +21,8 @@ export const doLogin = (payload) =>
             return error;
         });
 
+
+
 export const doRegister = (payload) =>
 
     fetch(`${api}/users/doRegister`, {
@@ -31,6 +33,7 @@ export const doRegister = (payload) =>
         },
         body: JSON.stringify(payload)
     }).then(res => {
+        console.log(res.status);
         return res.status;
     })
         .catch(error => {
@@ -42,13 +45,16 @@ export const doRegister = (payload) =>
 
 
 
-export const getImages = () =>
+export const getImages = (payload) =>
     fetch(`${api}/files/`)
         .then(res => res.json())
         .catch(error => {
             console.log("This is error.");
             return error;
         });
+
+
+
 
 export const uploadFile = (payload) =>
     fetch(`${api}/files/upload`, {
