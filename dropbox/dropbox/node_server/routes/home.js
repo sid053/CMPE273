@@ -5,6 +5,8 @@ var fs = require("fs")
 var first = "User";
 var second = "Table";
 var table = first+'_'+second;
+var fileUpload = require('./fileUpload');
+var glob = require('glob');
 function afterRegister(req,res){
 
 console.log(table);
@@ -48,7 +50,38 @@ mysql.fetchData(function(err){
    }
 
    else{
-   	res.status(201).send();
+
+   	//thsi si where i call the function
+    console.log("Inside afterSignIn for API ");
+    // console.log(req.body);
+    glob("public/uploads/*.jpeg", function (er, files) {
+
+        var resArr = files.map(function (file) {
+            var imgJSON = {};
+            imgJSON.img = 'uploads/'+file.split('/')[2];
+            imgJSON.cols = 2  ;
+            return imgJSON;
+        });
+
+        console.log(resArr);
+       res.status(201).send(resArr);
+    });
+
+
+
+   	// fileUpload.sendImages(function(err,result){
+
+   	// 	if(err){
+    //         res.status(401);
+
+   	// 	}
+   	// 	else {
+   	// 		res.status(201).send(result);
+   	// 	}
+
+
+   	// });
+   
    }
 
 

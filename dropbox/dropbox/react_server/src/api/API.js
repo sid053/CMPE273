@@ -13,8 +13,11 @@ export const doLogin = (payload) =>
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
-    }).then(res => {
-        return res.status;
+    }).then(res => { 
+        console.log("inside dologin");
+    console.log(res);
+        return res.status.json();
+
     })
         .catch(error => {
             console.log("This is error");
@@ -46,8 +49,7 @@ export const doRegister = (payload) =>
 
 
 export const getImages = (payload) =>
-    fetch(`${api}/files/`)
-        .then(res => res.json())
+    fetch(`${api}/files/`,{method :'GET'}).then(res => res.json())
         .catch(error => {
             console.log("This is error.");
             return error;

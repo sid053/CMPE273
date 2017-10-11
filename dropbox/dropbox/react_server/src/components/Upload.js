@@ -27,7 +27,8 @@ class Upload extends Component {
 
         payload.append('mypic', event.target.files[0]);
         payload.append('username',this.state.username);
-         
+        console.log("payload for upload");
+        // console.log(payload.body.username);
         API.uploadFile(payload)
             .then((status) => {
                 if (status === 204) {
@@ -52,16 +53,16 @@ class Upload extends Component {
     }
 
     componentDidMount() {
-         this.setState({
-            username : this.props.username
-        });
-         const payload = new FormData();
-         payload.append('username',this.state.username);
-         console.log(this.state.username + "Before sending the get");
-         console.log(payload);
-        API.getImages(payload)
+        console.log("componentDidMount function");
+        console.log("I am here");
+         console.log(this.state.username);
+          const username = this.state.username ;
+         
+       
+         //console.log(payload.body.username);
+        API.getImages(username)
             .then((data) => {
-                console.log(data);
+                //console.log(data);
                 this.setState({
                     images: data
                 });

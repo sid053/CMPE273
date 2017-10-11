@@ -5,10 +5,7 @@ var glob = require('glob');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        console.log("inside multer");
-        console.log()
-        console.log('./UserFiles/'+req.body.username)
-        cb(null, './UserFiles/'+req.body.username)
+        cb(null, './public/uploads/')
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + '.jpeg')
@@ -19,11 +16,28 @@ var upload = multer({storage:storage});
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    var resArr = [];
-    console.log("Inside get all files");
-    console.log(req);
-    var filepath = "UserFiles/"+req.body.username+"*.jpeg" ;
-    glob(filepath, function (er, files) {
+  //  var resArr = [];
+    //     console.log("Inside get for API ");
+    //  console.log(req.body);
+    // glob("public/uploads/*.jpeg", function (er, files) {
+
+    //     var resArr = files.map(function (file) {
+    //         var imgJSON = {};
+    //         imgJSON.img = 'uploads/'+file.split('/')[2];
+    //         imgJSON.cols = 2  ;
+    //         return imgJSON;
+    //     });
+
+    //     console.log(resArr);
+    //     res.status(200).send(resArr);
+    // });
+
+});
+
+function sendImages(callback){
+   console.log("Inside get for API ");
+     console.log(req.body);
+    glob("public/uploads/*.jpeg", function (er, files) {
 
         var resArr = files.map(function (file) {
             var imgJSON = {};
@@ -32,19 +46,24 @@ router.get('/', function (req, res, next) {
             return imgJSON;
         });
 
-        console.log(resArr);
-        res.status(200).send(resArr);
+        //console.log(resArr);
+       // res.status(200).send(resArr);
     });
 
-});
+  callback(err ,resArr);
+
+}
+
+
 
 router.post('/upload', upload.single('mypic'), function (req, res, next) {
-    //console.log(req.body);
-    //console.log(req.username);
+   
+    console.log("inside post upload");
     console.log(req.body.username);
     console.log(req.file);
 
     res.status(204).end();
 });
 
+exports.sendImages = sendImages ;
 module.exports = router;

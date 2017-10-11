@@ -13,18 +13,26 @@ class NewerHomePage extends Component {
     state = {
         isLoggedIn: false,
         message: '',
-        username: ''
+        username: '',
+        Images:[]
     };
 
     handleSubmit = (userdata) => {
         API.doLogin(userdata)
-            .then((status) => {
+            .then((status,data) => {
                 if (status === 201) {
+                    console.log("after SignIn response");
+                    //console.log(data);
                     this.setState({
                         isLoggedIn: true,
                         message: "Welcome to my App..!!",
-                        username: userdata.username
+                        username: userdata.username,
+                        Images:data
+                       
+
                     });
+                    console.log("inside handle submit state");
+                    console.log(this.state);
                     this.props.history.push("/Upload");
                 } else if (status === 401) {
                     this.setState({
@@ -51,6 +59,8 @@ class NewerHomePage extends Component {
                 }
             });
     };
+
+
 
     render() {
         return (
