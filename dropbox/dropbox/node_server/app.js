@@ -4,6 +4,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var session = require('client-sessions');
+var expressValidator = require('express-validator');
 
 var index = require('./routes/index');
 var fileUpload = require('./routes/fileUpload');

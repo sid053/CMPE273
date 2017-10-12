@@ -29,7 +29,7 @@ class ImageGridList extends Component {
 
     render(){
         const classes = this.props;
-        console.log("This is the classes") ;
+        console.log("This is the render for ImageGridList")
         console.log(classes) ;
 
         return (

@@ -19,27 +19,24 @@ class NewerHomePage extends Component {
 
     handleSubmit = (userdata) => {
         API.doLogin(userdata)
-            .then((status,data) => {
-                if (status === 201) {
+            .then((data) => {
                     console.log("after SignIn response");
-                    //console.log(data);
                     this.setState({
                         isLoggedIn: true,
                         message: "Welcome to my App..!!",
                         username: userdata.username,
                         Images:data
-                       
-
                     });
                     console.log("inside handle submit state");
                     console.log(this.state);
                     this.props.history.push("/Upload");
-                } else if (status === 401) {
-                    this.setState({
-                        isLoggedIn: false,
-                        message: "Wrong username or password. Try again..!!"
-                    });
-                }
+            }).catch((error)=> {
+                this.setState({
+                        isLoggedIn: true,
+                        message: "Error While logging in!!",
+                        username: userdata.username,
+                        Images:''
+                    });  
             });
     };
 
@@ -106,7 +103,7 @@ class NewerHomePage extends Component {
                 )}/>
 
                 <Route exact path="/Upload" render={() => (
-                    <Upload username = {this.state.username}/>
+                    <Upload {...this.state}/>
                 )}/>
 
 

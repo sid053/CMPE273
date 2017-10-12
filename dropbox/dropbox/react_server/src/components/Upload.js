@@ -12,13 +12,13 @@ class Upload extends Component {
         username: PropTypes.string.isRequired
     };
 
-    state = {
-        username :' '
-    }
+   
 
     componentWillMount(){
         this.setState({
-            username : this.props.username
+            username : this.props.username,
+            images : this.props.Images
+
         });
     }
     handleFileUpload = (event) => {
@@ -27,50 +27,40 @@ class Upload extends Component {
 
         payload.append('mypic', event.target.files[0]);
         payload.append('username',this.state.username);
+
         console.log("payload for upload");
         // console.log(payload.body.username);
         API.uploadFile(payload)
             .then((status) => {
                 if (status === 204) {
-                    API.getImages()
-                        .then((data) => {
-                            this.setState({
-                                images: data
-                            });
-                        });
+                    // API.getImages()
+                    //     .then((data) => {
+                    //         this.setState({
+                    //             images: data
+                    //         });
+                    //     });
                 }
             });
 
     };
 
-    constructor() {
-        super();
-        this.state = {
-            images: []
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         images: []
 
 
-        };
-    }
+    //     };
+    // }
 
     componentDidMount() {
         console.log("componentDidMount function");
         console.log("I am here");
          console.log(this.state.username);
-          const username = this.state.username ;
-         
-       
-         //console.log(payload.body.username);
-        API.getImages(username)
-            .then((data) => {
-                //console.log(data);
-                this.setState({
-                    images: data
-                });
-            });
-    };
+         };
 
     render() {
-         //console.log("Inside handleFileUpload :" + this.state.username)
+         console.log("Inside handleFileUpload :" + this.state.images);
 
         return (
             <div >
@@ -80,13 +70,13 @@ class Upload extends Component {
                 >
                     Dropbox
                 </Typography>
-                <TextField
+              <TextField
                     className={'fileupload'}
                     type="file"
                     name="mypic"
                     onChange={this.handleFileUpload}
-                />
-                <ImageGridList images={this.state.images}/>
+                />  
+               {/*   <ImageGridList images={this.state.images}/>   */}
             </div>
 
         );
