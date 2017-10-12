@@ -32,7 +32,7 @@ class NewerHomePage extends Component {
                     this.props.history.push("/Upload");
             }).catch((error)=> {
                 this.setState({
-                        isLoggedIn: true,
+                        isLoggedIn: false,
                         message: "Error While logging in!!",
                         username: userdata.username,
                         Images:''
@@ -56,9 +56,7 @@ class NewerHomePage extends Component {
                 }
             });
     };
-
-
-
+   
     render() {
         return (
             <div className="container-fluid">

@@ -28,6 +28,7 @@ console.log(table);
 		         if (!err) {
 			                   console.log("directory created") ;
 			                  console.log("checking");
+			                    console.log(req.sessionID);
         					 res.status(201).send();    
 		                    }
 		         else {
@@ -55,14 +56,17 @@ mysql.fetchData(function(err){
 
   
     console.log("Inside afterSign in for sending files back");
-     console.log(username)
+     req.session.user = username;
+     console.log("After assigning the user in the session");
+     console.log(req.sessionID);
+     console.log("Session");
+     //console.log(req.session);
 
     glob("UserFiles/"+username+"/*.jpeg", function (er, files) {
             console.log("inside glob");
             console.log(username)
         var resArr = files.map(function (file) {
             var imgJSON = {};
-           // console.log(file);
            var path = "UserFiles/"+username+"/";
            imgJSON.img = path+file.split('/')[2];
             imgJSON.cols = 2  ;

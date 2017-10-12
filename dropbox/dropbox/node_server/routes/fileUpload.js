@@ -6,6 +6,7 @@ const username = "yashvi"
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         console.log("Inside multer updated code");
+        console.log(req.sessionID);
         cb(null, './UserFiles/'+username)
     },
     filename: function (req, file, cb) {

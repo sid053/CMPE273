@@ -15,12 +15,15 @@ class Upload extends Component {
    
 
     componentWillMount(){
+        //this.handleFileUpload()
         this.setState({
             username : this.props.username,
             images : this.props.Images
 
         });
     }
+
+    
     handleFileUpload = (event) => {
 
         const payload = new FormData();
@@ -29,7 +32,6 @@ class Upload extends Component {
         payload.append('username',this.state.username);
 
         console.log("payload for upload");
-        // console.log(payload.body.username);
         API.uploadFile(payload)
             .then((status) => {
                 if (status === 204) {

@@ -4,8 +4,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var session = require('client-sessions');
+var expressSession = require('express-session');
 var expressValidator = require('express-validator');
+
 
 var index = require('./routes/index');
 var fileUpload = require('./routes/fileUpload');
@@ -26,7 +27,15 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
+app.use(cookieParser('foo'));
+app.use(expressSession({
+  cookieName: 'session',
+  secret: 'foo',
+  resave:false,
+  duration: 50 * 60 * 1000,
+  activeDuration: 30 * 60 * 1000,
+  ephemeral: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
