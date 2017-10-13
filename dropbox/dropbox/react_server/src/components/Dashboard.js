@@ -5,6 +5,8 @@ import ImageGridList from "../ImageGridList";
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
+import {createBrowserHistory} from 'history' ;
+import { Route, withRouter } from 'react-router-dom';
 
 class Dashboard extends Component {
 
@@ -12,7 +14,11 @@ class Dashboard extends Component {
         username: PropTypes.string.isRequired
     };
 
+   state = {
    
+   allowed : false
+
+   }
 
     componentWillMount(){
         //this.handleFileUpload()
@@ -21,6 +27,13 @@ class Dashboard extends Component {
             images : this.props.Images
 
         });
+         console.log("Inside component will mount");
+        API.checkSession().then((status)=>{
+            console.log("Inside check session");
+            if(status !== 201){
+            createBrowserHistory.push("/signIn");
+            }
+        })
     }
 
 
@@ -62,7 +75,8 @@ class Dashboard extends Component {
          };
 
     render() {
-         console.log("Inside handleFileUpload :" + this.state.images);
+        // console.log("Inside handleFileUpload :" + this.state.images);
+
 
         return (
         
@@ -108,7 +122,10 @@ class Dashboard extends Component {
 
             
         );
-    }
-}
 
+  
+     
+    
+}
+}
 export default Dashboard;

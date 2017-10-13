@@ -14,7 +14,8 @@ class NewerHomePage extends Component {
         isLoggedIn: false,
         message: "Welcome to DropBox",
         username: '',
-        Images:[]
+        Images:[],
+        dashboard:true
     };
 
     handleSubmit = (userdata) => {
@@ -29,6 +30,9 @@ class NewerHomePage extends Component {
                     });
                     console.log("inside handle submit state");
                     console.log(this.state);
+                    this.setState({
+                        dashboard:false
+                    })
                     this.props.history.push("/dashboard");
             }).catch((error)=> {
                 this.setState({
@@ -65,12 +69,17 @@ class NewerHomePage extends Component {
     };
    
     render() {
-        return (
 
+
+
+if(this.state.dashboard){
+
+        return (
+ 
 
  <div>
 
-
+                <div className="col-md-12">
                 <div className="row justify-content-md-center">
                     <div className="col-md-10">
                          <Message message={this.state.message}/>
@@ -86,11 +95,7 @@ class NewerHomePage extends Component {
 
   
                         </div>
-
-
-    
-
-
+                       
                         <div className="col-md-6">
                              <Route exact path="/" render={() => (
                                 <div>
@@ -120,19 +125,25 @@ class NewerHomePage extends Component {
 
                 
                 </div>
-
+            </div>  
 {/*         -----------------------------------------------------------------------------------------   */}
 
-        
-            <div>
+        </div>
+              );
+
+
+    }
+else{
+        return(
                 <Route exact path="/dashboard" render={() => (
                     <Dashboard {...this.state}/>
                 )}/>
-            </div>
+            
+             );
+  }
 
 
-</div>
-         );
+       
     }
 }
 
