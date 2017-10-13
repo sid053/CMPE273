@@ -18,14 +18,14 @@ class SignIn extends Component {
         this.setState({
             username: '',
             password: '',
-             images: []
+            images :[]
         });
     }
 
     render() {
         return (
             <div className="row justify-content-md-center">
-                <div className="col-md-3">
+                <div>
                     <form>
                         <div className="form-group">
                             <h1>Login</h1>

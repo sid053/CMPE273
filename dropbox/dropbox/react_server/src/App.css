@@ -40,11 +40,15 @@
 /*
  * General styles
  */
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css);
+body{margin-top:20px;}
+.fa-fw {width: 2em;}
+
 
 body, html{
      height: 100%;
   background-repeat: no-repeat;
-  background-color: #d3d3d3;
+  /*background-color: #d3d3d3;*/
   font-family: 'Oxygen', sans-serif;
 }
 
@@ -105,6 +109,7 @@ input::-webkit-input-placeholder {
   font-size: 11px;
   text-align: center;
 }
+
 
 
 

@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 
-class Upload extends Component {
+class Dashboard extends Component {
 
     static propTypes = {
         username: PropTypes.string.isRequired
@@ -23,7 +23,7 @@ class Upload extends Component {
         });
     }
 
-    
+
     handleFileUpload = (event) => {
 
         const payload = new FormData();
@@ -65,6 +65,25 @@ class Upload extends Component {
          console.log("Inside handleFileUpload :" + this.state.images);
 
         return (
+        
+
+            <div className="container">
+    <div className="row">
+        <div className="col-md-3">
+            <ul className="nav nav-pills nav-stacked">
+                <li className="active"><a href="#"><i className="fa fa-home fa-fw"></i>Home</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-list-alt fa-fw"></i>Widgets</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-file-o fa-fw"></i>Pages</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-bar-chart-o fa-fw"></i>Charts</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-table fa-fw"></i>Table</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-tasks fa-fw"></i>Forms</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-calendar fa-fw"></i>Calender</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-book fa-fw"></i>Library</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-pencil fa-fw"></i>Applications</a></li>
+                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-cogs fa-fw"></i>Settings</a></li>
+            </ul>
+        </div>
+        <div className="col-md-9 well">
             <div >
                 <Typography
                     align={'center'}
@@ -81,8 +100,15 @@ class Upload extends Component {
                {/*   <ImageGridList images={this.state.images}/>   */}
             </div>
 
+
+        </div>
+    </div>
+</div>
+
+
+            
         );
     }
 }
 
-export default Upload;
+export default Dashboard;

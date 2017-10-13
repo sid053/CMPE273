@@ -12,9 +12,10 @@ var glob = require('glob');
 function afterRegister(req,res){
 
 console.log(table);
-      const FilePath = "UserFiles/"+req.param("username");
-	var insertUser = "Insert into "+table+" values('"+req.param("name")+"','"+req.param("username")+"','"+req.param("email")+"','"+req.param("password")+"')";
+      const FilePath = "UserFiles/"+req.body.username;
+	var insertUser = "Insert into "+table+" values('"+req.body.name+"','"+req.body.username+"','"+req.body.email+"','"+req.body.password+"')";
 	console.log("The query is :" , insertUser);
+
 	mysql.putData(function(err){
 		if(err){
 			console.log("error in the callback for after register");
@@ -28,6 +29,8 @@ console.log(table);
 		         if (!err) {
 			                   console.log("directory created") ;
 			                  console.log("checking");
+			                   var sessData = req.session;
+  								sessData.someAttribute = "siddharth";
 			                    console.log(req.sessionID);
         					 res.status(201).send();    
 		                    }
@@ -43,7 +46,7 @@ console.log(table);
 }
 
 function afterSignIn(req,res){
-const username = req.param("username");
+const username = req.body.username;
 var getUser = "Select password from "+table+" where username='"+username+"';";
 console.log("The query is :", getUser);
 mysql.fetchData(function(err){
@@ -53,18 +56,11 @@ mysql.fetchData(function(err){
    }
 
    else{
-
-  
-    console.log("Inside afterSign in for sending files back");
-     req.session.user = username;
-     console.log("After assigning the user in the session");
-     console.log(req.sessionID);
-     console.log("Session");
-     //console.log(req.session);
-
+        console.log(req.sessionID);
+        
+        req.session.username = username;
     glob("UserFiles/"+username+"/*.jpeg", function (er, files) {
-            console.log("inside glob");
-            console.log(username)
+         
         var resArr = files.map(function (file) {
             var imgJSON = {};
            var path = "UserFiles/"+username+"/";
@@ -72,7 +68,7 @@ mysql.fetchData(function(err){
             imgJSON.cols = 2  ;
             return imgJSON;
         });
-         console.log(resArr);
+        // console.log(resArr);
      
        res.status(201).send(resArr);
     });

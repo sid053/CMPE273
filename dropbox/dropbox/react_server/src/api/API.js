@@ -8,6 +8,8 @@ const headers = {
 export const doLogin = (payload) =>
     fetch(`${api}/users/doLogin`, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
@@ -36,6 +38,8 @@ export const doRegister = (payload) =>
 
     fetch(`${api}/users/doRegister`, {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
@@ -67,6 +71,8 @@ export const getImages = () =>
 export const uploadFile = (payload) =>
     fetch(`${api}/files/upload`, {
         method: 'POST',
+         credentials: 'include',
+        mode: 'cors',
         body: payload
     }).then(res => {
         return res.status;
