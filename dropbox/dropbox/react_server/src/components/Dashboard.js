@@ -22,18 +22,20 @@ class Dashboard extends Component {
 
     componentWillMount(){
         //this.handleFileUpload()
+      //   createBrowserHistory.push("/");
         this.setState({
             username : this.props.username,
             images : this.props.Images
 
         });
          console.log("Inside component will mount");
-        API.checkSession().then((status)=>{
-            console.log("Inside check session");
-            if(status !== 201){
-            createBrowserHistory.push("/signIn");
-            }
-        })
+        // API.checkSession().then((status)=>{
+        //     console.log("Inside check session");
+        //     if(status === 201){
+        //     //createBrowserHistory.push("/signIn");
+        //     }
+
+        // }).catch((error)=>{ console.log("Inside error of will mount")})
     }
 
 
@@ -48,12 +50,12 @@ class Dashboard extends Component {
         API.uploadFile(payload)
             .then((status) => {
                 if (status === 204) {
-                    // API.getImages()
-                    //     .then((data) => {
-                    //         this.setState({
-                    //             images: data
-                    //         });
-                    //     });
+                    API.getImages()
+                        .then((data) => {
+                            this.setState({
+                                images: data
+                            });
+                        });
                 }
             });
 
@@ -72,60 +74,51 @@ class Dashboard extends Component {
         console.log("componentDidMount function");
         console.log("I am here");
          console.log(this.state.username);
+         console.log("files for the user");
+         console.log(this.state.images);
          };
-
-    render() {
-        // console.log("Inside handleFileUpload :" + this.state.images);
-
-
-        return (
-        
-
-            <div className="container">
-    <div className="row">
-        <div className="col-md-3">
-            <ul className="nav nav-pills nav-stacked">
-                <li className="active"><a href="#"><i className="fa fa-home fa-fw"></i>Home</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-list-alt fa-fw"></i>Widgets</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-file-o fa-fw"></i>Pages</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-bar-chart-o fa-fw"></i>Charts</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-table fa-fw"></i>Table</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-tasks fa-fw"></i>Forms</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-calendar fa-fw"></i>Calender</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-book fa-fw"></i>Library</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-pencil fa-fw"></i>Applications</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i className="fa fa-cogs fa-fw"></i>Settings</a></li>
-            </ul>
-        </div>
-        <div className="col-md-9 well">
-            <div >
+            
+  render(){
+    return(
+<div>
+             
+    
                 <Typography
                     align={'center'}
                     type="display3"
                 >
                     Dropbox
                 </Typography>
+               
+     <div className="row">
+            <div className="col-md-6">
               <TextField
                     className={'fileupload'}
                     type="file"
                     name="mypic"
                     onChange={this.handleFileUpload}
                 />  
-               {/*   <ImageGridList images={this.state.images}/>   */}
+            </div>    
+
+             <div className="col-md-6">   
+        {
+          this.state.images.map((images,index) => {
+            <div key={index}>
+             {images.img}
             </div>
-
-
+          })
+        }
         </div>
-    </div>
-</div>
-
-
+                
+    </div>           
             
-        );
 
-  
-     
-    
-}
+</div>    
+
+
+        );
+  }     
+
+
 }
 export default Dashboard;

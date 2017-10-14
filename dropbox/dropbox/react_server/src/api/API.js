@@ -56,23 +56,34 @@ export const doRegister = (payload) =>
 
 
 
+
 export const getImages = () =>
-    fetch(`${api}/files/`,{method :'GET'}).then(res => res.json())
+    fetch(`${api}/files/`,{method :'GET' , 
+        credentials:'include',
+         mode:'cors',
+          headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        }
+
+     }).then(res => res.json())
         .catch(error => {
             console.log("This is error.");
             return error;
         });
 
 
+
+
 export const checkSession = () =>
      fetch(`${api}/files/check`,{
         method :'GET',
         credentials: 'include',
-        mode: 'cors',
+         mode: 'cors',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
-        },
+        }
 
            }).then(res => res.status)
         .catch(error => {

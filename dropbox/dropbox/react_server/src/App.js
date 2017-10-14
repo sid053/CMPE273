@@ -12,7 +12,7 @@ import HomePage from "./components/HomePage";
                 <div className="App">
                  
                     <BrowserRouter>
-                        <HomePage/>
+                      <HomePage/>
                     </BrowserRouter>
                 </div>
             );

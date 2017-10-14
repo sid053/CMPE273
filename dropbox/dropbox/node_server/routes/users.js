@@ -8,13 +8,16 @@ var home = require('./home');
 
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond with a resource');
-});
 
 router.post('/doLogin',home.afterSignIn)
 
 router.post('/doRegister', home.afterRegister);
+
+router.post('/doLogout' , home.logout);
+
+router.post('/login', home.loginPassport);
+
+router.get('/',home.getFiles);
 
 
 module.exports = router;

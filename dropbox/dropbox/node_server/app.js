@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var expressSession = require('express-session');
 var expressValidator = require('express-validator');
-
+var passport = require('passport');
 
 var index = require('./routes/index');
 var fileUpload = require('./routes/fileUpload');
@@ -42,6 +42,9 @@ app.use(expressSession({
 
 
 //session middleware 
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use(express.static(path.join(__dirname, 'public')));

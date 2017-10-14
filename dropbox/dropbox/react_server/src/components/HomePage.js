@@ -8,14 +8,14 @@ import Dashboard from "./Dashboard" ;
 import SignUp from "./SignUp";
 import {Button} from "react-bootstrap";
 
-class NewerHomePage extends Component {
+class HomePage extends Component {
 
     state = {
         isLoggedIn: false,
         message: "Welcome to DropBox",
         username: '',
         Images:[],
-        dashboard:true
+        dashboard:false
     };
 
     handleSubmit = (userdata) => {
@@ -24,22 +24,20 @@ class NewerHomePage extends Component {
                     console.log("after SignIn response");
                     this.setState({
                         isLoggedIn: true,
-                        message: "Welcome to my App..!!",
+                        message: "You have succesully Logged in..!!",
                         username: userdata.username,
-                        Images:data
+                        Images:data,
+                        dashboard:true
                     });
                     console.log("inside handle submit state");
                     console.log(this.state);
-                    this.setState({
-                        dashboard:false
-                    })
                     this.props.history.push("/dashboard");
             }).catch((error)=> {
                 this.setState({
                         isLoggedIn: false,
                         message: "Error While logging in!!",
                         username: userdata.username,
-                        Images:''
+                        Images:[]
                     });  
             });
     };
@@ -71,9 +69,6 @@ class NewerHomePage extends Component {
     render() {
 
 
-
-if(this.state.dashboard){
-
         return (
  
 
@@ -87,9 +82,12 @@ if(this.state.dashboard){
 
                 </div>
                 <hr/>
-               
-                <div className="row ">
-                        <div className="col-sm-6">
+               </div>
+
+        <div className="row"> 
+                <Route exact path="/" render={() => (
+                    <div className="row">
+                        <div className="col-md-6">
                             
                             <img src = "https://dropboxmainblog.files.wordpress.com/2015/09/team-feature.png?w=650&h=325"/>
 
@@ -97,8 +95,8 @@ if(this.state.dashboard){
                         </div>
                        
                         <div className="col-md-6">
-                             <Route exact path="/" render={() => (
-                                <div>
+                             
+                                
                                   
                                    <div className="col-md-10"> 
                                        <SignIn handleSubmit={this.handleSubmit}/>
@@ -111,40 +109,53 @@ if(this.state.dashboard){
                                         Register
                                     </Button>
                                    </div>
-                                </div>
-                            )}/>
+                        </div>
+                     </div>   
+                )}/>
 
-                            <Route exact path="/SignUp" render={() => (
+            <Route exact path="/SignUp" render={() => (
+                   <div className ="row">
+                        <div className="col-md-6">
+                            
+                            <img src = "https://dropboxmainblog.files.wordpress.com/2015/09/team-feature.png?w=650&h=325"/>
+
+  
+                        </div>
+                       
+                        <div className="col-md-6">
+                                <div className="col-md-10"> 
+                        
                                      <div>
                                         <SignUp handleRegister={this.handleRegister}/>
                                     
                                     </div>
+                                </div>
+                          </div>
+
+                    </div>      
                             )}/> 
-                        </div>
+       </div>
 
 
                 
-                </div>
-            </div>  
+             
+        
 {/*         -----------------------------------------------------------------------------------------   */}
+        <Route exact path="/dashboard" render={() => (
+     <Dashboard {...this.state}/>
+     )}/>
+</div>
+             
 
-        </div>
-              );
 
-
-    }
-else{
-        return(
-                <Route exact path="/dashboard" render={() => (
-                    <Dashboard {...this.state}/>
-                )}/>
-            
+ 
              );
-  }
+        
+  
 
 
        
     }
 }
 
-export default withRouter(NewerHomePage);
+export default withRouter(HomePage);
