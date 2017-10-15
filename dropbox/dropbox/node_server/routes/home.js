@@ -112,7 +112,9 @@ function loginPassport(req,res,next){
       }
 
       req.session.user = user.username;
+      req.session.loggedin = true;
       console.log(req.session.user);
+      console.log(req.session);
       console.log("session initilized")
       return res.status(201).send();
     })

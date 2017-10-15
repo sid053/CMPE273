@@ -7,8 +7,10 @@ var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       //  console.log("Inside multer updated code");
         console.log(req.sessionID);
-        const username = req.session.username; 
-        cb(null, './UserFiles/'+username)
+       console.log(req.session);
+      const username ="./UserFiles/"+req.session.user; 
+
+        cb(null,username);
     },
     filename: function (req, file, cb) {
         cb(null, file.original)
@@ -16,6 +18,7 @@ var storage = multer.diskStorage({
 });
 
 var upload = multer({storage:storage});
+
 router.post('/upload', upload.single('mypic'),function (req, res, next) {
     
     console.log("inside post upload");
@@ -32,8 +35,10 @@ router.get('/check', function(req,res){
      console.log(req.sessionID);
      console.log("check session logged in");
      console.log("here i am");
-    // console.log(req.session.loggedin);
+     console.log("inside check function at node ");
+     console.log(req.session.loggedin);
      if(req.session.loggedin=== true){
+        console.log("foobar")
         res.status(201).send("User Logged in");
      }
      res.status(401).send("Not logged in ");

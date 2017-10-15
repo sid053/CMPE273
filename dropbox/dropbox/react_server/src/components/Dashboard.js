@@ -29,13 +29,14 @@ class Dashboard extends Component {
 
         });
          console.log("Inside component will mount");
-        // API.checkSession().then((status)=>{
-        //     console.log("Inside check session");
-        //     if(status === 201){
-        //     //createBrowserHistory.push("/signIn");
-        //     }
+         API.checkSession().then((status)=>{
+             console.log("Inside check session");
+             if(status !== 201){
+             createBrowserHistory.push("/");
+            }
+        }).catch((error)=>{ console.log("Inside error of will mount")})
 
-        // }).catch((error)=>{ console.log("Inside error of will mount")})
+
     }
 
 
@@ -101,13 +102,15 @@ class Dashboard extends Component {
             </div>    
 
              <div className="col-md-6">   
-        {
+      {/*  {
           this.state.images.map((images,index) => {
             <div key={index}>
+            hello
              {images.img}
             </div>
           })
-        }
+        }      */}
+        inside the Dashboard
         </div>
                 
     </div>           

@@ -6,7 +6,7 @@ const headers = {
 };
 
 export const doLogin = (payload) =>
-    fetch(`${api}/users/doLogin`, {
+    fetch(`${api}/users/login`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -17,12 +17,9 @@ export const doLogin = (payload) =>
         body: JSON.stringify(payload)
     })
     .then(res => { 
-        console.log("inside dologin");
-        console.log(res.status);
-        if(res.status===201){
-
-        return res.json();
-         }
+        
+        return res.status;
+         
 
     }).catch(error => {
 
@@ -85,7 +82,11 @@ export const checkSession = () =>
             'Content-Type': 'application/json'
         }
 
-           }).then(res => res.status)
+           }).then(res => {
+            console.log("inside checkSession APi response")
+            console.log(res.status);
+            console.log("returning the status back");
+            return res.status})
         .catch(error => {
             console.log("This is error.");
             return error;

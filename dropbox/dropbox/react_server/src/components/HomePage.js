@@ -20,18 +20,35 @@ class HomePage extends Component {
 
     handleSubmit = (userdata) => {
         API.doLogin(userdata)
-            .then((data) => {
+            .then((status) => {
+                   if(status===201){
                     console.log("after SignIn response");
                     this.setState({
                         isLoggedIn: true,
-                        message: "You have succesully Logged in..!!",
+                        message: "You have succesully registered..!!",
                         username: userdata.username,
-                        Images:data,
                         dashboard:true
                     });
                     console.log("inside handle submit state");
                     console.log(this.state);
                     this.props.history.push("/dashboard");
+                }
+                else{
+
+                     console.log("after SignIn response");
+                    this.setState({
+                        isLoggedIn: false,
+                        message: "Wrong username and password..!!",
+                        username: userdata.username,
+                        dashboard:false
+
+                    });
+                    console.log("inside handle submit state for wrong username");
+                    console.log(this.state);
+                    this.props.history.push("/");
+
+                }
+                
             }).catch((error)=> {
                 this.setState({
                         isLoggedIn: false,
@@ -39,6 +56,7 @@ class HomePage extends Component {
                         username: userdata.username,
                         Images:[]
                     });  
+                this.props.history.push('"/');
             });
     };
 
