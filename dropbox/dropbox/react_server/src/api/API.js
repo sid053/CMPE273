@@ -82,11 +82,21 @@ export const checkSession = () =>
             'Content-Type': 'application/json'
         }
 
-           }).then(res => {
+           }).then((res,error) => {
             console.log("inside checkSession APi response")
             console.log(res.status);
+            if(res.status===201){
             console.log("returning the status back");
-            return res.status})
+            //console.log(res.json());
+            return res.json();
+            }
+            else{
+                return error ;
+            }
+
+        })
+
+
         .catch(error => {
             console.log("This is error.");
             return error;

@@ -158,7 +158,7 @@ class HomePage extends Component {
                 
              
         
-{/*         -----------------------------------------------------------------------------------------   */}
+
         <Route exact path="/dashboard" render={() => (
      <Dashboard {...this.state}/>
      )}/>

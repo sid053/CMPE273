@@ -9,7 +9,7 @@ var fileUpload = require('./fileUpload');
 var glob = require('glob');
 var passport = require('passport');
 require('./passport')(passport);
-
+var resArr ;
 
 //register function
 function afterRegister(req,res){
@@ -116,7 +116,24 @@ function loginPassport(req,res,next){
       console.log(req.session.user);
       console.log(req.session);
       console.log("session initilized")
-      return res.status(201).send();
+       glob("UserFiles/"+username+"/*.*", function (er, files) {
+         
+         resArr = files.map(function (file) {
+            var imgJSON = {};
+           var path = "UserFiles/"+username+"/";
+           imgJSON.img = path+file.split('/')[2];
+            imgJSON.cols = 2  ;
+            return imgJSON;
+        });
+        // console.log(resArr);
+     
+      // res.status(201).send(resArr);
+    });
+
+
+
+
+      return res.status(201).json(resArr);
     })
   })(req, res, next);
 

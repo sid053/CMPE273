@@ -21,20 +21,26 @@ class Dashboard extends Component {
    }
 
     componentWillMount(){
-        //this.handleFileUpload()
-      //   createBrowserHistory.push("/");
         this.setState({
             username : this.props.username,
-            images : this.props.Images
+            images : this.props.Images,
+            message : this.props.message
 
         });
          console.log("Inside component will mount");
-         API.checkSession().then((status)=>{
+         API.checkSession().then((data)=>{
+            
              console.log("Inside check session");
-             if(status !== 201){
-             createBrowserHistory.push("/");
-            }
-        }).catch((error)=>{ console.log("Inside error of will mount")})
+                this.setState({
+                    images:data,
+                    message: "You have logged in ..",
+                })
+                console.log(this.state.images); 
+                console.log("inside here ");
+        }).catch((error)=>{ 
+            console.log("Inside error of will mount")
+        
+        })
 
 
     }
@@ -74,16 +80,14 @@ class Dashboard extends Component {
     componentDidMount() {
         console.log("componentDidMount function");
         console.log("I am here");
-         console.log(this.state.username);
-         console.log("files for the user");
+        console.log(this.state.username);
+        console.log("files for the user");
          console.log(this.state.images);
          };
             
   render(){
     return(
-<div>
-             
-    
+      <div>
                 <Typography
                     align={'center'}
                     type="display3"
@@ -92,7 +96,7 @@ class Dashboard extends Component {
                 </Typography>
                
      <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-3">
               <TextField
                     className={'fileupload'}
                     type="file"
@@ -101,23 +105,19 @@ class Dashboard extends Component {
                 />  
             </div>    
 
-             <div className="col-md-6">   
-      {/*  {
-          this.state.images.map((images,index) => {
-            <div key={index}>
-            hello
-             {images.img}
-            </div>
-          })
-        }      */}
-        inside the Dashboard
-        </div>
+             <div className="col-md-3">   
+                 inside the Dashboard
+             </div>
+
+             <div className="col-md-3">   
+                third column
+             </div>
                 
     </div>           
-            
-
+              
+ 
 </div>    
-
+            
 
         );
   }     

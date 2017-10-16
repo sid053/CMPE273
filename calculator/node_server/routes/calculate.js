@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.post('/add', function (req, res, next) {
-  
+    console.log(req.body);
     var var1 = parseInt(req.body.displayValue) ;
     var var2 = parseInt(req.body.oldnum) ;
     var1 = var1+var2;
@@ -18,7 +18,7 @@ router.post('/add', function (req, res, next) {
 });
 
 router.post('/sub', function (req, res, next) {
-  
+  console.log(req.body);
     var var1 = parseInt(req.body.displayValue) ;
     var var2 = parseInt(req.body.oldnum) ;
     var1 = var2-var1;
@@ -30,7 +30,7 @@ router.post('/sub', function (req, res, next) {
 });
 
 router.post('/multiply', function (req, res, next) {
-  
+  console.log(req.body);
    var var1 = parseInt(req.body.displayValue) ;
     var var2 = parseInt(req.body.oldnum) ;
     var1 = var2*var1;
@@ -41,7 +41,7 @@ router.post('/multiply', function (req, res, next) {
 });
 
 router.post('/divide', function (req, res, next) {
-  
+  console.log(req.body);
     var var1 = parseInt(req.body.displayValue) ;
     var var2 = parseInt(req.body.oldnum) ;
     var1 = var2/var1;
