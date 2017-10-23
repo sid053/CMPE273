@@ -5,12 +5,32 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var expressSession = require('express-session');
-var expressValidator = require('express-validator');
+//var expressValidator = require('express-validator');
 var passport = require('passport');
+var MongoDBStore = require('connect-mongodb-session')(expressSession);
+
+//mongodb connection
+// var mongoose   = require('mongoose');
+// var mongo = require('mongodb');
+// var User    = require('./models/User');
+// mongoose.connect('mongodb://localhost/session')
+// var db = mongoose.connection;
+
+var store = new MongoDBStore(
+    {
+        uri: 'mongodb://localhost:27017/cmpe_273',
+        collection: 'mySessions'
+    });
+
+// Catch errors
+store.on('error', function(error) {
+    assert.ifError(error);
+    assert.ok(false);
+});
 
 var index = require('./routes/index');
-var fileUpload = require('./routes/fileUpload');
 var users = require('./routes/users');
+
 
 
 var app = express();
@@ -18,6 +38,9 @@ var app = express();
 //Enable CORS
 app.use(cors({ credentials: true, origin: true }))
 
+
+//express validator
+//app.use(expressValidator(middlewareOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,7 +60,8 @@ app.use(expressSession({
   duration: 50 * 60 * 1000,
   activeDuration: 30 * 60 * 1000,
   saveUninitialized:true,
-  ephemeral: true
+  ephemeral: true,
+    store: store,
 }));
 
 
@@ -51,9 +75,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //routes 
 app.use('/', index);
-app.use('/files', fileUpload);
+//app.use('/files', fileUpload);
 app.use('/users', users);
-app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));
+//app.use('./public/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 

@@ -26,9 +26,6 @@ export const doLogin = (payload) =>
             console.log("This is error inside dologin");
             return error;
         });
-
-
-
 export const doRegister = (payload) =>
 
     fetch(`${api}/users/doRegister`, {
@@ -48,30 +45,6 @@ export const doRegister = (payload) =>
             console.log("This is error");
             return error;
         });
-
-
-
-
-
-
-export const getImages = () =>
-    fetch(`${api}/users/getFiles`,{method :'GET' , 
-        credentials:'include',
-         mode:'cors',
-          headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        }
-
-     }).then(res => res.json())
-        .catch(error => {
-            console.log("This is error.");
-            return error;
-        });
-
-
-
-
 export const checkSession = () =>
      fetch(`${api}/files/check`,{
         method :'GET',
@@ -95,21 +68,5 @@ export const checkSession = () =>
 
         .catch(error => {
             console.log("This is error.");
-            return error;
-        });
-
-
-
-
-export const uploadFile = (payload) =>
-    fetch(`${api}/files/upload`, {
-        method: 'POST',
-         credentials: 'include',
-        mode: 'cors',
-        body: payload
-    }).then(res => {
-        return res.status;
-    }).catch(error => {
-            console.log("This is error");
             return error;
         });
