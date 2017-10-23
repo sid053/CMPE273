@@ -28,7 +28,7 @@ class Welcome extends Component {
             <div className="row justify-content-md-center">
                 <div className="col-md-3">
                     <div className="alert alert-warning" role="alert">
-                        {this.state.username}, welcome to my App..!!
+                        {this.state.username} welcome to my App..!!
                     </div>
                     <Link to="/login">Logout</Link>
                 </div>

@@ -45,6 +45,7 @@ export const doRegister = (payload) =>
             console.log("This is error");
             return error;
         });
+
 export const checkSession = () =>
      fetch(`${api}/files/check`,{
         method :'GET',
