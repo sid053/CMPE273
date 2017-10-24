@@ -11,33 +11,6 @@ require('./passport')(passport);
 
 function afterRegister(req,res){
 
-	// console.log(table);
-     //  const FilePath = "UserFiles/"+req.body.username;
-	// var insertUser = "Insert into "+table+" values('"+req.body.name+"','"+req.body.username+"','"+req.body.email+"','"+req.body.password+"')";
-	// console.log("The query is :" , insertUser);
-    //
-	// mysql.putData(function(err){
-	// 	if(err){
-	// 		console.log("error in the callback for after register");
-     //           res.status(401);
- 	// 			}
-	//
-	//
-	// 	else{
-     //
-     //        fs.mkdir(FilePath, function(err) {
-	// 	         if (!err) {
-	//
-	// 		                  console.log(req.sessionID);
-     //    					 res.status(201).send();
-	// 	                    }
-	// 	         else {
-	// 		              return res.end("Dir creation failed : " + err);
-	// 		              res.status(401);
-	// 	              }
-	// 		});
-     //     }
-	// },insertUser);
 
     var user = new User();
     user.name = req.body.name ;
@@ -99,23 +72,6 @@ function loginPassport(req,res,next){
 }
 
 
-// function getFiles(req,res,next){
-//
-//     const username = req.session.username;
-//     var folderPath = "UserFiles/"+username+"/*.*" ;
-//      glob(folderPath, function (er, files) {
-//         var resArr = files.map(function (file) {
-//             var imgJSON = {};
-//             var path = "UserFiles/"+username+"/";
-//            imgJSON.img = path+file.split('/')[2];
-//             imgJSON.cols = 2  ;
-//             console.log(imgJSON);
-//             return imgJSON;
-//         });
-//          console.log(resArr);
-//           res.status(201).send(resArr);
-//     });
-  
 
 
 function checkSession(req,res,next){

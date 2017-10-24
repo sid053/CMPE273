@@ -1,6 +1,6 @@
 
  var ejs = require("ejs");
-var mysql = require('./mysql');
+var User    = require('../models/User');
 var fs = require("fs")
 var first = "User";
 var second = "Table";
@@ -8,37 +8,40 @@ var table = first+'_'+second;
 var fileUpload = require('./fileUpload');
 var glob = require('glob');
 var passport = require('passport');
+
 require('./passport')(passport);
 
 function afterRegister(req,res){
+var FilePath = "./UserFiles/"+req.body.username ;
+var user = new User();
+    user.name = req.body.name ;
+    user.username = req.body.username;
+    user.email = req.body.email;
+    user.password = req.body.password;
 
-	console.log(table);
-      const FilePath = "UserFiles/"+req.body.username;
-	var insertUser = "Insert into "+table+" values('"+req.body.name+"','"+req.body.username+"','"+req.body.email+"','"+req.body.password+"')";
-	console.log("The query is :" , insertUser);
+    user.save(function (err) { if(err){
+          res.status(401).send(err);
+        }
+        else{
+          
+          fs.mkdir(FilePath, function(err) {
+             if (!err) {
 
-	mysql.putData(function(err){
-		if(err){
-			console.log("error in the callback for after register");
-               res.status(401);		
- 				}
-		
-		
-		else{
-               
-            fs.mkdir(FilePath, function(err) {
-		         if (!err) {
-			                  
-			                  console.log(req.sessionID);
-        					 res.status(201).send();    
-		                    }
-		         else {
-			              return res.end("Dir creation failed : " + err);
-			              res.status(401);
-		              }
-			});
-         }
-	},insertUser);
+                       console.log(req.sessionID);
+                   res.status(201).send();
+                        }
+             else {
+                    return res.end("Dir creation failed : " + err);
+                    res.status(401);
+                  }
+      });
+
+      
+        }
+        }
+        
+    );
+  
 	
 	
 }

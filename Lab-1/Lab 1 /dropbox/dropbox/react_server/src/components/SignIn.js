@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Button} from 'react-bootstrap'
+import {Button} from 'react-bootstrap';
+import * as API from '../api/API';
 
 class SignIn extends Component {
 
@@ -20,6 +21,24 @@ class SignIn extends Component {
             password: '',
             images :[]
         });
+      
+      API.checkSession().then((data)=>{
+            
+             console.log("Inside check session");
+                this.setState({
+                    images:data,
+                    message: "You have logged in ..",
+                })
+                console.log(this.state.images); 
+                console.log("inside here ");
+                this.props.history.push("/dashboard");
+        }).catch((error)=>{ 
+            console.log("Inside error of will mount")
+        
+        })
+
+
+
     }
 
     render() {

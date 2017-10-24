@@ -89,6 +89,7 @@ class HomePage extends Component {
 
 
     componentWillMount(){
+        console.log("Here");
         if(this.state.check==='SignIn') {
             console.log(this.state);
             console.log("I am inside component will mount");
@@ -137,8 +138,8 @@ class HomePage extends Component {
 
                     <div className="col-md-10">
                     <Button bsStyle="primary" onClick={() => {
-                    this.setState({check:"SignUp"});
-                    this.props.history.push("/SignUp");
+                    this.setState({check:"dashboard"});
+                    this.props.history.push("/Welcome");
                     }}>
                     Register
                     </Button>

@@ -11,6 +11,20 @@ var passport = require('passport');
 var index = require('./routes/index');
 var fileUpload = require('./routes/fileUpload');
 var users = require('./routes/users');
+var MongoDBStore = require('connect-mongodb-session')(expressSession);
+
+var store = new MongoDBStore(
+    {
+        uri: 'mongodb://localhost:27017/cmpe_273',
+        collection: 'mySessions'
+    });
+
+// Catch errors
+store.on('error', function(error) {
+    assert.ifError(error);
+    assert.ok(false);
+});
+
 
 
 var app = express();
@@ -37,7 +51,8 @@ app.use(expressSession({
   duration: 50 * 60 * 1000,
   activeDuration: 30 * 60 * 1000,
   saveUninitialized:true,
-  ephemeral: true
+  ephemeral: true,
+  store: store,
 }));
 
 

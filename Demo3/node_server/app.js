@@ -9,13 +9,6 @@ var expressSession = require('express-session');
 var passport = require('passport');
 var MongoDBStore = require('connect-mongodb-session')(expressSession);
 
-//mongodb connection
-// var mongoose   = require('mongoose');
-// var mongo = require('mongodb');
-// var User    = require('./models/User');
-// mongoose.connect('mongodb://localhost/session')
-// var db = mongoose.connection;
-
 var store = new MongoDBStore(
     {
         uri: 'mongodb://localhost:27017/cmpe_273',
