@@ -36,7 +36,7 @@ function afterRegister(req,res){
 function logout(req,res){
      
 	req.session.destroy();
-	res.status(201).send("succesfully destroyed");
+    res.status(201).send();
 }
 
 

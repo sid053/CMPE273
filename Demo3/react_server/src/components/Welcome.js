@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link,withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as API from '../api/API';
 import {Button} from 'react-bootstrap';
@@ -22,7 +22,22 @@ class Welcome extends Component {
     }
      
     componentWillMount(){
-      
+        API.checkSession().then((status)=>{
+            if(status===201){
+                this.setState({
+                    isLoggedIn: true,
+                    message: "LoggedIn",
+
+                });
+                this.props.history.push("/Welcome");
+            }
+            else{
+                this.props.history.push("/")
+            }
+
+        }).catch((error)=>{
+            this.props.history.push("/")
+        })
         //document.title = `Welcome, ${this.state.username} !!`;
     }
 
