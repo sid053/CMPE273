@@ -12,15 +12,11 @@ class SignIn extends Component {
     state = {
         username: '',
         password: '',
-        images: []
+
     };
 
     componentWillMount(){
-        this.setState({
-            username: '',
-            password: '',
-            images :[]
-        });
+
     }
 
     render() {

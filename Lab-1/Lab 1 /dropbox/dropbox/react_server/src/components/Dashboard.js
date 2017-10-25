@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
-import {getData,deleteFile} from '../action/index';
+import {getData,fileDelete} from '../action/index';
 import {connect} from 'react-redux';
  
 class Dashboard extends Component {
@@ -41,7 +41,7 @@ class Dashboard extends Component {
         const payload = new FormData();
 
         payload.append('mypic', event.target.files[0]);
-        payload.append('username',this.state.username);
+
 
         console.log("payload for upload");
         API.uploadFile(payload)
@@ -58,11 +58,15 @@ class Dashboard extends Component {
 
     handleDelete = (data,index) =>{
         console.log("inside handleDelete");
-        console.log(data);
-        API.deleteFile(data).then((status)=>
+
+        var payload = {
+            file : data
+        }
+        console.log(payload);
+        API.deleteFile(payload).then((status)=>
         {
             if(status===201){
-                this.props.deleteFile(index);
+                this.props.fileDelete(index);
             }
         })
 
@@ -137,7 +141,7 @@ function mapStateToProps(userdata) {
 function mapDispatchToProps(dispatch) {
     return {
         getData : (data) => dispatch(getData(data)),
-        deleteFile : (data) => dispatch(deleteFile(data))
+        fileDelete : (data) => dispatch(fileDelete(data))
     };
 }
 

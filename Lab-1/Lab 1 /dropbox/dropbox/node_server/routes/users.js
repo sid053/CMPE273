@@ -9,8 +9,6 @@ var home = require('./home');
 
 /* GET users listing. */
 
-router.post('/doLogin',home.afterSignIn)
-
 router.post('/doRegister', home.afterRegister);
 
 router.post('/doLogout' , home.logout);

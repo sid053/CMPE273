@@ -9,7 +9,7 @@ export function getData(userdata) {
 
 
 
-export function deleteFile(index) {
+export function fileDelete(index) {
      //console.log(userdata);
     return {
 

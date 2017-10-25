@@ -116,12 +116,16 @@ export const uploadFile = (payload) =>
 
 
 
-export const deleteFile = (data) =>
+export const deleteFile = (payload) =>
     fetch(`${api}/files/delete`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
-        body: JSON.stringify(data)
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(payload)
     }).then(res => {
         return res.status;
     }).catch(error => {

@@ -45,40 +45,7 @@ var user = new User();
 	
 	
 }
-//sign in function
-function afterSignIn(req,res){
-	const username = req.body.username;
-	var getUser = "Select password from "+table+" where username='"+username+"';";
-	console.log("The query is :", getUser);
-	mysql.fetchData(function(err){
-   if(err){
-   	console.log("Error in callback for fetchData");
-   	res.status(401) ;
-   }
 
-   else{
-        console.log(req.sessionID);
-        
-        req.session.username = username;
-        req.session.loggedin = true;
-    glob("UserFiles/"+username+"/*.*", function (er, files) {
-         
-        var resArr = files.map(function (file) {
-            var imgJSON = {};
-           var path = "UserFiles/"+username+"/";
-           imgJSON.img = path+file.split('/')[2];
-            imgJSON.cols = 2  ;
-            return imgJSON;
-        });
-        // console.log(resArr);
-     
-       res.status(201).send(resArr);
-    });
-   }
-
-
-    },getUser)
-}
 
 
 //logout function
@@ -90,7 +57,7 @@ function logout(req,res){
 }
 
 
-
+//login Function
 function loginPassport(req,res,next){
 
 	passport.authenticate('login', function(err, user, info) {
@@ -143,5 +110,4 @@ function getFiles(req,res,next){
 exports.getFiles=getFiles;
 exports.logout =logout;
 exports.loginPassport = loginPassport;
-exports.afterSignIn = afterSignIn ;
 exports.afterRegister = afterRegister;
