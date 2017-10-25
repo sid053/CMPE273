@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Button} from 'react-bootstrap';
-import * as API from '../api/API';
+import {Button} from 'react-bootstrap'
 
 class SignIn extends Component {
 
     static propTypes = {
-        handleSubmit: PropTypes.func.isRequired
+        handleSubmit: PropTypes.func.isRequired,
+        loginSignUp : PropTypes.func.isRequired
     };
 
     state = {
         username: '',
         password: '',
-         images: []
+        images: []
     };
 
     componentWillMount(){
@@ -21,24 +21,6 @@ class SignIn extends Component {
             password: '',
             images :[]
         });
-      
-      API.checkSession().then((data)=>{
-            
-             console.log("Inside check session");
-                this.setState({
-                    images:data,
-                    message: "You have logged in ..",
-                })
-                console.log(this.state.images); 
-                console.log("inside here ");
-                this.props.history.push("/dashboard");
-        }).catch((error)=>{ 
-            console.log("Inside error of will mount")
-        
-        })
-
-
-
     }
 
     render() {
@@ -84,6 +66,14 @@ class SignIn extends Component {
                                 onClick={() => this.props.handleSubmit(this.state)}>
                                 Submit
                             </Button>
+                            <pre></pre>
+                            <Button
+                                bsStyle="success"
+                                onClick={() => this.props.loginSignUp("SignUp")}>
+                                Register
+                            </Button>
+
+
                         </div>
                     </form>
                 </div>

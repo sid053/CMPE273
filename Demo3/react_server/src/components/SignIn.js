@@ -5,7 +5,8 @@ import {Button} from 'react-bootstrap'
 class SignIn extends Component {
 
     static propTypes = {
-        handleSubmit: PropTypes.func.isRequired
+        handleSubmit: PropTypes.func.isRequired,
+        loginSignUp : PropTypes.func.isRequired
     };
 
     state = {
@@ -65,6 +66,14 @@ class SignIn extends Component {
                                 onClick={() => this.props.handleSubmit(this.state)}>
                                 Submit
                             </Button>
+                            <pre></pre>
+                            <Button
+                                bsStyle="success"
+                                onClick={() => this.props.loginSignUp("SignUp")}>
+                                Register
+                            </Button>
+
+
                         </div>
                     </form>
                 </div>

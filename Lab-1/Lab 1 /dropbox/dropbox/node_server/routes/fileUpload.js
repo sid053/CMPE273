@@ -48,4 +48,12 @@ router.get('/check', function(req,res){
     }
 
 });
+
+
+router.post('/delete' , function (req,res) {
+    console.log("inside Delete");
+    console.log(req.body);
+    res.status(201).send() ;
+
+})
 module.exports = router;

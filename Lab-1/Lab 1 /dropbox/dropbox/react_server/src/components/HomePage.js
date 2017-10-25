@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import {withRouter } from 'react-router-dom';
 import * as API from '../api/API';
 import SignIn from "./SignIn";
 import Message from "./Message";
-//import Welcome from "./Welcome";
-import Dashboard from "./Dashboard" ;
 import SignUp from "./SignUp";
-import {Button} from "react-bootstrap";
+
 
 class HomePage extends Component {
 
@@ -15,7 +13,8 @@ class HomePage extends Component {
         message: "Welcome to DropBox",
         username: '',
         Images:[],
-        dashboard:false
+        dashboard:false,
+        check:"SignIn"
     };
 
     handleSubmit = (userdata) => {
@@ -85,90 +84,56 @@ class HomePage extends Component {
                 }
             });
     };
+
+    loginSignUp = (data) =>{
+        console.log(data) ;
+        this.setState({
+            check:JSON.stringify(data)
+        })
+
+    }
    
     render() {
 
 
         return (
- 
-
- <div>
-
+            <div>
                 <div className="col-md-12">
-                <div className="row justify-content-md-center">
-                    <div className="col-md-10">
-                         <Message message={this.state.message}/>
+                    <div className="row justify-content-md-center">
+                        <div className="col-md-10">
+                            <Message message={this.state.message}/>
+                        </div>
+
+                    </div>
+                    <hr/>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-6">
+
+                        <img src = "https://dropboxmainblog.files.wordpress.com/2015/09/team-feature.png?w=650&h=325"/>
+
+                    </div>
+
+                    <div className="col-md-6">
+
+                        <div className="col-md-10">
+                            {this.state.check === "SignIn" ?
+                                <SignIn handleSubmit={this.handleSubmit}  loginSignUp = {this.loginSignUp}/>
+                                :
+                                <SignUp handleRegister={this.handleRegister} loginSignUp = {this.loginSignUp} />
+                            }
+                        </div>
+
                     </div>
 
                 </div>
-                <hr/>
-               </div>
-
-        <div className="row"> 
-                <Route exact path="/" render={() => (
-                    <div className="row">
-                        <div className="col-md-6">
-                            
-                            <img src = "https://dropboxmainblog.files.wordpress.com/2015/09/team-feature.png?w=650&h=325"/>
-
-  
-                        </div>
-                       
-                        <div className="col-md-6">
-                             
-                                
-                                  
-                                   <div className="col-md-10"> 
-                                       <SignIn handleSubmit={this.handleSubmit}/>
-                                   </div>
-                        
-                                  <div className="col-md-10">
-                                    <Button bsStyle="primary" onClick={() => {
-                                    this.props.history.push("/SignUp");
-                                    }}>
-                                        Register
-                                    </Button>
-                                   </div>
-                        </div>
-                     </div>   
-                )}/>
-
-            <Route exact path="/SignUp" render={() => (
-                   <div className ="row">
-                        <div className="col-md-6">
-                            
-                            <img src = "https://dropboxmainblog.files.wordpress.com/2015/09/team-feature.png?w=650&h=325"/>
-
-  
-                        </div>
-                       
-                        <div className="col-md-6">
-                                <div className="col-md-10"> 
-                        
-                                     <div>
-                                        <SignUp handleRegister={this.handleRegister}/>
-                                    
-                                    </div>
-                                </div>
-                          </div>
-
-                    </div>      
-                            )}/> 
-       </div>
 
 
-                
-             
-        
-
-        <Route exact path="/dashboard" render={() => (
-     <Dashboard {...this.state}/>
-     )}/>
-</div>
-             
-
-
+            </div>
  
+
+
              );
         
   

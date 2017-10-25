@@ -32,7 +32,7 @@ class HomePage extends Component {
                     });
                     console.log("inside handle submit state");
                     console.log(this.state);
-                    this.props.history.push("/dashboard");
+                    this.props.history.push("/Welcome");
                 }
                 else{
 
@@ -87,20 +87,32 @@ class HomePage extends Component {
             });
     };
 
+    loginSignUp = (data) =>{
+         console.log(data) ;
+        this.setState({
+            check:"data"
+        })
 
+    }
     componentWillMount(){
-        console.log("Here");
-        if(this.state.check==='SignIn') {
-            console.log(this.state);
-            console.log("I am inside component will mount");
-            this.props.history.push("/SignIn");
-        }
-        else if(this.state.check==='SignUp'){
-            this.props.history.push("/SignUp");
-        }
-        else if(this.state.check==='dashboard'){
-            this.props.history.push("/Welcome");
-        }
+
+        API.checkSession().then((status)=>{
+            if(status===201){
+                this.setState({
+                        isLoggedIn: true,
+                        message: "LoggedIn",
+                        
+                    }); 
+                    this.props.history.push("/Welcome"); 
+            }
+            else{
+                this.props.history.push("/")
+            }
+
+        }).catch((error)=>{
+            this.props.history.push("/")
+        })
+
     }
 
 
@@ -130,32 +142,14 @@ class HomePage extends Component {
 
             <div className="col-md-6">
 
-                <Route exact path="/SignIn" render={() => (
-                   <div>
-                    <div className="col-md-10">
-                        <SignIn handleSubmit={this.handleSubmit}/>
-                    </div>
-
-                    <div className="col-md-10">
-                    <Button bsStyle="primary" onClick={() => {
-                    this.setState({check:"dashboard"});
-                    this.props.history.push("/Welcome");
-                    }}>
-                    Register
-                    </Button>
-                    </div>
-                   </div>
-
-                    )}/>
-
-
-                <Route exact path="/SignUp" render={() => (
-
                         <div className="col-md-10">
-                            <SignUp handleRegister={this.handleRegister}/>
+                            {this.state.check === "SignIn" ?
+                                <SignIn handleSubmit={this.handleSubmit}  loginSignUp = {this.loginSignUp}/>
+                                :
+                                <SignUp handleRegister={this.handleRegister} loginSignUp = {this.loginSignUp} />
+                            }
                         </div>
 
-                )}/>
             </div>
 
         </div>

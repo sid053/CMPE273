@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 import {BrowserRouter} from 'react-router-dom';
-import HomePage from "./components/HomePage";
+import Main from "./components/Main";
 
-
-// import HomePage from "./components/HomePage";
 
     class App extends Component {
         render() {
@@ -12,7 +10,7 @@ import HomePage from "./components/HomePage";
                 <div className="App">
                  
                     <BrowserRouter>
-                      <HomePage/>
+                      <Main/>
                     </BrowserRouter>
                 </div>
             );

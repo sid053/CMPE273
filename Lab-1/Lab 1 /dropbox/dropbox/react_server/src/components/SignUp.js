@@ -4,7 +4,8 @@ import {Button} from 'react-bootstrap';
 class SignUp extends Component {
 
     static propTypes = {
-        handleRegister: PropTypes.func.isRequired
+        handleRegister: PropTypes.func.isRequired,
+        loginSignUp : PropTypes.func.isRequired
     };
 
     state = {
@@ -16,18 +17,13 @@ class SignUp extends Component {
     };
 
     componentWillMount(){
-        this.setState({
-            username: '',
-        password: '',
-        email : '',
-        name:''
-        });
+
     }
 
     render() {
         return (
-            
-           <div className="row justify-content-md-center">
+
+            <div className="row justify-content-md-center">
                 <div>
                     <form>
                         <div className="form-group">
@@ -98,11 +94,18 @@ class SignUp extends Component {
                                 onClick={() => this.props.handleRegister(this.state)}>
                                 Register
                             </Button>
+
+                            <pre></pre>
+                            <Button
+                                bsStyle="success"
+                                onClick={() => this.props.loginSignUp("SignIn")}>
+                                SignIn
+                            </Button>
                         </div>
                     </form>
                 </div>
             </div>
-        
+
 
         );
     }

@@ -8,7 +8,7 @@ var table = first+'_'+second;
 var mongoose   = require('mongoose');
 var mongo = require('mongodb');
 var User    = require('../models/User');
-mongoose.connect('mongodb://localhost:27017/cmpe_273');
+mongoose.connect('mongodb://127.0.0.1:27017/cmpe_273');
 var db = mongoose.connection;
 
 

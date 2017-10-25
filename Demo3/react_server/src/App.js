@@ -12,7 +12,7 @@ import MainComponent from "./components/MainComponent";
                 <div className="App">
                  
                     <BrowserRouter>
-                      <HomePage/>
+                      <MainComponent/>
                     </BrowserRouter>
                 </div>
             );

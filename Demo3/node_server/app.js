@@ -11,7 +11,7 @@ var MongoDBStore = require('connect-mongodb-session')(expressSession);
 
 var store = new MongoDBStore(
     {
-        uri: 'mongodb://localhost:27017/cmpe_273',
+        uri: 'mongodb://127.0.0.1:27017/cmpe_273',
         collection: 'mySessions'
     });
 

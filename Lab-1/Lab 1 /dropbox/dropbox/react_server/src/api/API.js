@@ -113,3 +113,18 @@ export const uploadFile = (payload) =>
             console.log("This is error");
             return error;
         });
+
+
+
+export const deleteFile = (data) =>
+    fetch(`${api}/files/delete`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        body: JSON.stringify(data)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });

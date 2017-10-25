@@ -26,6 +26,7 @@ export const doLogin = (payload) =>
             console.log("This is error inside dologin");
             return error;
         });
+
 export const doRegister = (payload) =>
 
     fetch(`${api}/users/doRegister`, {
@@ -47,7 +48,7 @@ export const doRegister = (payload) =>
         });
 
 export const checkSession = () =>
-     fetch(`${api}/files/check`,{
+     fetch(`${api}/users/check`,{
         method :'GET',
         credentials: 'include',
          mode: 'cors',
@@ -71,3 +72,23 @@ export const checkSession = () =>
             console.log("This is error.");
             return error;
         });
+
+export const logout = () =>
+    fetch(`${api}/users/doLogout`,{
+        method :'POST',
+        credentials: 'include',
+         mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        }
+
+           }).then((res) => {
+            console.log("inside Logout APi response")
+            console.log(res.status);
+           
+            console.log("returning the status back");
+            console.log(res.body);
+            return res.status;
+           
+        })
