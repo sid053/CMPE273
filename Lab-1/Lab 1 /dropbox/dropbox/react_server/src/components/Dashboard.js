@@ -9,6 +9,16 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import {getData,fileDelete} from '../action/index';
 import {connect} from 'react-redux';
+
+import {Panel,
+       Accordion,
+       Jumbotron,
+        Button,
+        ButtonToolbar,
+        OverlayTrigger,
+        Popover,
+        FormGroup,
+        FormControl} from 'react-bootstrap'
  
 class Dashboard extends Component {
 
@@ -76,20 +86,85 @@ class Dashboard extends Component {
     componentDidMount() {
         console.log("componentDidMount function");
          };
+
+    //the other display code
+
+
+    state={
+        shareUsername:''
+    }
+
+    getValidationState() {
+        const length = this.state.shareUsername.length;
+         {
+            console.log(this.state.shareUsername)
+            return 'success';}
+        // else if (length > 5) return 'warning';
+        // else if (length > 0) return 'error';
+         return null;
+    }
+
+    // handleChange(event) {
+    //     this.setState({ shareUsername: event.target.value });
+    // }
+
             
     renderList(){
+
+
+        const popoverRight = (
+            <Popover id="popover-positioned-right" title="Enter Username">
+                <form>
+                    <FormGroup
+                        controlId="formBasicText"
+                        validationState={this.getValidationState()}
+                    >
+                        <FormControl
+                            type="text"
+                            value={this.state.shareUsername}
+                            placeholder="Enter username"
+                            onChange={(event)=>{
+                            this.setState({ shareUsername: event.target.value });
+                            }}
+                        />
+                    </FormGroup>
+                </form>
+
+            </Popover>
+        );
         return this.props.userdata.files.map((file,index)=>{
          return(
-                    <div key={index} onClick={() => this.handleDelete(file.img,index)}>
-                        {file.img.split('/')[2]}
-                    </div>
+                 <Accordion>
+                   <Panel collapsible header={file.img.split('/')[2]}
+                          key={index}
+                          eventKey={index}
+                          >
+                       <ButtonToolbar>
+                       <Button
+                           bsStyle="danger"
+                           onClick={() => this.handleDelete(file.img,index)}>
+                           Delete
+                       </Button>
+
+                        <OverlayTrigger trigger="click" placement="right" overlay={popoverRight}>
+                            <Button
+                                bsStyle="primary"
+                                active>
+                                share
+                            </Button>
+                        </OverlayTrigger>
+                       </ButtonToolbar>
+                   </Panel>
+               </Accordion>
+
          );
         });
     }
 
 
     render(){
-    
+
+
      
     return(
       <div>
@@ -115,7 +190,10 @@ class Dashboard extends Component {
                 </div>
                
                 <div>
+                    <Jumbotron>
+                        <h3> User Files </h3>
                  {this.renderList()}
+                    </Jumbotron>
                  </div>
                  
                 

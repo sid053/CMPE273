@@ -38,8 +38,8 @@
       <file leaf-file-name="fileUpload.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/fileUpload.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+            <state relative-caret-position="60">
+              <caret line="4" column="23" lean-forward="false" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
               <folding>
                 <element signature="e#183#558#0" expanded="false" />
                 <element signature="e#675#852#0" expanded="false" />
@@ -123,12 +123,6 @@
               <item name="node_server" type="462c0819:PsiDirectoryNode" />
               <item name="UserFiles" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="node_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="node_server" type="462c0819:PsiDirectoryNode" />
-              <item name="UserFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="sid" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -175,12 +169,12 @@
       <updated>1505755908654</updated>
       <workItem from="1505755919039" duration="6253000" />
       <workItem from="1505772357271" duration="446000" />
-      <workItem from="1508875419751" duration="6291000" />
+      <workItem from="1508875419751" duration="7139000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12990000" />
+    <option name="totallyTimeSpent" value="13838000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -305,8 +299,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/fileUpload.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="57" column="21" lean-forward="true" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+        <state relative-caret-position="60">
+          <caret line="4" column="23" lean-forward="false" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
           <folding>
             <element signature="e#183#558#0" expanded="false" />
             <element signature="e#675#852#0" expanded="false" />

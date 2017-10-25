@@ -53,8 +53,6 @@ router.get('/check', function(req,res){
 
 router.post('/delete' , function (req,res) {
     console.log("inside Delete");
-    //console.log(req.sessionID);
-    //console.log(req.body.file);
     var FilePath = "./"+req.body.file ;
     console.log(FilePath);
     fs.unlink(FilePath, function(err) {
@@ -64,7 +62,7 @@ router.post('/delete' , function (req,res) {
             res.status(201).send();
         }
         else {
-            return res.end("Dir creation failed : " + err);
+            return res.end("deletion failed : " + err);
             res.status(401);
         }
     });

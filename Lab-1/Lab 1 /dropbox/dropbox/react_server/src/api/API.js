@@ -5,7 +5,7 @@ const headers = {
     'Accept': 'application/json'
 };
 
-export const doLogin = (payload) =>
+export const doLogin = (payload) => {
     fetch(`${api}/users/login`, {
         method: 'POST',
         credentials: 'include',
@@ -16,20 +16,20 @@ export const doLogin = (payload) =>
         },
         body: JSON.stringify(payload)
     })
-    .then(res => { 
-        console.log("inside do login");
-        return res.status;
-         
-
-    }).catch(error => {
-
-            console.log("This is error inside dologin");
-            return error;
-        });
+        .then(res => {
+            console.log("inside do login");
+            return res.status;
 
 
+        }).catch(error => {
 
-export const doRegister = (payload) =>
+        console.log("This is error inside dologin");
+        return error;
+    });
+
+}
+
+export const doRegister = (payload) => {
 
     fetch(`${api}/users/doRegister`, {
         method: 'POST',
@@ -48,75 +48,69 @@ export const doRegister = (payload) =>
             console.log("This is error");
             return error;
         });
+}
 
-
-
-
-
-
-export const getImages = () =>
-    fetch(`${api}/users/getFiles`,{method :'GET' , 
-        credentials:'include',
-         mode:'cors',
-          headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        }
-
-     }).then(res => res.json())
-        .catch(error => {
-            console.log("This is error.");
-            return error;
-        });
-
-
-
-
-export const checkSession = () =>
-     fetch(`${api}/files/check`,{
-        method :'GET',
+export const getImages = () => {
+    fetch(`${api}/users/getFiles`, {
+        method: 'GET',
         credentials: 'include',
-         mode: 'cors',
+        mode: 'cors',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         }
 
-           }).then((res) => {
-            console.log("inside checkSession APi response")
-            console.log(res.status);
-           
-            console.log("returning the status back");
-            console.log(res.body);
-            return res.status;
-           
-        })
+    }).then(res => res.json())
+        .catch(error => {
+            console.log("This is error.");
+            return error;
+        });
+
+}
+
+export const checkSession = () => {
+    fetch(`${api}/files/check`, {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        }
+
+    }).then((res) => {
+        console.log("inside checkSession APi response")
+        console.log(res.status);
+
+        console.log("returning the status back");
+        console.log(res.body);
+        return res.status;
+
+    })
 
 
         .catch(error => {
             console.log("This is error.");
             return error;
         });
+}
 
-
-
-
-export const uploadFile = (payload) =>
+export const uploadFile = (payload) => {
     fetch(`${api}/files/upload`, {
         method: 'POST',
-         credentials: 'include',
+        credentials: 'include',
         mode: 'cors',
         body: payload
     }).then(res => {
         return res.status;
     }).catch(error => {
-            console.log("This is error");
-            return error;
-        });
+        console.log("This is error");
+        return error;
+    });
 
+}
 
-
-export const deleteFile = (payload) =>
+export const deleteFile = (payload) => {
     fetch(`${api}/files/delete`, {
         method: 'POST',
         credentials: 'include',
@@ -125,10 +119,31 @@ export const deleteFile = (payload) =>
             ...headers,
             'Content-Type': 'application/json'
         },
-        body:JSON.stringify(payload)
+        body: JSON.stringify(payload)
     }).then(res => {
         return res.status;
     }).catch(error => {
         console.log("This is error");
         return error;
     });
+}
+
+export const validateUsername = (payload) => {
+    fetch(`${api}/users/validate`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+}
+
