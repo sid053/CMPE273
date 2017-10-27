@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as API from '../api/API';
 import SignIn from "./SignIn";
 import Message from "./Message";
+import Welcome from "./Welcome";
 import SignUp from "./SignUp";
-
+import {Button} from "react-bootstrap";
 
 class HomePage extends Component {
 
@@ -12,21 +13,21 @@ class HomePage extends Component {
         isLoggedIn: false,
         message: "Welcome to DropBox",
         username: '',
-        Images:[],
-        dashboard:false,
-        check:"SignIn"
+        check:"SignIn",
+        dashboard:false
     };
 
     handleSubmit = (userdata) => {
         API.doLogin(userdata)
             .then((status) => {
-                   if(status===201){
+                if(status===201){
                     console.log("after SignIn response");
                     this.setState({
                         isLoggedIn: true,
                         message: "You have succesully LoggedIn..!!",
                         username: userdata.username,
                         dashboard:true,
+                        check:"dashboard"
 
                     });
                     console.log("inside handle submit state");
@@ -35,7 +36,7 @@ class HomePage extends Component {
                 }
                 else{
 
-                     console.log("after SignIn response");
+                    console.log("after SignIn response");
                     this.setState({
                         isLoggedIn: false,
                         message: "Wrong username and password..!!",
@@ -48,17 +49,17 @@ class HomePage extends Component {
                     this.props.history.push("/");
 
                 }
-                
+
             }).catch((error)=> {
-                console.log("inside error");
-                this.setState({
-                        isLoggedIn: false,
-                        message: "Error While logging in!!",
-                        username: userdata.username,
-                       // Images:[]
-                    });  
-                this.props.history.push('"/');
+            console.log("inside error");
+            this.setState({
+                isLoggedIn: false,
+                message: "Error While logging in!!",
+                username: userdata.username,
+                // Images:[]
             });
+            // this.props.history.push('"/');
+        });
     };
 
 
@@ -72,10 +73,11 @@ class HomePage extends Component {
                         isLoggedIn: true,
                         message: "You have registered .. SignIn to continue",
                         username: userdata.username,
-                        
+                        check:"SignIn"
+
                     });
-            
-                    this.props.history.push("/");
+
+                    this.props.history.push("/SignIn");
                 } else if (status === 401) {
                     this.setState({
                         isLoggedIn: false,
@@ -88,16 +90,39 @@ class HomePage extends Component {
     loginSignUp = (data) =>{
         console.log(data) ;
         this.setState({
-            check:JSON.stringify(data)
+            check:data
         })
 
     }
-   
+    componentWillMount(){
+
+        API.checkSession().then((status)=>{
+            if(status===201){
+                this.setState({
+                    isLoggedIn: true,
+                    message: "LoggedIn",
+
+                });
+                this.props.history.push("/dashboard");
+            }
+            else{
+                this.props.history.push("/")
+            }
+
+        }).catch((error)=>{
+            this.props.history.push("/")
+        })
+
+    }
+
+
+
     render() {
 
 
         return (
-            <div>
+
+            <div className="col-md-12">
                 <div className="col-md-12">
                     <div className="row justify-content-md-center">
                         <div className="col-md-10">
@@ -108,8 +133,10 @@ class HomePage extends Component {
                     <hr/>
                 </div>
 
-                <div className="row">
-                    <div className="col-md-6">
+
+
+                <div>
+                    <div className="col-lg-6">
 
                         <img src = "https://dropboxmainblog.files.wordpress.com/2015/09/team-feature.png?w=650&h=325"/>
 
@@ -131,15 +158,12 @@ class HomePage extends Component {
 
 
             </div>
- 
+        );
 
 
-             );
-        
-  
 
 
-       
+
     }
 }
 

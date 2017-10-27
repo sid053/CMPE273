@@ -13,11 +13,15 @@ class Main extends Component {
         return (
             <div>
                 <Route exact path="/" render={() => (
+                   <div>
                     <HomePage/>
+                   </div>
                 )}/>
 
                 <Route exact path="/dashboard" render={() => (
+                    <div>
                     <Dashboard/>
+                    </div>
                 )}/>
             </div>
 

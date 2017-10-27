@@ -5,7 +5,7 @@ const headers = {
     'Accept': 'application/json'
 };
 
-export const doLogin = (payload) => {
+export const doLogin = (payload) =>
     fetch(`${api}/users/login`, {
         method: 'POST',
         credentials: 'include',
@@ -27,9 +27,9 @@ export const doLogin = (payload) => {
         return error;
     });
 
-}
 
-export const doRegister = (payload) => {
+
+export const doRegister = (payload) =>
 
     fetch(`${api}/users/doRegister`, {
         method: 'POST',
@@ -48,9 +48,12 @@ export const doRegister = (payload) => {
             console.log("This is error");
             return error;
         });
-}
 
-export const getImages = () => {
+
+
+
+
+export const getImages = () =>
     fetch(`${api}/users/getFiles`, {
         method: 'GET',
         credentials: 'include',
@@ -66,9 +69,9 @@ export const getImages = () => {
             return error;
         });
 
-}
 
-export const checkSession = () => {
+
+export const checkSession = () =>
     fetch(`${api}/files/check`, {
         method: 'GET',
         credentials: 'include',
@@ -93,9 +96,11 @@ export const checkSession = () => {
             console.log("This is error.");
             return error;
         });
-}
 
-export const uploadFile = (payload) => {
+
+
+
+export const uploadFile = (payload) =>
     fetch(`${api}/files/upload`, {
         method: 'POST',
         credentials: 'include',
@@ -108,9 +113,9 @@ export const uploadFile = (payload) => {
         return error;
     });
 
-}
 
-export const deleteFile = (payload) => {
+
+export const deleteFile = (payload) =>
     fetch(`${api}/files/delete`, {
         method: 'POST',
         credentials: 'include',
@@ -126,10 +131,12 @@ export const deleteFile = (payload) => {
         console.log("This is error");
         return error;
     });
-}
 
-export const validateUsername = (payload) => {
-    fetch(`${api}/users/validate`, {
+
+
+
+export const validateUser = (payload) =>
+    fetch(`${api}/users/ValidateUser`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -144,6 +151,3 @@ export const validateUsername = (payload) => {
         console.log("This is error");
         return error;
     });
-
-}
-

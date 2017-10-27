@@ -20,7 +20,8 @@ const userdata = (state = initialState, action) => {
             console.log("inside userdata");
             console.log(action.payload);
             console.log("display done");
-            return {
+            state = {
+                ...state,
                 files: action.payload
             };
             break;
@@ -49,7 +50,7 @@ const userdata = (state = initialState, action) => {
 
    }
 
-   return state;
+ return state;
 
 }
 

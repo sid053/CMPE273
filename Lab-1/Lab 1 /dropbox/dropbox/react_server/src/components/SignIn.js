@@ -12,11 +12,15 @@ class SignIn extends Component {
     state = {
         username: '',
         password: '',
-
+        images: []
     };
 
     componentWillMount(){
-
+        this.setState({
+            username: '',
+            password: '',
+            images :[]
+        });
     }
 
     render() {
@@ -62,7 +66,7 @@ class SignIn extends Component {
                                 onClick={() => this.props.handleSubmit(this.state)}>
                                 Submit
                             </Button>
-                            <pre></pre>
+                        <br/>
                             <Button
                                 bsStyle="success"
                                 onClick={() => this.props.loginSignUp("SignUp")}>

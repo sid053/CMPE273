@@ -3,7 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 import * as API from '../api/API';
 import SignIn from "./SignIn";
 import Message from "./Message";
-//import Welcome from "./Welcome";
+import Welcome from "./Welcome";
 import SignUp from "./SignUp";
 import {Button} from "react-bootstrap";
 

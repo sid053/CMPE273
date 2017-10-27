@@ -4,6 +4,7 @@ var multer = require('multer');
 var glob = require('glob');
 var fs = require('fs');
 
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       //  console.log("Inside multer updated code");
@@ -63,7 +64,7 @@ router.post('/delete' , function (req,res) {
         }
         else {
             return res.end("deletion failed : " + err);
-            res.status(401);
+            res.status(401).send();
         }
     });
 

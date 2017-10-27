@@ -4,7 +4,7 @@ import * as API from '../api/API';
 
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-import PropTypes from 'prop-types';
+
 
 import { withRouter } from 'react-router-dom';
 import {getData,fileDelete} from '../action/index';
@@ -18,7 +18,7 @@ import {Panel,
         OverlayTrigger,
         Popover,
         FormGroup,
-        FormControl} from 'react-bootstrap'
+        FormControl} from 'react-bootstrap';
  
 class Dashboard extends Component {
 
@@ -44,7 +44,6 @@ class Dashboard extends Component {
             return error;
         })
     }
-
 
     handleFileUpload = (event) => {
 
@@ -96,22 +95,33 @@ class Dashboard extends Component {
 
     getValidationState() {
         const length = this.state.shareUsername.length;
-         {
+
             console.log(this.state.shareUsername)
-            return 'success';}
+            return 'success';
         // else if (length > 5) return 'warning';
         // else if (length > 0) return 'error';
-         return null;
+
     }
 
-    // handleChange(event) {
-    //     this.setState({ shareUsername: event.target.value });
-    // }
+    validate(data){
+        console.log("inside validate user in dashboard");
+
+        API.validateUser(data).then((status)=>{
+           if(status===201) {
+               console.log("correct username");
+           }
+           else{
+               console.log("Username doesnot exist");
+           }
+        })
+
+    }
+
 
             
     renderList(){
 
-
+        console.log("inside RenderList");
         const popoverRight = (
             <Popover id="popover-positioned-right" title="Enter Username">
                 <form>
@@ -127,13 +137,22 @@ class Dashboard extends Component {
                             this.setState({ shareUsername: event.target.value });
                             }}
                         />
+
+                        <Button
+                            bsStyle="primary"
+                            onClick={() => this.validate(this.state)}
+                            active>
+                            share
+                        </Button>
+
                     </FormGroup>
                 </form>
 
             </Popover>
         );
         return this.props.userdata.files.map((file,index)=>{
-         return(
+            console.log("inside Accordion");
+        return(
                  <Accordion>
                    <Panel collapsible header={file.img.split('/')[2]}
                           key={index}
@@ -157,7 +176,7 @@ class Dashboard extends Component {
                    </Panel>
                </Accordion>
 
-         );
+          );
         });
     }
 
@@ -186,7 +205,7 @@ class Dashboard extends Component {
                 </div>
 
                 <div className="col-md-3">
-                    inside the Dashboard
+
                 </div>
                
                 <div>

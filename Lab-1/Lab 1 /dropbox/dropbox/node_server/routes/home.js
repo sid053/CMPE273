@@ -8,7 +8,6 @@ var table = first+'_'+second;
 var fileUpload = require('./fileUpload');
 var glob = require('glob');
 var passport = require('passport');
-
 require('./passport')(passport);
 
 function afterRegister(req,res){
@@ -106,7 +105,28 @@ function getFiles(req,res,next){
   
 }
 
+function validateUser(req,res,next) {
 
+    User.findOne({username: req.shareUsername}, function (err,user) {
+        if(err){
+            console.log(err);
+        }
+
+        if (user) {
+            res.status(201).send("username is valid");
+        }
+        else {
+            console.log("Inside the error thingy");
+            res.status(401).send("this is error");
+        }
+
+    });
+
+}
+
+
+
+exports.validateUser = validateUser;
 exports.getFiles=getFiles;
 exports.logout =logout;
 exports.loginPassport = loginPassport;
