@@ -95,7 +95,7 @@ class SignUp extends Component {
                                 Register
                             </Button>
 
-                            <pre></pre>
+
                             <Button
                                 bsStyle="success"
                                 onClick={() => this.props.loginSignUp("SignIn")}>

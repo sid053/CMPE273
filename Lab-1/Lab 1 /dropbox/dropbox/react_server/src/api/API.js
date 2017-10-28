@@ -136,7 +136,25 @@ export const deleteFile = (payload) =>
 
 
 export const validateUser = (payload) =>
-    fetch(`${api}/users/ValidateUser`, {
+    fetch(`${api}/users/validateUser`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+
+export const share = (payload) =>
+    fetch(`${api}/files/share`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',

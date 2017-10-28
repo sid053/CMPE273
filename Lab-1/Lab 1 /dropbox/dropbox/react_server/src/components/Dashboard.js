@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import '../App.css';
 import * as API from '../api/API';
-
+import Brand from './Brand';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-
+import Footer from './Footer';
+import Basic from './Basic';
 
 import { withRouter } from 'react-router-dom';
 import {getData,fileDelete} from '../action/index';
@@ -93,63 +94,44 @@ class Dashboard extends Component {
         shareUsername:''
     }
 
-    getValidationState() {
-        const length = this.state.shareUsername.length;
 
-            console.log(this.state.shareUsername)
-            return 'success';
-        // else if (length > 5) return 'warning';
-        // else if (length > 0) return 'error';
-
-    }
-
-    validate(data){
+    validate(data,file){
         console.log("inside validate user in dashboard");
-
-        API.validateUser(data).then((status)=>{
+            console.log(file);
+            console.log(data);
+            const payload = {
+                'shareUsername': this.state.shareUsername,
+                'img' : file
+            }
+            console.log(payload);
+            API.validateUser(data).then((status)=>{
            if(status===201) {
+
                console.log("correct username");
+               API.share(payload).then((status)=>
+               {
+                   if(status===201){
+                       console.log("file shared succesfully");
+                   }else{
+                       console.log("unable to share");
+                   }
+               }).catch((error)=>{
+                   console.log(error);
+               })
            }
+
+
            else{
                console.log("Username doesnot exist");
            }
+        }).catch((error) => {
+            console.log("Error Occured while checking the username")
         })
 
     }
 
-
-            
     renderList(){
 
-        console.log("inside RenderList");
-        const popoverRight = (
-            <Popover id="popover-positioned-right" title="Enter Username">
-                <form>
-                    <FormGroup
-                        controlId="formBasicText"
-                        validationState={this.getValidationState()}
-                    >
-                        <FormControl
-                            type="text"
-                            value={this.state.shareUsername}
-                            placeholder="Enter username"
-                            onChange={(event)=>{
-                            this.setState({ shareUsername: event.target.value });
-                            }}
-                        />
-
-                        <Button
-                            bsStyle="primary"
-                            onClick={() => this.validate(this.state)}
-                            active>
-                            share
-                        </Button>
-
-                    </FormGroup>
-                </form>
-
-            </Popover>
-        );
         return this.props.userdata.files.map((file,index)=>{
             console.log("inside Accordion");
         return(
@@ -165,7 +147,35 @@ class Dashboard extends Component {
                            Delete
                        </Button>
 
-                        <OverlayTrigger trigger="click" placement="right" overlay={popoverRight}>
+                        <OverlayTrigger trigger="click" rootClose placement="right" overlay={
+
+                            <Popover id="popover-trigger-click-root-close" title="Enter Username">
+                                <form>
+                                    <FormGroup
+                                        controlId="formBasicText"
+                                    >
+                                        <FormControl
+                                            type="text"
+                                            value={this.state.shareUsername}
+                                            placeholder="Enter username"
+                                            onChange={(event)=>{
+                                                this.setState({ shareUsername: event.target.value });
+                                            }}
+                                        />
+
+                                        <Button
+                                            bsStyle="primary"
+                                            onClick={() => this.validate(this.state,file.img)}
+                                            active>
+                                            share
+                                        </Button>
+
+                                    </FormGroup>
+                                </form>
+
+                            </Popover>
+
+                        }  >
                             <Button
                                 bsStyle="primary"
                                 active>
@@ -182,41 +192,55 @@ class Dashboard extends Component {
 
 
     render(){
-
+        var containerStyle = {
+            fontFamily: '"Lato", sans-serif',
+            margin: '40px 0',
+            overflow: 'hidden'
+        };
 
      
     return(
       <div>
-          <Typography
-                    align={'center'}
-                    type="display3"
-          >
-              Dropbox
-          </Typography>
-               
+          <div className="container-fluid">
+              <div className="row">
+                  <div style={containerStyle}>
+
+                      <div className="col-sm-5">
+                          <Brand />
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+
+
            <div className="row">
-                <div className="col-md-3">
-                    <TextField
-                        className={'fileupload'}
-                        type="file"
-                        name="mypic"
-                        onChange={this.handleFileUpload}
-                    />
-                </div>
 
-                <div className="col-md-3">
+               <div className="col-md-4">
+                   
+               </div>
 
-                </div>
-               
-                <div>
-                    <Jumbotron>
+               <div className="col-md-3">
+                   <label className="custom-file">
+                       <input type="file" id="file"
+                              name="mypic"
+                              className="custom-file-input"
+                              onChange={this.handleFileUpload}/>
+                           <span className="custom-file-control"></span>
+                   </label>
+               </div>
+
+
+                <div className="col-md-5">
                         <h3> User Files </h3>
-                 {this.renderList()}
-                    </Jumbotron>
-                 </div>
-                 
+                         {this.renderList()}
+                </div>
+
+
                 
             </div>
+
+
               
  
      </div>

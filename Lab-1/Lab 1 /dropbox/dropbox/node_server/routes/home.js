@@ -96,18 +96,18 @@ function getFiles(req,res,next){
             var path = "UserFiles/"+username+"/";
            imgJSON.img = path+file.split('/')[2];
             imgJSON.cols = 2  ;
-            console.log(imgJSON);
+           //console.log(file.split('/')[2]);
             return imgJSON;
         });
-         console.log(resArr);
+         //console.log(resArr);
           res.status(201).send(resArr);
     });
   
 }
 
 function validateUser(req,res,next) {
-
-    User.findOne({username: req.shareUsername}, function (err,user) {
+       console.log(req.body.shareUsername);
+    User.findOne({username: req.body.shareUsername}, function (err,user) {
         if(err){
             console.log(err);
         }

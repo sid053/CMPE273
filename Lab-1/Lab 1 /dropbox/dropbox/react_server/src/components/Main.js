@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import Dashboard from "./Dashboard" ;
 import HomePage from "./HomePage";
-
+import Footer from './Footer';
 
 
 class Main extends Component {
@@ -23,6 +23,7 @@ class Main extends Component {
                     <Dashboard/>
                     </div>
                 )}/>
+
             </div>
 
         );
