@@ -217,7 +217,7 @@ class Dashboard extends Component {
            <div className="row">
 
                <div className="col-md-4">
-                   
+
                </div>
 
                <div className="col-md-3">
