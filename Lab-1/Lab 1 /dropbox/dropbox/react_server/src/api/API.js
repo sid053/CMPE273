@@ -19,18 +19,12 @@ export const doLogin = (payload) =>
         .then(res => {
             console.log("inside do login");
             return res.status;
-
-
         }).catch(error => {
-
         console.log("This is error inside dologin");
         return error;
     });
 
-
-
 export const doRegister = (payload) =>
-
     fetch(`${api}/users/doRegister`, {
         method: 'POST',
         credentials: 'include',
@@ -49,10 +43,6 @@ export const doRegister = (payload) =>
             return error;
         });
 
-
-
-
-
 export const getImages = () =>
     fetch(`${api}/users/getFiles`, {
         method: 'GET',
@@ -62,14 +52,11 @@ export const getImages = () =>
             ...headers,
             'Content-Type': 'application/json'
         }
-
     }).then(res => res.json())
         .catch(error => {
             console.log("This is error.");
             return error;
         });
-
-
 
 export const checkSession = () =>
     fetch(`${api}/files/check`, {
@@ -80,7 +67,6 @@ export const checkSession = () =>
             ...headers,
             'Content-Type': 'application/json'
         }
-
     }).then((res) => {
         console.log("inside checkSession APi response")
         console.log(res.status);
@@ -88,17 +74,10 @@ export const checkSession = () =>
         console.log("returning the status back");
         console.log(res.body);
         return res.status;
-
-    })
-
-
-        .catch(error => {
+    }).catch(error => {
             console.log("This is error.");
             return error;
         });
-
-
-
 
 export const uploadFile = (payload) =>
     fetch(`${api}/files/upload`, {
@@ -112,8 +91,6 @@ export const uploadFile = (payload) =>
         console.log("This is error");
         return error;
     });
-
-
 
 export const deleteFile = (payload) =>
     fetch(`${api}/files/delete`, {
@@ -131,8 +108,6 @@ export const deleteFile = (payload) =>
         console.log("This is error");
         return error;
     });
-
-
 
 
 export const validateUser = (payload) =>

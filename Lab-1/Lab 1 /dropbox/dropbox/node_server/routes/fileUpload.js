@@ -3,7 +3,7 @@ var router = express.Router();
 var multer = require('multer');
 var glob = require('glob');
 var fs = require('fs');
-
+var kafka = require('./kafka/client');
 
 
 var storage = multer.diskStorage({
@@ -25,13 +25,52 @@ var storage = multer.diskStorage({
 
 var upload = multer({storage:storage});
 
-router.post('/upload', upload.single('mypic'),function (req, res, next) {
+router.post('/upload',function (req, res, next) {
     var username = req.session.username ;
     console.log("inside post upload");
    // console.log(req.body.username);
-    console.log(req.file);
+   // console.log(req.file);
+ fs.readFile('./UserFiles/sid/testforsending.txt' ,function (err,buf) {
+     if(err){
+         console.log(err);
+     }
+     else{
+        // console.log(buf)
 
-    res.status(204).end();
+         var buffer = buf.toString('base64');
+
+         kafka.make_request('upload12',{file: buf},'upload', function(err,results){
+             console.log('response from kafka for user validation');
+           //  console.log(results);
+             if(err){
+                 console.log(err);
+             }
+             else
+             {
+
+                 if(results.code==='200'){
+
+                     res.status(201).send(results.files);
+                 }
+                 else{
+                     res.status(401).send("no files to return");
+                 }
+             }
+         });
+
+
+
+         // fs.writeFile('./UserFiles/sid/test123.jpg',buffer,function (err) {
+         //     console.log("I am inside write");
+         //     res.status(201).send("File copied");
+         // })
+     }
+
+ })
+
+
+
+    //res.status(204).end();
 });
 
 

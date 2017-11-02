@@ -9,39 +9,57 @@ var fileUpload = require('./fileUpload');
 var glob = require('glob');
 var passport = require('passport');
 require('./passport')(passport);
+ var kafka = require('./kafka/client');
 
 function afterRegister(req,res){
-var FilePath = "./UserFiles/"+req.body.username ;
-var user = new User();
-    user.name = req.body.name ;
-    user.username = req.body.username;
-    user.email = req.body.email;
-    user.password = req.body.password;
+//var FilePath = "./UserFiles/"+req.body.username ;
 
-    user.save(function (err) { if(err){
-          res.status(401).send(err);
-        }
-        else{
-          
-          fs.mkdir(FilePath, function(err) {
-             if (!err) {
 
-                       console.log(req.sessionID);
-                   res.status(201).send();
-                        }
-             else {
-                    return res.end("Dir creation failed : " + err);
-                    res.status(401);
-                  }
-      });
 
-      
+
+    // user.save(function (err) { if(err){
+    //       res.status(401).send(err);
+    //     }
+    //     else{
+    //
+    //       fs.mkdir(FilePath, function(err) {
+    //          if (!err) {
+    //
+    //                    console.log(req.sessionID);
+    //                res.status(201).send();
+    //                     }
+    //          else {
+    //                 return res.end("Dir creation failed : " + err);
+    //                 res.status(401);
+    //               }
+    //   });
+    //
+    //
+    //     }
+    //     }
+    //
+    // );
+    //
+
+    kafka.make_request('signUp',req.body,'SignUp', function(err,results){
+        console.log('response from kafka for user validation');
+        console.log(results);
+        if(err){
+            console.log(err);
         }
+        else
+        {
+
+            if(results.code==='200'){
+                res.status(201).send("User Registered");
+            }
+            else{
+                res.status(401).send("User not Registered");
+            }
         }
-        
-    );
-  
-	
+    });
+
+
 	
 }
 
@@ -89,38 +107,70 @@ function loginPassport(req,res,next){
 function getFiles(req,res,next){
   
     const username = req.session.username;
-    var folderPath = "UserFiles/"+username+"/*.*" ;
-     glob(folderPath, function (er, files) {
-        var resArr = files.map(function (file) { 
-            var imgJSON = {};
-            var path = "UserFiles/"+username+"/";
-           imgJSON.img = path+file.split('/')[2];
-            imgJSON.cols = 2  ;
-           //console.log(file.split('/')[2]);
-            return imgJSON;
-        });
-         //console.log(resArr);
-          res.status(201).send(resArr);
+
+
+    kafka.make_request('files',{"username":username},'getfiles', function(err,results){
+        console.log('response from kafka for user validation');
+        console.log(results);
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+
+            if(results.code==='200'){
+
+                res.status(201).send(results.files);
+            }
+            else{
+                res.status(401).send("no files to return");
+            }
+        }
     });
-  
+
+
+
 }
 
 function validateUser(req,res,next) {
        console.log(req.body.shareUsername);
-    User.findOne({username: req.body.shareUsername}, function (err,user) {
+       var shareUsername = req.body.shareUsername;
+     //  var callingFunction = validateUser1 ;
+      console.log("Inside validate user function")
+    kafka.make_request('validate',{"username":shareUsername},'validateuser1', function(err,results){
+        console.log('response from kafka for user validation');
+        console.log(results);
         if(err){
-            console.log(err);
+           console.log(err);
         }
+        else
+        {
 
-        if (user) {
-            res.status(201).send("username is valid");
+          if(results.code==='200'){
+              res.status(201).send("Username is valid");
+          }
+          else{
+              res.status(401).send("Username not valid");
+          }
         }
-        else {
-            console.log("Inside the error thingy");
-            res.status(401).send("this is error");
-        }
-
     });
+
+
+
+    // User.findOne({username: req.body.shareUsername}, function (err,user) {
+    //     if(err){
+    //         console.log(err);
+    //     }
+    //
+    //     if (user) {
+    //         res.status(201).send("username is valid");
+    //     }
+    //     else {
+    //         console.log("Inside the error thingy");
+    //         res.status(401).send("this is error");
+    //     }
+    //
+    // });
 
 }
 

@@ -136,7 +136,7 @@ class Dashboard extends Component {
             console.log("inside Accordion");
         return(
                  <Accordion>
-                   <Panel collapsible header={file.img.split('/')[2]}
+                   <Panel collapsible header={file.img}
                           key={index}
                           eventKey={index}
                           >

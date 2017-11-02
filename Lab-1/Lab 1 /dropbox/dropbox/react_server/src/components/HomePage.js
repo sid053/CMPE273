@@ -77,7 +77,7 @@ class HomePage extends Component {
 
                     });
 
-                    this.props.history.push("/SignIn");
+                    this.props.history.push("/");
                 } else if (status === 401) {
                     this.setState({
                         isLoggedIn: false,

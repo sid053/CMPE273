@@ -4,7 +4,7 @@ var first = "User";
 var second = "Table";
 var table = first+'_'+second;
 var User    = require('../models/User');
-
+var kafka = require('./kafka/client');
 
 
 
@@ -15,17 +15,25 @@ module.exports = function(passport) {
         const uname = username;
         const pswd = password;
 
-
-        User.findOne({username: username, password: password}, function (err, user) {
-            if (user) {
-                done(null, {username: uname, password: pswd});   //when username and password is valid
+        console.log('in passport');
+        kafka.make_request('login',{"username":username,"password":password},'passport', function(err,results){
+            console.log('in result');
+            console.log(results);
+            if(err){
+                done(err,{});
             }
-            else {
-                console.log("Inside the error thingy");
-                done(null, false);
+            else
+            {
+                if(results.code == 200){
+                    done(null,{username:uname,password:pswd});
+                }
+                else {
+                    done(null,false);
+                }
             }
-
         });
+
+
 
         //when error occurs
     }));
