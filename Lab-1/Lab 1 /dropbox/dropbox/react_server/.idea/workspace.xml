@@ -25,30 +25,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dashboard.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Dashboard.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="41">
-              <caret line="138" column="54" lean-forward="false" selection-start-line="138" selection-start-column="54" selection-end-line="138" selection-end-column="54" />
+            <state relative-caret-position="526">
+              <caret line="62" column="30" lean-forward="true" selection-start-line="59" selection-start-column="19" selection-end-line="62" selection-end-column="30" />
               <folding>
-                <element signature="n#!!block;n#componentWillMount#0;n#Dashboard#0" expanded="false" />
-                <element signature="e#1383#1830#0" expanded="false" />
-                <element signature="e#1867#2168#0" expanded="false" />
+                <element signature="e#1929#2230#0" expanded="false" />
                 <element signature="n#!!block;n#componentDidMount#0;n#Dashboard#0" expanded="false" />
-                <element signature="e#2302#2334#0" expanded="false" />
+                <element signature="e#2364#2396#0" expanded="false" />
                 <element signature="n#!!block;n#validate#0;n#Dashboard#0" expanded="false" />
-                <element signature="e#3976#5613#0" expanded="false" />
-                <element signature="e#5948#6243#0" expanded="false" />
+                <element signature="e#4038#5675#0" expanded="false" />
+                <element signature="e#6010#6305#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomePage.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomePage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/HomePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="79" column="46" lean-forward="false" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+            <state relative-caret-position="327">
+              <caret line="114" column="0" lean-forward="true" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -100,9 +98,9 @@
         <option value="$PROJECT_DIR$/src/components/Basic.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/api/API.js" />
-        <option value="$PROJECT_DIR$/src/components/Dashboard.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/components/HomePage.js" />
+        <option value="$PROJECT_DIR$/src/components/Dashboard.js" />
       </list>
     </option>
   </component>
@@ -240,12 +238,12 @@
       <workItem from="1508875826830" duration="31945000" />
       <workItem from="1509251299041" duration="107000" />
       <workItem from="1509425372836" duration="1079000" />
-      <workItem from="1509556893837" duration="1097000" />
+      <workItem from="1509556893837" duration="1903000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46122000" />
+    <option name="totallyTimeSpent" value="46928000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -281,7 +279,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="19" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -299,14 +297,12 @@
         <state relative-caret-position="2070">
           <caret line="138" column="54" lean-forward="false" selection-start-line="138" selection-start-column="54" selection-end-line="138" selection-end-column="54" />
           <folding>
-            <element signature="n#!!block;n#componentWillMount#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#1383#1830#0" expanded="false" />
-            <element signature="e#1867#2168#0" expanded="false" />
+            <element signature="e#1929#2230#0" expanded="false" />
             <element signature="n#!!block;n#componentDidMount#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#2302#2334#0" expanded="false" />
+            <element signature="e#2364#2396#0" expanded="false" />
             <element signature="n#!!block;n#validate#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#3976#5613#0" expanded="false" />
-            <element signature="e#5948#6243#0" expanded="false" />
+            <element signature="e#4038#5675#0" expanded="false" />
+            <element signature="e#6010#6305#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -372,14 +368,12 @@
         <state relative-caret-position="3285">
           <caret line="219" column="0" lean-forward="false" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#componentWillMount#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#1383#1830#0" expanded="false" />
-            <element signature="e#1867#2168#0" expanded="false" />
+            <element signature="e#1929#2230#0" expanded="false" />
             <element signature="n#!!block;n#componentDidMount#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#2302#2334#0" expanded="false" />
+            <element signature="e#2364#2396#0" expanded="false" />
             <element signature="n#!!block;n#validate#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#3976#5613#0" expanded="false" />
-            <element signature="e#5948#6243#0" expanded="false" />
+            <element signature="e#4038#5675#0" expanded="false" />
+            <element signature="e#6010#6305#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -403,14 +397,12 @@
         <state relative-caret-position="45">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
-            <element signature="n#!!block;n#componentWillMount#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#1383#1830#0" expanded="false" />
-            <element signature="e#1867#2168#0" expanded="false" />
+            <element signature="e#1929#2230#0" expanded="false" />
             <element signature="n#!!block;n#componentDidMount#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#2302#2334#0" expanded="false" />
+            <element signature="e#2364#2396#0" expanded="false" />
             <element signature="n#!!block;n#validate#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#3976#5613#0" expanded="false" />
-            <element signature="e#5948#6243#0" expanded="false" />
+            <element signature="e#4038#5675#0" expanded="false" />
+            <element signature="e#6010#6305#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -585,23 +577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="138" column="54" lean-forward="false" selection-start-line="138" selection-start-column="54" selection-end-line="138" selection-end-column="54" />
-          <folding>
-            <element signature="n#!!block;n#componentWillMount#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#1383#1830#0" expanded="false" />
-            <element signature="e#1867#2168#0" expanded="false" />
-            <element signature="n#!!block;n#componentDidMount#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#2302#2334#0" expanded="false" />
-            <element signature="n#!!block;n#validate#0;n#Dashboard#0" expanded="false" />
-            <element signature="e#3976#5613#0" expanded="false" />
-            <element signature="e#5948#6243#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/SignUp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1425">
@@ -620,9 +595,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/HomePage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="79" column="46" lean-forward="false" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
+        <state relative-caret-position="327">
+          <caret line="114" column="0" lean-forward="true" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="62" column="30" lean-forward="true" selection-start-line="59" selection-start-column="19" selection-end-line="62" selection-end-column="30" />
+          <folding>
+            <element signature="e#1929#2230#0" expanded="false" />
+            <element signature="n#!!block;n#componentDidMount#0;n#Dashboard#0" expanded="false" />
+            <element signature="e#2364#2396#0" expanded="false" />
+            <element signature="n#!!block;n#validate#0;n#Dashboard#0" expanded="false" />
+            <element signature="e#4038#5675#0" expanded="false" />
+            <element signature="e#6010#6305#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

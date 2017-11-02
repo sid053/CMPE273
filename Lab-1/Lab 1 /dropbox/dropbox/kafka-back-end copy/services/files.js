@@ -11,26 +11,13 @@ function handle_Get_Files(msg, callback) {
     var folderPath = "./services/UserFiles/" + username + "/*.*";
     console.log(folderPath);
     var res = {};
-    glob(folderPath, function (er, files) {
-        console.log("inside glob");
-        res.files = files.map(function (file) {
-            var imgJSON = {};
-            imgJSON.img = file.split('/')[4];
-            imgJSON.cols = 2;
-            return imgJSON;
-        });
-        if (er) {
-            res.code = "401";
-            console.log("inside error");
-
+    User.find({username:"sid"},function (err,results) {
+        if(!err){
+            console.log(results);
         }
-        else {
-            res.code = "200";
-        }
-        callback(null, res);
+        callback(null,results);
 
-
-    });
+    })
 
 }
 

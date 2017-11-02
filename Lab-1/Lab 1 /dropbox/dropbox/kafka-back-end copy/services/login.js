@@ -98,19 +98,26 @@ var user = new User();
 
 function file_Upload(msg,callback) {
 
-
-    var folderPath = "./services/UserFiles/sid/sid12356.jpg" ;
-    console.log(folderPath);
+    console.log(msg.file);
+    console.log("**************");
+    console.log(msg.username);
     var res = {};
 
-    fs.writeFile(folderPath,new Buffer(msg.file,'base64'),function(err){
 
-        if(!err){
-            res.code='200';
-        }
-        callback(null,res);
+    User.update({"username":msg.username}, {"$push": {file:msg.file}} ,function (err) {
+    console.log("After the updateone query");
+    if(!err){
+        res.code = "200";
+        res.value = "Files Saved in the database";
+    }
+    else{
+        res.code = "400";
+        res.value = "Problem saving files";
+    }
+    callback(null,res);
+})
 
-    });
+
 
 
 

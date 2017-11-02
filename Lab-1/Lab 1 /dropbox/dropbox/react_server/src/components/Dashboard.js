@@ -25,25 +25,25 @@ class Dashboard extends Component {
 
     componentWillMount(){
 
-         console.log("Inside component will mount");
-         API.checkSession()
-         .then((status)=>{
-             if(status===201){
-                 API.getImages().then((data)=>{
-                    console.log(data);
-                    this.props.getData(data);
-                    console.log("after setting up the images");
-                    console.log("xxxxxx");
-                 }).catch((error)=> {return error;})
-             }
-             else{
-                 this.props.history.push("/")
-             }
-             
-          }).catch((error)=>{
-            console.log("Inside error of will mount")
-            return error;
-        })
+        //  console.log("Inside component will mount");
+        //  API.checkSession()
+        //  .then((status)=>{
+        //      if(status===201){
+        //          API.getImages().then((data)=>{
+        //             console.log(data);
+        //             this.props.getData(data);
+        //             console.log("after setting up the images");
+        //             console.log("xxxxxx");
+        //          }).catch((error)=> {return error;})
+        //      }
+        //      else{
+        //          this.props.history.push("/")
+        //      }
+        //
+        //   }).catch((error)=>{
+        //     console.log("Inside error of will mount")
+        //     return error;
+        // })
     }
 
     handleFileUpload = (event) => {
@@ -57,10 +57,10 @@ class Dashboard extends Component {
         API.uploadFile(payload)
             .then((status) => {
                 if (status === 204) {
-                    API.getImages()
-                        .then((data) => {
-                           this.props.getData(data); 
-                        });
+                    // API.getImages()
+                    //     .then((data) => {
+                    //        this.props.getData(data);
+                    //     });
                 }
             });
 

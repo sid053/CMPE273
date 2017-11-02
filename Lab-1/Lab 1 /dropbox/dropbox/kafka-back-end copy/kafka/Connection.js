@@ -7,7 +7,8 @@ function ConnectionProvider() {
             this.client = new kafka.Client("localhost:2181");
 
             this.kafkaConsumerConnection = new kafka.Consumer(this.client,[ { topic: 'login', partition: 0 },
-                {topic:'validate', partition:0},{topic:'files',partition:0},{topic:'signUp',partition:0},{topic:'upload12',partition:0}]);
+                {topic:'validate', partition:0},{topic:'files',partition:0},{topic:'signUp',partition:0},
+                {topic:'uploadFiles',partition:0}]);
 
             this.client.on('ready', function () { console.log('client ready!')
 

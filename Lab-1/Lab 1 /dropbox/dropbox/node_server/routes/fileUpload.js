@@ -4,74 +4,56 @@ var multer = require('multer');
 var glob = require('glob');
 var fs = require('fs');
 var kafka = require('./kafka/client');
-
+var fileName ;
+var filePath ;
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      //  console.log("Inside multer updated code");
 
-        console.log(req.sessionID);
-       console.log(req.session);
-      const username ="./UserFiles/"+req.session.username; 
+      const username ="./UserFiles/"+req.session.username;
 
         cb(null,username);
     },
     filename: function (req, file, cb) {
 
-      console.log(file);
+   //   console.log(file);
         cb(null, file.originalname);
     }
 });
 
 var upload = multer({storage:storage});
 
-router.post('/upload',function (req, res, next) {
+router.post('/upload', upload.single('mypic'),function (req, res, next) {
     var username = req.session.username ;
     console.log("inside post upload");
    // console.log(req.body.username);
-   // console.log(req.file);
- fs.readFile('./UserFiles/sid/testforsending.txt' ,function (err,buf) {
-     if(err){
-         console.log(err);
-     }
-     else{
-        // console.log(buf)
+    console.log(req.file);
 
-         var buffer = buf.toString('base64');
+    kafka.make_request('uploadFiles',{file:req.file,username:username},'fileUpload', function(err,results){
+        console.log('response from kafka for user validation');
+        console.log(results);
+        if(err){
+            console.log(err);
+        }
+        else
+        {
 
-         kafka.make_request('upload12',{file: buf},'upload', function(err,results){
-             console.log('response from kafka for user validation');
-           //  console.log(results);
-             if(err){
-                 console.log(err);
-             }
-             else
-             {
-
-                 if(results.code==='200'){
-
-                     res.status(201).send(results.files);
-                 }
-                 else{
-                     res.status(401).send("no files to return");
-                 }
-             }
-         });
+            if(results.code==='200'){
+                res.status(201).send();
+            }
+            else{
+                res.status(401).send();
+            }
+        }
+    });
 
 
 
-         // fs.writeFile('./UserFiles/sid/test123.jpg',buffer,function (err) {
-         //     console.log("I am inside write");
-         //     res.status(201).send("File copied");
-         // })
-     }
 
- })
-
-
-
-    //res.status(204).end();
 });
+
+
+
 
 
 router.get('/check', function(req,res){

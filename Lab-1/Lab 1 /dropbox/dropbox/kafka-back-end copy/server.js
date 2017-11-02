@@ -93,7 +93,7 @@ switch(message.topic) {
                 { topic: data.replyTo,
                     messages:JSON.stringify({
                         correlationId:data.correlationId,
-                        data : res
+                        data : "hello"
                     }),
                     partition : 0
                 }
@@ -134,7 +134,8 @@ switch(message.topic) {
 
         break;
 
-    case 'upload12' :
+    case 'uploadFiles' :
+
           login.file_Upload(data.data , function  (err, res) {
               console.log('after handle' + res.code);
               var payloads = [
