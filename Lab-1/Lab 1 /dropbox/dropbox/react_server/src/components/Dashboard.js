@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import '../App.css';
 import * as API from '../api/API';
 import Brand from './Brand';
-import TextField from 'material-ui/TextField';
-import Typography from 'material-ui/Typography';
-import Footer from './Footer';
-import Basic from './Basic';
+//import TextField from 'material-ui/TextField';
+//import Typography from 'material-ui/Typography';
+import UserDetails from './UserDetails'
+
 
 import { withRouter } from 'react-router-dom';
-import {getData,fileDelete} from '../action/index';
+import {getData, fileDelete, handleFolder} from '../action/index';
 import {connect} from 'react-redux';
 
 import {Panel,
@@ -25,25 +25,27 @@ class Dashboard extends Component {
 
     componentWillMount(){
 
-        //  console.log("Inside component will mount");
-        //  API.checkSession()
-        //  .then((status)=>{
-        //      if(status===201){
-        //          API.getImages().then((data)=>{
-        //             console.log(data);
-        //             this.props.getData(data);
-        //             console.log("after setting up the images");
-        //             console.log("xxxxxx");
-        //          }).catch((error)=> {return error;})
-        //      }
-        //      else{
-        //          this.props.history.push("/")
-        //      }
-        //
-        //   }).catch((error)=>{
-        //     console.log("Inside error of will mount")
-        //     return error;
-        // })
+         console.log("Inside component will mount");
+         API.checkSession()
+         .then((status)=>{
+             if(status===201){
+                 API.getImages().then((data)=>{
+                     console.log("************************************")
+                    console.log(data);
+                     console.log("************************************")
+                    this.props.getData(data);
+                    console.log("after setting up the images");
+                    console.log("xxxxxx");
+                 }).catch((error)=> {return error;})
+             }
+             else{
+                 this.props.history.push("/")
+             }
+
+          }).catch((error)=>{
+            console.log("Inside error of will mount")
+            return error;
+        })
     }
 
     handleFileUpload = (event) => {
@@ -56,11 +58,12 @@ class Dashboard extends Component {
         console.log("payload for upload");
         API.uploadFile(payload)
             .then((status) => {
-                if (status === 204) {
-                    // API.getImages()
-                    //     .then((data) => {
-                    //        this.props.getData(data);
-                    //     });
+                if (status === 201) {
+                    console.log("upload successfull , calling get Images");
+                    API.getImages()
+                        .then((data) => {
+                           this.props.getData(data);
+                        });
                 }
             });
 
@@ -83,6 +86,17 @@ class Dashboard extends Component {
 
     };
 
+
+
+    logout = () => {
+        console.log("inside logout function");
+        API.doLogout().then((status)=>{
+            if(status===201){
+                this.props.history.push("/");
+            }
+        })
+    }
+
     componentDidMount() {
         console.log("componentDidMount function");
          };
@@ -91,14 +105,26 @@ class Dashboard extends Component {
 
 
     state={
-        shareUsername:''
+        shareUsername:'',
+        foldername:''
+
     }
 
+    handlefolder(data){
+        console.log("inside folder creation");
+        console.log(data);
 
-    validate(data,file){
+
+
+        this.props.handleFolder(data);
+    }
+
+    validate(username,file){
         console.log("inside validate user in dashboard");
             console.log(file);
-            console.log(data);
+            const data = {
+                'shareUsername':username
+            }
             const payload = {
                 'shareUsername': this.state.shareUsername,
                 'img' : file
@@ -130,64 +156,158 @@ class Dashboard extends Component {
 
     }
 
-    renderList(){
+    renderListFiles(){
 
         return this.props.userdata.files.map((file,index)=>{
-            console.log("inside Accordion");
-        return(
+
+             return (
                  <Accordion>
-                   <Panel collapsible header={file.img}
-                          key={index}
-                          eventKey={index}
-                          >
-                       <ButtonToolbar>
-                       <Button
-                           bsStyle="danger"
-                           onClick={() => this.handleDelete(file.img,index)}>
-                           Delete
-                       </Button>
+                     <Panel collapsible header={file.filename}
+                            key={index}
+                            eventKey={index}
+                     >
+                         <ButtonToolbar>
+                             <Button
+                                 bsStyle="danger"
+                                 onClick={() => this.handleDelete(file.filename, index)}>
+                                 Delete
+                             </Button>
 
-                        <OverlayTrigger trigger="click" rootClose placement="right" overlay={
+                             <OverlayTrigger trigger="click" rootClose placement="right" overlay={
 
-                            <Popover id="popover-trigger-click-root-close" title="Enter Username">
-                                <form>
-                                    <FormGroup
-                                        controlId="formBasicText"
+                                 <Popover id="popover-trigger-click-root-close" title="Enter Username">
+                                     <form>
+                                         <FormGroup
+                                             controlId="formBasicText"
+                                         >
+                                             <FormControl
+                                                 type="text"
+                                                 value={this.state.shareUsername}
+                                                 placeholder="Enter username"
+                                                 onChange={(event) => {
+                                                     this.setState({shareUsername: event.target.value});
+                                                 }}
+                                             />
+
+                                             <Button
+                                                 bsStyle="primary"
+                                                 onClick={() => this.validate(this.state.shareUsername, file.filename)}
+                                                 active>
+                                                 share
+                                             </Button>
+
+                                         </FormGroup>
+                                     </form>
+
+                                 </Popover>
+
+                             }>
+                                 <Button
+                                     bsStyle="primary"
+                                     active>
+                                     share
+                                 </Button>
+                             </OverlayTrigger>
+                         </ButtonToolbar>
+                     </Panel>
+                 </Accordion>
+
+             );
+
+
+
+        });
+
+    }
+
+   renderListFolders(){
+        if(this.props.userdata.folder.length===0){
+            return(<h4>You have no Folders</h4>);
+        }
+       else {
+            return this.props.userdata.folder.map((folders, index) => {
+
+                console.log("inside Accordion for folders");
+
+                console.log(folders);
+                console.log("after folder ");
+
+
+                    return (
+                        <Accordion>
+                            <Panel collapsible header={folders}
+                                   key={index}
+                                   eventKey={index}
+                            >
+                                <ButtonToolbar>
+                                    <Button
+                                        bsStyle="danger"
                                     >
-                                        <FormControl
-                                            type="text"
-                                            value={this.state.shareUsername}
-                                            placeholder="Enter username"
-                                            onChange={(event)=>{
-                                                this.setState({ shareUsername: event.target.value });
-                                            }}
-                                        />
+                                        Delete
+                                    </Button>
 
+                                    <OverlayTrigger trigger="click" rootClose placement="right" overlay={
+
+                                        <Popover id="popover-trigger-click-root-close" title="Add Files">
+                                            <form>
+
+                                            </form>
+
+                                        </Popover>
+
+                                    }>
                                         <Button
                                             bsStyle="primary"
-                                            onClick={() => this.validate(this.state,file.img)}
                                             active>
-                                            share
+                                            AddFiles
                                         </Button>
+                                    </OverlayTrigger>
 
-                                    </FormGroup>
-                                </form>
+                                    <OverlayTrigger trigger="click" rootClose placement="right" overlay={
 
-                            </Popover>
+                                        <Popover id="popover-trigger-click-root-close" title="Share Folder">
+                                            <form>
+                                                <FormGroup
+                                                    controlId="formBasicText"
+                                                >
+                                                    <FormControl
+                                                        type="text"
+                                                        value={this.state.shareUsername}
+                                                        placeholder="Enter username"
+                                                        onChange={(event) => {
+                                                            this.setState({shareUsername: event.target.value});
+                                                        }}
+                                                    />
 
-                        }  >
-                            <Button
-                                bsStyle="primary"
-                                active>
-                                share
-                            </Button>
-                        </OverlayTrigger>
-                       </ButtonToolbar>
-                   </Panel>
-               </Accordion>
+                                                    <Button
+                                                        bsStyle="primary"
 
-          );
-        });
+                                                        active>
+                                                        share
+                                                    </Button>
+
+                                                </FormGroup>
+
+                                            </form>
+
+                                        </Popover>
+
+                                    }>
+                                        <Button
+                                            bsStyle="primary"
+                                            active>
+                                            Share
+                                        </Button>
+                                    </OverlayTrigger>
+                                </ButtonToolbar>
+                            </Panel>
+                        </Accordion>
+
+                    );
+
+            });
+
+        }
     }
 
 
@@ -206,11 +326,14 @@ class Dashboard extends Component {
                   <div style={containerStyle}>
 
                       <div className="col-sm-5">
-                          <Brand />
+                          <Brand logout={this.logout} />
                       </div>
 
                   </div>
+
               </div>
+
+
           </div>
 
 
@@ -218,9 +341,13 @@ class Dashboard extends Component {
 
                <div className="col-md-4">
 
+                   <Jumbotron>
+                       <UserDetails/>
+                   </Jumbotron>
+
                </div>
 
-               <div className="col-md-3">
+               <div className="col-md-5">
                    <label className="custom-file">
                        <input type="file" id="file"
                               name="mypic"
@@ -228,14 +355,55 @@ class Dashboard extends Component {
                               onChange={this.handleFileUpload}/>
                            <span className="custom-file-control"></span>
                    </label>
+
+                   <h3> User Files </h3>
+                   {this.renderListFiles()}
+                   <h3> Folders </h3>
+                   {this.renderListFolders()}
+
                </div>
 
 
-                <div className="col-md-5">
-                        <h3> User Files </h3>
-                         {this.renderList()}
-                </div>
+                <div className="col-md-3">
+                    <Jumbotron>
+                        <OverlayTrigger trigger="click" rootClose placement="right" overlay={
 
+                            <Popover id="popover-trigger-click-root-close" title="Enter FolderName">
+                                <form>
+                                    <FormGroup
+                                        controlId="formBasicText"
+                                    >
+                                        <FormControl
+                                            type="text"
+                                            value={this.state.foldername}
+                                            placeholder="Enter username"
+                                            onChange={(event)=>{
+                                                this.setState({ foldername: event.target.value });
+                                            }}
+                                        />
+
+                                        <Button
+                                            bsStyle="primary"
+                                            onClick={() => this.handlefolder(this.state.foldername)}
+                                            >
+                                            create
+                                        </Button>
+
+                                    </FormGroup>
+                                </form>
+
+                            </Popover>
+
+                        }  >
+                            <Button
+                                bsStyle="primary"
+                                active>
+                                New Folder
+                            </Button>
+                        </OverlayTrigger>
+                    </Jumbotron>
+
+                </div>
 
                 
             </div>
@@ -262,7 +430,8 @@ function mapStateToProps(userdata) {
 function mapDispatchToProps(dispatch) {
     return {
         getData : (data) => dispatch(getData(data)),
-        fileDelete : (data) => dispatch(fileDelete(data))
+        fileDelete : (data) => dispatch(fileDelete(data)),
+        handleFolder : (data) => dispatch(handleFolder(data))
     };
 }
 

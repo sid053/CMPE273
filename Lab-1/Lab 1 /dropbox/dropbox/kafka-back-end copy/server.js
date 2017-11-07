@@ -87,22 +87,22 @@ switch(message.topic) {
     case 'files':
         files.handle_Get_Files(data.data,function (err,res) {
             console.log("After processing the data");
-            console.log(res.code+"  ");
+           // console.log(res.file+"  ");
          //   var files = "Empty";
             var payloads = [
                 { topic: data.replyTo,
                     messages:JSON.stringify({
                         correlationId:data.correlationId,
-                        data : "hello"
+                        data : res
                     }),
                     partition : 0
                 }
             ];
             console.log("after the payload is formed");
-            console.log(payloads);
+           // console.log(payloads);
             console.log("about to send response");
             producer.send(payloads, function(err, data){
-                console.log(data);
+             //   console.log(data);
             });
             return;
         });
@@ -160,6 +160,28 @@ switch(message.topic) {
           });
           break;
 
+    case 'uploadFolder':
+        login.handle_Folder_upload(data.data,function (err,res) {
+            console.log("inside the upload folder function");
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+
+                console.log(data);
+                console.log("After the data is sent");
+            });
+            return;
+        });
+        break;
+
     default:
         console.log("inside the default thingy");
         break;
@@ -171,39 +193,3 @@ switch(message.topic) {
 
 
 
-// consumerGetFiles.on('message',function (message) {
-//     console.log("inside get files queue");
-//     console.log(JSON.stringify(message));
-//     var data = JSON.parse(message.value);
-//
-//     files.handle_Get_Files(data.data,function (err,res) {
-//         console.log("After the get files is done , ie callback of get files");
-//
-//         var payloads = [{
-//             topic:data.replyTo ,
-//             message:JSON.stringify({
-//                 correlationID: data.correlationID,
-//                 data : res
-//             }),
-//             partition : 0
-//         }];
-//         console.log("the payload is formed and the payload is ");
-//         console.log("*********************");
-//         console.log(payloads);
-//         producer.send(payloads,function (err,data) {
-//             if (err){
-//                 console.log("Error in sending the payload");
-//
-//             }
-//             else {
-//                 console.log(data);
-//             }
-//
-//         });
-//         return;
-//
-//     });
-//
-// });
-//
-//

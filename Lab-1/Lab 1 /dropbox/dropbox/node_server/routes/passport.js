@@ -3,7 +3,6 @@ var LocalStrategy = require("passport-local").Strategy;
 var first = "User";
 var second = "Table";
 var table = first+'_'+second;
-var User    = require('../models/User');
 var kafka = require('./kafka/client');
 
 

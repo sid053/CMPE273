@@ -19,3 +19,12 @@ export function fileDelete(index) {
 };
 
 
+export function handleFolder(foldername) {
+    console.log("inside folder creation");
+    return{
+        type: 'FOLDER',
+        payload : foldername
+    }
+
+}
+

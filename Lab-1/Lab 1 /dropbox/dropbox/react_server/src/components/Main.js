@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import Dashboard from "./Dashboard" ;
 import HomePage from "./HomePage";
-import Footer from './Footer';
+import {Jumbotron} from 'react-bootstrap';
 
 
 class Main extends Component {
@@ -11,6 +11,7 @@ class Main extends Component {
     render() {
 
         return (
+
             <div>
                 <Route exact path="/" render={() => (
                    <div>
@@ -25,6 +26,7 @@ class Main extends Component {
                 )}/>
 
             </div>
+
 
         );
 

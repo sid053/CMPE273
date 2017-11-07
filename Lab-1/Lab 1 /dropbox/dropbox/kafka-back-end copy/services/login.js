@@ -16,7 +16,7 @@ function handle_Login_request(msg, callback){
 
         }
         else {
-            console.log("Inside the error thingy");
+            console.log("Inside the error thingsy");
             res.code = "401";
             res.value = "Failed Login";
 
@@ -25,6 +25,29 @@ function handle_Login_request(msg, callback){
     });
 
 }
+
+function handle_Folder_Upload(msg, callback) {
+    console.log(msg.folder);
+    console.log("**************");
+    console.log(msg.username);
+    var res = {};
+
+
+    User.update({"username":msg.username}, {"$push": {folder:msg.folder}} ,function (err) {
+        console.log("After the updateone query");
+        if(!err){
+            res.code = "200";
+            res.value = "Folder Saved in the database";
+        }
+        else{
+            res.code = "400";
+            res.value = "Problem saving Folder";
+        }
+        callback(null,res);
+    })
+
+}
+
 
 
 function handle_Validate_request(msg,callback) {
@@ -116,13 +139,10 @@ function file_Upload(msg,callback) {
     }
     callback(null,res);
 })
-
-
-
-
-
 }
 
+
+exports.handle_Folder_upload = handle_Folder_Upload;
 exports.file_Upload = file_Upload;
 exports.handle_SignUp_request = handle_SignUp_request;
 exports.handle_Login_request = handle_Login_request;

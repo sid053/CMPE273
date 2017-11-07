@@ -1,8 +1,15 @@
-var React = require('react');
+import {Button} from 'react-bootstrap';
+import React, {Component} from 'react';
 
-var Brand = React.createClass({
-    render: function () {
 
+
+class Brand extends Component{
+    componentWillMount(){
+        console.log("Brand component mounted");
+    }
+
+
+    render () {
         var h1Style = {
             color: '#1866e7',
             fontSize: '28px',
@@ -11,10 +18,24 @@ var Brand = React.createClass({
             textAlign: 'center'
         };
 
+
+
         return (
+            <div className="row">
+            <div className="col-md-1">
             <h1 style={h1Style}>DropBox</h1>
+            </div>
+            <div className="col-md-9">
+            <Button
+              bsStyle="danger"
+              onClick={() => this.props.logout()}
+               >
+                Logout
+              </Button>
+             </div>
+            </div>
         );
     }
-});
+}
 
-module.exports = Brand;
+export default Brand;

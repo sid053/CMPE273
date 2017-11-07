@@ -9,6 +9,7 @@ const initialState = {
     files :[],
     groups: [],
     userLog:[],
+    folder:[]
 
 };
 
@@ -18,11 +19,14 @@ const userdata = (state = initialState, action) => {
     
         case 'LOGIN' :
             console.log("inside userdata");
-            console.log(action.payload);
-            console.log("display done");
+            //console.log(action.payload[0].file);
+
+           // console.log("display done");
             state = {
                 ...state,
-                files: action.payload
+                files: action.payload.file,
+                Name : action.payload.name,
+                username: action.payload.username
             };
             break;
 
@@ -40,7 +44,13 @@ const userdata = (state = initialState, action) => {
             console.log(state.files);
             break;
 
+        case 'FOLDER' :
+            state = {
 
+                ...state,
+                folder:[...state.folder ,action.payload]
+            }
+            break;
 
 
 

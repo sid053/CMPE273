@@ -60,6 +60,9 @@ router.get('/check', function(req,res){
      var username = req.session.username ;
      console.log("inside check function at node ");
      console.log(req.sessionID);
+     console.log(req.session);
+     console.log(req.session.loggedin);
+     console.log("ppppppppppppppppppppppppp");
      if(req.session.loggedin=== true){
          console.log("foobar")
          const username = req.session.user;
@@ -72,6 +75,71 @@ router.get('/check', function(req,res){
     }
 
 });
+
+router.post('/uploadFolder' , function (req,res) {
+
+    var username = req.session.username ;
+    console.log("inside post upload");
+    // console.log(req.body.username);
+    console.log(req.file);
+    var folderpath = "UserFiles/"+req.session.username+"/"+req.body.folder ;
+
+    fs.mkdir(folderpath, function(err) {
+             if (!err) {
+
+                 kafka.make_request('uploadFolder',{folder:folderpath,username:username},'folderUpload', function(err,results){
+                     console.log('response from kafka for user validation');
+                     console.log(results);
+                     if(err){
+                         console.log(err);
+                     }
+                     else
+                     {
+
+                         if(results.code==='200'){
+                             res.status(201).send();
+                         }
+                         else{
+                             res.status(401).send();
+                         }
+                     }
+                 });
+
+             }
+             else {
+                    return res.end("Dir creation failed : " + err);
+                    res.status(401).send();
+                  }
+      });
+
+
+
+
+
+    kafka.make_request('uploadFolder',{folder:folderpath,username:username},'folderUpload', function(err,results){
+        console.log('response from kafka for user validation');
+        console.log(results);
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+
+            if(results.code==='200'){
+                res.status(201).send();
+            }
+            else{
+                res.status(401).send();
+            }
+        }
+    });
+
+
+
+
+
+
+})
 
 
 router.post('/delete' , function (req,res) {

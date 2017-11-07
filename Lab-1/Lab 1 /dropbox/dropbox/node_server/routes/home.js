@@ -1,45 +1,18 @@
 
  var ejs = require("ejs");
-var User    = require('../models/User');
+//var User    = require('../models/User');
 var fs = require("fs")
 var first = "User";
 var second = "Table";
 var table = first+'_'+second;
 var fileUpload = require('./fileUpload');
-var glob = require('glob');
+//var glob = require('glob');
 var passport = require('passport');
 require('./passport')(passport);
  var kafka = require('./kafka/client');
 
 function afterRegister(req,res){
-//var FilePath = "./UserFiles/"+req.body.username ;
 
-
-
-
-    // user.save(function (err) { if(err){
-    //       res.status(401).send(err);
-    //     }
-    //     else{
-    //
-    //       fs.mkdir(FilePath, function(err) {
-    //          if (!err) {
-    //
-    //                    console.log(req.sessionID);
-    //                res.status(201).send();
-    //                     }
-    //          else {
-    //                 return res.end("Dir creation failed : " + err);
-    //                 res.status(401);
-    //               }
-    //   });
-    //
-    //
-    //     }
-    //     }
-    //
-    // );
-    //
 
     kafka.make_request('signUp',req.body,'SignUp', function(err,results){
         console.log('response from kafka for user validation');
@@ -120,7 +93,7 @@ function getFiles(req,res,next){
 
             if(results.code==='200'){
 
-                res.status(201).send(results.files);
+                res.status(201).send(results.value);
             }
             else{
                 res.status(401).send("no files to return");
@@ -155,22 +128,6 @@ function validateUser(req,res,next) {
         }
     });
 
-
-
-    // User.findOne({username: req.body.shareUsername}, function (err,user) {
-    //     if(err){
-    //         console.log(err);
-    //     }
-    //
-    //     if (user) {
-    //         res.status(201).send("username is valid");
-    //     }
-    //     else {
-    //         console.log("Inside the error thingy");
-    //         res.status(401).send("this is error");
-    //     }
-    //
-    // });
 
 }
 

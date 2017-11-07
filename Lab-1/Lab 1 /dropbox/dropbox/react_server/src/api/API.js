@@ -24,6 +24,26 @@ export const doLogin = (payload) =>
         return error;
     });
 
+export const doLogout = () =>
+    fetch(`${api}/users/doLogout`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+
+    })
+        .then(res => {
+            console.log("inside do logout");
+            return res.status;
+        }).catch(error => {
+        console.log("This is error inside dologin");
+        return error;
+    });
+
+
 export const doRegister = (payload) =>
     fetch(`${api}/users/doRegister`, {
         method: 'POST',
@@ -58,6 +78,7 @@ export const getImages = () =>
             return error;
         });
 
+
 export const checkSession = () =>
     fetch(`${api}/files/check`, {
         method: 'GET',
@@ -68,11 +89,12 @@ export const checkSession = () =>
             'Content-Type': 'application/json'
         }
     }).then((res) => {
+        console.log("here it is in the check session");
         console.log("inside checkSession APi response")
         console.log(res.status);
 
         console.log("returning the status back");
-        console.log(res.body);
+        //console.log(res.body);
         return res.status;
     }).catch(error => {
             console.log("This is error.");
