@@ -11,6 +11,9 @@ var passport = require('passport');
 require('./passport')(passport);
  var kafka = require('./kafka/client');
 
+
+ //*******************************************************************************************************************
+
 function afterRegister(req,res){
 
 
@@ -36,7 +39,7 @@ function afterRegister(req,res){
 	
 }
 
-
+ //*******************************************************************************************************************
 
 //logout function
 
@@ -46,6 +49,7 @@ function logout(req,res){
 	res.status(201).send("succesfully destroyed");
 }
 
+ //*******************************************************************************************************************
 
 //login Function
 function loginPassport(req,res,next){
@@ -76,6 +80,7 @@ function loginPassport(req,res,next){
 
 }
 
+ //*******************************************************************************************************************
 
 function getFiles(req,res,next){
   
@@ -105,6 +110,7 @@ function getFiles(req,res,next){
 
 }
 
+ //*******************************************************************************************************************
 function validateUser(req,res,next) {
        console.log(req.body.shareUsername);
        var shareUsername = req.body.shareUsername;

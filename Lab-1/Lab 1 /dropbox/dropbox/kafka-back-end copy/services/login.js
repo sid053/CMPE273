@@ -33,11 +33,12 @@ function handle_Folder_Upload(msg, callback) {
     var res = {};
 
 
-    User.update({"username":msg.username}, {"$push": {folder:msg.folder}} ,function (err) {
+    User.updateOne({"username":msg.username}, {"$push": {folder:msg.folder}} ,function (err) {
         console.log("After the updateone query");
         if(!err){
             res.code = "200";
             res.value = "Folder Saved in the database";
+            console.log("foobarfoobar");
         }
         else{
             res.code = "400";

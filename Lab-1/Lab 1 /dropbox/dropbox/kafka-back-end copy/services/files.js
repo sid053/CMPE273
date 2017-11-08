@@ -8,7 +8,7 @@ function handle_Get_Files(msg, callback) {
 
     const username = msg.username;
 
-    var folderPath = "./services/UserFiles/" + username + "/*.*";
+  //  var folderPath = "./services/UserFiles/" + username + "/*.*";
     //console.log(folderPath);
     var res = {};
     User.findOne({username:"sid"},{_id:0},function (err,results) {

@@ -23,6 +23,8 @@ import {Panel,
  
 class Dashboard extends Component {
 
+    //*********************************************************************************
+
     componentWillMount(){
 
          console.log("Inside component will mount");
@@ -48,6 +50,8 @@ class Dashboard extends Component {
         })
     }
 
+    //*********************************************************************************
+
     handleFileUpload = (event) => {
 
         const payload = new FormData();
@@ -68,7 +72,7 @@ class Dashboard extends Component {
             });
 
     };
-
+    //*********************************************************************************
     handleDelete = (data,index) =>{
         console.log("inside handleDelete");
 
@@ -86,7 +90,7 @@ class Dashboard extends Component {
 
     };
 
-
+    //*********************************************************************************
 
     logout = () => {
         console.log("inside logout function");
@@ -96,7 +100,7 @@ class Dashboard extends Component {
             }
         })
     }
-
+    //*********************************************************************************
     componentDidMount() {
         console.log("componentDidMount function");
          };
@@ -109,19 +113,37 @@ class Dashboard extends Component {
         foldername:''
 
     }
+    //*********************************************************************************
 
     handlefolder(data){
         console.log("inside folder creation");
+       // console.log(data);
+        API.uploadFolder(data).then((status)=>
+        {
+            if(status===201){
+                var test = "/sid/"+data;
+                this.props.handleFolder(test);
+
+            }
+            else{
+                console.log("error while uploading");
+            }
+        })
+    }
+
+    //*********************************************************************************
+
+    deleteFolder(data){
+        console.log("inside delete folder thingy");
         console.log(data);
 
 
-
-        this.props.handleFolder(data);
     }
 
+    //*********************************************************************************
     validate(username,file){
         console.log("inside validate user in dashboard");
-            console.log(file);
+          //  console.log(file);
             const data = {
                 'shareUsername':username
             }
@@ -129,7 +151,7 @@ class Dashboard extends Component {
                 'shareUsername': this.state.shareUsername,
                 'img' : file
             }
-            console.log(payload);
+           // console.log(payload);
             API.validateUser(data).then((status)=>{
            if(status===201) {
 
@@ -156,6 +178,7 @@ class Dashboard extends Component {
 
     }
 
+    //*********************************************************************************
     renderListFiles(){
 
         return this.props.userdata.files.map((file,index)=>{
@@ -220,6 +243,8 @@ class Dashboard extends Component {
 
     }
 
+    //*********************************************************************************
+
    renderListFolders(){
         if(this.props.userdata.folder.length===0){
             return(<h4>You have no Folders</h4>);
@@ -228,20 +253,22 @@ class Dashboard extends Component {
             return this.props.userdata.folder.map((folders, index) => {
 
                 console.log("inside Accordion for folders");
+                var check = folders.split('/');
+                console.log(check , check.length);
 
-                console.log(folders);
                 console.log("after folder ");
 
-
+                var head = (check[check.length-1]).toUpperCase() + "   Parent-> "  + check[check.length-2]
                     return (
                         <Accordion>
-                            <Panel collapsible header={folders}
+                            <Panel collapsible header={head}
                                    key={index}
                                    eventKey={index}
                             >
                                 <ButtonToolbar>
                                     <Button
                                         bsStyle="danger"
+                                        onClick={()=>{this.deleteFolder(folders)}}
                                     >
                                         Delete
                                     </Button>
@@ -310,6 +337,7 @@ class Dashboard extends Component {
         }
     }
 
+    //*********************************************************************************
 
     render(){
         var containerStyle = {

@@ -5,6 +5,8 @@ const headers = {
     'Accept': 'application/json'
 };
 
+//****************************************************
+
 export const doLogin = (payload) =>
     fetch(`${api}/users/login`, {
         method: 'POST',
@@ -23,6 +25,8 @@ export const doLogin = (payload) =>
         console.log("This is error inside dologin");
         return error;
     });
+
+//****************************************************
 
 export const doLogout = () =>
     fetch(`${api}/users/doLogout`, {
@@ -43,7 +47,7 @@ export const doLogout = () =>
         return error;
     });
 
-
+//****************************************************
 export const doRegister = (payload) =>
     fetch(`${api}/users/doRegister`, {
         method: 'POST',
@@ -62,7 +66,7 @@ export const doRegister = (payload) =>
             console.log("This is error");
             return error;
         });
-
+//****************************************************
 export const getImages = () =>
     fetch(`${api}/users/getFiles`, {
         method: 'GET',
@@ -78,7 +82,7 @@ export const getImages = () =>
             return error;
         });
 
-
+//****************************************************
 export const checkSession = () =>
     fetch(`${api}/files/check`, {
         method: 'GET',
@@ -101,6 +105,9 @@ export const checkSession = () =>
             return error;
         });
 
+
+//****************************************************
+
 export const uploadFile = (payload) =>
     fetch(`${api}/files/upload`, {
         method: 'POST',
@@ -113,7 +120,24 @@ export const uploadFile = (payload) =>
         console.log("This is error");
         return error;
     });
+//****************************************************
 
+export const uploadFolder = (payload) =>
+    fetch(`${api}/files/uploadFolder`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        body: payload
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+
+
+//****************************************************
 export const deleteFile = (payload) =>
     fetch(`${api}/files/delete`, {
         method: 'POST',
@@ -131,7 +155,7 @@ export const deleteFile = (payload) =>
         return error;
     });
 
-
+//****************************************************
 export const validateUser = (payload) =>
     fetch(`${api}/users/validateUser`, {
         method: 'POST',
@@ -149,7 +173,7 @@ export const validateUser = (payload) =>
         return error;
     });
 
-
+//****************************************************
 export const share = (payload) =>
     fetch(`${api}/files/share`, {
         method: 'POST',

@@ -26,7 +26,8 @@ const userdata = (state = initialState, action) => {
                 ...state,
                 files: action.payload.file,
                 Name : action.payload.name,
-                username: action.payload.username
+                username: action.payload.username,
+                folder:action.payload.folder
             };
             break;
 
