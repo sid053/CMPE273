@@ -25,14 +25,6 @@ class Brand extends Component{
             <div className="col-md-1">
             <h1 style={h1Style}>DropBox</h1>
             </div>
-            <div className="col-md-9">
-            <Button
-              bsStyle="danger"
-              onClick={() => this.props.logout()}
-               >
-                Logout
-              </Button>
-             </div>
             </div>
         );
     }

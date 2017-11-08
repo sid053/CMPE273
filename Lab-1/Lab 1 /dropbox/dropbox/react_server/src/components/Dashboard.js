@@ -4,7 +4,8 @@ import * as API from '../api/API';
 import Brand from './Brand';
 //import TextField from 'material-ui/TextField';
 //import Typography from 'material-ui/Typography';
-import UserDetails from './UserDetails'
+import UserDetails from './UserDetails';
+
 
 
 import { withRouter } from 'react-router-dom';
@@ -118,12 +119,12 @@ class Dashboard extends Component {
     handlefolder(data){
         console.log("inside folder creation");
        // console.log(data);
-        API.uploadFolder(data).then((status)=>
+         var test ={folder: "UserFiles/"+this.props.userdata.username+"/"+data}
+         console.log(test);
+        API.uploadFolder(test).then((status)=>
         {
             if(status===201){
-                var test = "/sid/"+data;
                 this.props.handleFolder(test);
-
             }
             else{
                 console.log("error while uploading");
@@ -348,98 +349,152 @@ class Dashboard extends Component {
 
      
     return(
-      <div>
-          <div className="container-fluid">
-              <div className="row">
-                  <div style={containerStyle}>
+      <div className="row">
 
-                      <div className="col-sm-5">
-                          <Brand logout={this.logout} />
+         <div className="col-md-4">
+
+          <div>
+              <div>
+                  <ul className="sidebar-nav">
+                      <li>
+                          <a href="#">
+                              <h2>Dropbox</h2>
+                              <h4>logo should come here</h4>
+                          </a>
+                      </li>
+                       <br/>
+                      <br/>
+
+                      <li>
+                          <a href=""><h3>Dashboard</h3></a>
+                      </li>
+
+                      <li>
+                          <a href=""><h3>Groups</h3></a>
+                      </li>
+
+                      <li>
+                          <a href=""><h3>Interests</h3></a>
+                      </li>
+                      <li>
+                          <a href=""><h3>Logs</h3></a>
+                      </li>
+                      <li>
+                          <a href=""><h3>About</h3></a>
+                      </li>
+                      <li>
+                          <a href=""><h3>Contact</h3></a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+
+         </div>
+
+          {/* ************************************************************************************* */}
+          <div className="col-md-6">
+              <h1>Dashboard</h1>
+                  <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+
+                  <div className="row">
+                      <div className="col-md-6">
+                          <label className="custom-file">
+                              <input type="file" id="file"
+                                     name="mypic"
+                                     className="custom-file-input"
+                                     onChange={this.handleFileUpload}/>
+                              <span className="custom-file-control"></span>
+                          </label>
+
+                          <h3> User Files </h3>
+                          {this.renderListFiles()}
+                          <h3> Folders </h3>
+                          {this.renderListFolders()}
+
                       </div>
+
+
+                      <div className="col-md-6">
+
+                          <Jumbotron>
+                              <OverlayTrigger trigger="click" rootClose placement="right" overlay={
+
+                                  <Popover id="popover-trigger-click-root-close" title="Enter FolderName">
+                                      <form>
+                                          <FormGroup
+                                              controlId="formBasicText"
+                                          >
+                                              <FormControl
+                                                  type="text"
+                                                  value={this.state.foldername}
+                                                  placeholder="Enter username"
+                                                  onChange={(event)=>{
+                                                      this.setState({ foldername: event.target.value });
+                                                  }}
+                                              />
+
+                                              <Button
+                                                  bsStyle="primary"
+                                                  onClick={() => this.handlefolder(this.state.foldername)}
+                                              >
+                                                  create
+                                              </Button>
+
+                                          </FormGroup>
+                                      </form>
+
+                                  </Popover>
+
+                              }  >
+
+                                  <Button
+                                      bsStyle="primary"
+                                      center>
+                                      New Folder
+                                  </Button>
+
+                              </OverlayTrigger>
+                          </Jumbotron>
+
+                      </div>
+
 
                   </div>
 
-              </div>
+
+
+
+
+
+
+
 
 
           </div>
 
+          {/* ************************************************************************************* */}
 
-           <div className="row">
-
-               <div className="col-md-4">
-
-                   <Jumbotron>
-                       <UserDetails/>
-                   </Jumbotron>
-
-               </div>
-
-               <div className="col-md-5">
-                   <label className="custom-file">
-                       <input type="file" id="file"
-                              name="mypic"
-                              className="custom-file-input"
-                              onChange={this.handleFileUpload}/>
-                           <span className="custom-file-control"></span>
-                   </label>
-
-                   <h3> User Files </h3>
-                   {this.renderListFiles()}
-                   <h3> Folders </h3>
-                   {this.renderListFolders()}
-
-               </div>
+       <div className="col-md-2">
+           <br/>
+           <Button
+               bsStyle="danger"
+               onClick={()=>{this.logout()}}
+               >
+               logout
+           </Button>
+       </div>
 
 
-                <div className="col-md-3">
-                    <Jumbotron>
-                        <OverlayTrigger trigger="click" rootClose placement="right" overlay={
 
-                            <Popover id="popover-trigger-click-root-close" title="Enter FolderName">
-                                <form>
-                                    <FormGroup
-                                        controlId="formBasicText"
-                                    >
-                                        <FormControl
-                                            type="text"
-                                            value={this.state.foldername}
-                                            placeholder="Enter username"
-                                            onChange={(event)=>{
-                                                this.setState({ foldername: event.target.value });
-                                            }}
-                                        />
+      </div>
 
-                                        <Button
-                                            bsStyle="primary"
-                                            onClick={() => this.handlefolder(this.state.foldername)}
-                                            >
-                                            create
-                                        </Button>
-
-                                    </FormGroup>
-                                </form>
-
-                            </Popover>
-
-                        }  >
-                            <Button
-                                bsStyle="primary"
-                                active>
-                                New Folder
-                            </Button>
-                        </OverlayTrigger>
-                    </Jumbotron>
-
-                </div>
-
-                
-            </div>
-
-
-              
- 
-     </div>
             
 
         );

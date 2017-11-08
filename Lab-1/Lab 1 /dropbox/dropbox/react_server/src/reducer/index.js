@@ -46,10 +46,12 @@ const userdata = (state = initialState, action) => {
             break;
 
         case 'FOLDER' :
+            console.log("Inside folder reducer");
+          //  console.log(action.payload)
             state = {
 
                 ...state,
-                folder:[...state.folder ,action.payload]
+                folder:[...state.folder ,action.payload.folder]
             }
             break;
 

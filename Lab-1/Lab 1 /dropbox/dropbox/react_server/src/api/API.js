@@ -113,6 +113,10 @@ export const uploadFile = (payload) =>
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
         body: payload
     }).then(res => {
         return res.status;
@@ -127,7 +131,12 @@ export const uploadFolder = (payload) =>
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
-        body: payload
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(payload)
+
     }).then(res => {
         return res.status;
     }).catch(error => {

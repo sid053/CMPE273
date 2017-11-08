@@ -87,8 +87,8 @@ router.post('/uploadFolder' , function (req,res) {
     var username = req.session.username ;
     console.log("inside post upload");
     // console.log(req.body.username);
-    console.log(req.file);
-    var folderpath = "UserFiles/"+req.session.username+"/"+req.body.folder ;
+    console.log(req.body);
+    var folderpath = req.body.folder ;
 
     fs.mkdir(folderpath, function(err) {
              if (!err) {
