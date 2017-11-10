@@ -165,6 +165,41 @@ export const deleteFile = (payload) =>
     });
 
 //****************************************************
+
+export const getGroups = () =>
+    fetch(`${api}/users/groups`, {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+        .catch(error => {
+            console.log("This is error.");
+            return error;
+        });
+
+//****************************************************
+export const deleteFolder = (payload) =>
+    fetch(`${api}/files/deleteFolder`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+//****************************************************
 export const validateUser = (payload) =>
     fetch(`${api}/users/validateUser`, {
         method: 'POST',
@@ -199,3 +234,60 @@ export const share = (payload) =>
         console.log("This is error");
         return error;
     });
+
+//****************************************************
+export const createGroup = (payload) =>
+    fetch(`${api}/users/createGroup`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+//****************************************************
+export const addMember = (payload) =>
+    fetch(`${api}/users/addMember`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+//****************************************************
+
+export const deleteGroup = (payload) =>
+    fetch(`${api}/users/deleteGroup`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+
+//****************************************************

@@ -110,8 +110,11 @@ function getFiles(req,res,next){
 
 }
 
- //*******************************************************************************************************************
-function validateUser(req,res,next) {
+
+//*******************************************************************************************************************
+
+
+ function validateUser(req,res,next) {
        console.log(req.body.shareUsername);
        var shareUsername = req.body.shareUsername;
      //  var callingFunction = validateUser1 ;
@@ -137,8 +140,149 @@ function validateUser(req,res,next) {
 
 }
 
+ //*******************************************************************************************************************
+
+ function getGroups(req,res,next){
+
+     const username = req.session.username;
+
+      var body = {
+          username:username,
+          action: "getGroups"
+      }
+     kafka.make_request('groups',body,'groups', function(err,results){
+         console.log('response from kafka for user validation');
+         console.log(results);
+         if(err){
+             console.log(err);
+         }
+         else
+         {
+               console.log("inside else fo error for , about to send response");
+             if(results.code==="200"){
+                   console.log("yay.i am here good thing");
+                 res.status(201).send(results.value);
+             }
+             else{
+                 console.log("i shouldnt be here");
+                 res.status(401).send("no files to return");
+             }
+         }
+     });
+ }
+
+ //*******************************************************************************************************************
 
 
+ function createGroup(req,res,next){
+
+     const username = req.session.username;
+
+     var body = {
+         username:username,
+         action: "create",
+         groupname:req.body.groupname
+
+     }
+     kafka.make_request('groups',body,'groups', function(err,results){
+         console.log('response from kafka for user validation for groups');
+         //console.log(results);
+         if(err){
+             console.log(err);
+         }
+         else
+         {
+            // console.log(results.code);
+             if(results.code==='200'){
+                 res.status(201).send(results.value);
+             }
+             else{
+                 res.status(401).send("Whys is this happening");
+             }
+         }
+     });
+ }
+
+ //*******************************************************************************************************************
+
+function addMember(req,res,next){
+
+     var body = {
+         owner : req.session.username,
+         groupname : req.body.groupname,
+         member : req.body.member,
+         action : "addMember"
+     }
+
+    kafka.make_request('groups',body,'groups', function(err,results){
+        console.log('response from kafka for user validation for groups');
+        //console.log(results);
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+            // console.log(results.code);
+            if(results.code==='200'){
+                res.status(201).send(results.value);
+            }
+            else{
+                res.status(401).send(results.value);
+            }
+        }
+    });
+}
+
+
+ //*******************************************************************************************************************
+
+ //*******************************************************************************************************************
+
+ function deleteGroup(req,res,next){
+
+
+
+     var body = {
+         groupname: req.body.groupname,
+         username:req.session.username,
+         action: "deleteGroup"
+     }
+     console.log("Sssssssssssssssssssssssssssssssssssssssssssssss");
+
+     kafka.make_request('groups',body,'groups', function(err,results){
+         console.log('response from kafka for user validation');
+         console.log(results);
+         if(err){
+             console.log(err);
+         }
+         else
+         {
+             console.log("inside else fo error for , about to send response");
+             if(results.code==="200"){
+                 console.log("yay.i am here good thing");
+                 res.status(201).send("Group deleted");
+             }
+             else{
+                 console.log("i shouldnt be here");
+                 res.status(401).send("no files to return");
+             }
+         }
+     });
+
+ }
+
+ //*******************************************************************************************************************
+
+
+
+
+
+
+
+ exports.deleteGroup = deleteGroup;
+ exports.addMember = addMember;
+exports.createGroup = createGroup;
+exports.getGroups = getGroups;
 exports.validateUser = validateUser;
 exports.getFiles=getFiles;
 exports.logout =logout;

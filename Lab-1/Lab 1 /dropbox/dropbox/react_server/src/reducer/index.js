@@ -7,9 +7,9 @@ const initialState = {
     email: '',
     username:'',
     files :[],
-    groups: [],
     userLog:[],
-    folder:[]
+    folder:[],
+    groups:[]
 
 };
 
@@ -19,9 +19,7 @@ const userdata = (state = initialState, action) => {
     
         case 'LOGIN' :
             console.log("inside userdata");
-            //console.log(action.payload[0].file);
 
-           // console.log("display done");
             state = {
                 ...state,
                 files: action.payload.file,
@@ -47,13 +45,56 @@ const userdata = (state = initialState, action) => {
 
         case 'FOLDER' :
             console.log("Inside folder reducer");
-          //  console.log(action.payload)
             state = {
 
                 ...state,
                 folder:[...state.folder ,action.payload.folder]
             }
             break;
+
+        case 'DELETEFOLDER' :
+            console.log("inside delete folder");
+            state = {
+                ...state,
+                folder:[
+                    ...state.folder.slice(0, action.payload),
+                    ...state.folder.slice(action.payload + 1)
+                ]
+            };
+
+            break;
+
+        case 'GETGROUPS' :
+            console.log("Inside the get groups thingy");
+            state = {
+                ...state,
+                groups:action.payload
+            };
+            break;
+
+        case 'ADDGROUP':
+            console.log("Inside creation of a new group");
+            state = {
+                ...state,
+                groups:[...state.groups , action.payload]
+            }
+
+        case 'DELETEGROUP' :
+            console.log("inside delete group clicked ");
+
+            //console.log(state.files);
+            state = {
+                ...state,
+                groups:[
+                    ...state.groups.slice(0, action.payload),
+                    ...state.groups.slice(action.payload + 1)
+                ]
+            };
+            //console.log(state.files);
+            break;
+
+
+
 
 
 

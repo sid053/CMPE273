@@ -28,3 +28,33 @@ export function handleFolder(folderpath) {
 
 }
 
+export function folderDelete(index) {
+    //console.log(userdata);
+    return {
+
+        type : 'DELETEFOLDER',
+        payload : index
+    }
+};
+
+export function getGroups(data) {
+    return {
+        type: 'GETGROUPS',
+        payload: data
+    }
+}
+
+export function addGroup(data){
+        return {
+            type : 'ADDGROUP',
+            payload : data
+        }
+}
+
+export function deleteGroup(data){
+    return {
+        type : 'DELETEGROUP',
+        payload : data
+    }
+}
+

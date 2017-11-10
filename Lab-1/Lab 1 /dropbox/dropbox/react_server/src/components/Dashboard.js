@@ -9,7 +9,7 @@ import UserDetails from './UserDetails';
 
 
 import { withRouter } from 'react-router-dom';
-import {getData, fileDelete, handleFolder} from '../action/index';
+import {getData, fileDelete, handleFolder,folderDelete} from '../action/index';
 import {connect} from 'react-redux';
 
 import {Panel,
@@ -59,7 +59,7 @@ class Dashboard extends Component {
 
         payload.append('mypic', event.target.files[0]);
 
-
+        console.log(payload);
         console.log("payload for upload");
         API.uploadFile(payload)
             .then((status) => {
@@ -134,9 +134,18 @@ class Dashboard extends Component {
 
     //*********************************************************************************
 
-    deleteFolder(data){
+    deleteFolder(data,index){
         console.log("inside delete folder thingy");
         console.log(data);
+        var payload = {folder: data}
+        API.deleteFolder(payload).then((status)=>{
+            if(status===201){
+                console.log("folder deleted from the database");
+                this.props.folderDelete(index);
+
+
+            }
+        })
 
 
     }
@@ -265,11 +274,12 @@ class Dashboard extends Component {
                             <Panel collapsible header={head}
                                    key={index}
                                    eventKey={index}
+                                   bsStyle="info"
                             >
                                 <ButtonToolbar>
                                     <Button
                                         bsStyle="danger"
-                                        onClick={()=>{this.deleteFolder(folders)}}
+                                        onClick={()=>{this.deleteFolder(folders,index)}}
                                     >
                                         Delete
                                     </Button>
@@ -366,11 +376,11 @@ class Dashboard extends Component {
                       <br/>
 
                       <li>
-                          <a href=""><h3>Dashboard</h3></a>
+                          <h3>Dashboard</h3>
                       </li>
 
                       <li>
-                          <a href=""><h3>Groups</h3></a>
+                          <a href="/Groups"><h3>Groups</h3></a>
                       </li>
 
                       <li>
@@ -514,7 +524,8 @@ function mapDispatchToProps(dispatch) {
     return {
         getData : (data) => dispatch(getData(data)),
         fileDelete : (data) => dispatch(fileDelete(data)),
-        handleFolder : (data) => dispatch(handleFolder(data))
+        handleFolder : (data) => dispatch(handleFolder(data)),
+        folderDelete : (data) => dispatch(folderDelete(data))
     };
 }
 

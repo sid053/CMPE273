@@ -10,7 +10,7 @@ var rimraf = require('rimraf');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-
+           console.log("about to upload");
       const username ="./UserFiles/"+req.session.username;
 
         cb(null,username);
@@ -32,23 +32,23 @@ router.post('/upload', upload.single('mypic'),function (req, res, next) {
    // console.log(req.body.username);
     console.log(req.file);
 
-    kafka.make_request('uploadFiles',{file:req.file,username:username},'fileUpload', function(err,results){
-        console.log('response from kafka for user validation');
-        console.log(results);
-        if(err){
-            console.log(err);
-        }
-        else
-        {
-
-            if(results.code==='200'){
-                res.status(201).send();
-            }
-            else{
-                res.status(401).send();
-            }
-        }
-    });
+    // kafka.make_request('uploadFiles',{file:req.file,username:username},'fileUpload', function(err,results){
+    //
+    //     console.log(results);
+    //     if(err){
+    //         console.log(err);
+    //     }
+    //     else
+    //     {
+    //
+    //         if(results.code==='200'){
+    //             res.status(201).send();
+    //         }
+    //         else{
+    //             res.status(401).send();
+    //         }
+    //     }
+    // });
 
 
 
@@ -121,6 +121,11 @@ router.post('/uploadFolder' , function (req,res) {
 })
 
 
+
+
+
+
+
 //*******************************************************************************************************************
 
 router.post('/delete' , function (req,res) {
@@ -182,21 +187,39 @@ router.post('/share' , function(req,res){
 router.post('/deleteFolder' , function(req,res){
 
     console.log(req.body.folderpath);
-    var folderpath = req.body.folderpath;
+    var folderpath = req.body.folder;
+    var username = req.session.username;
     console.log("the username of the account is : " + req.session.username);
     rimraf(folderpath , function (err) {
-        if(!err){
-            console.log("directory deleted");
-            res.status(201).send("directory deleted");
-        }
-        else{
-            res.status(401).send("unable to delete the directory")
-        }
+
+            if (!err) {
+                   console.log("about to send the delete folder request")
+                kafka.make_request('deleteFolder',{folder:folderpath,username:username},'deleteFolder', function(err,results){
+                    console.log(results);
+                    if(err){
+                        console.log(err);
+                    }
+                    else
+                    {
+
+                        if(results.code==='200'){
+                            res.status(201).send("directory deleted");
+                        }
+                        else{
+                            res.status(401).send("unable to delete from the database");
+                        }
+                    }
+                });
+
+            }
+            else {
+
+                res.status(401).send("deletion from the serverfailed");
+            }
+
+
+
     })
-
-
-
-
 })
 
 module.exports = router;

@@ -20,6 +20,13 @@ router.get('/getFiles',home.getFiles);
 
 router.post('/validateUser' , home.validateUser);
 
+router.get('/groups' , home.getGroups);
+
+router.post('/createGroup' , home.createGroup);
+
+router.post('/addMember' , home.addMember);
+
+router.post('/deleteGroup',home.deleteGroup)
 
 
 

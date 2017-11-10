@@ -1,7 +1,7 @@
 var User    = require('./models/User');
 var fs = require('fs');
 
-
+//*******************************************************************************************************************
 
 function handle_Login_request(msg, callback){
 
@@ -25,7 +25,7 @@ function handle_Login_request(msg, callback){
     });
 
 }
-
+//*******************************************************************************************************************
 function handle_Folder_Upload(msg, callback) {
     console.log(msg.folder);
     console.log("**************");
@@ -48,6 +48,34 @@ function handle_Folder_Upload(msg, callback) {
     })
 
 }
+
+//*******************************************************************************************************************
+function handle_Folder_delete(msg, callback) {
+    console.log(msg.folder);
+    console.log("**************");
+    console.log(msg.username);
+    var res = {};
+
+
+    User.updateOne({"username":msg.username}, {"$pull": {folder:msg.folder}} ,function (err) {
+        console.log("After the updateone query");
+        if(!err){
+            res.code = "200";
+            res.value = "Folder Saved in the database";
+            console.log("foobarfoobar");
+        }
+        else{
+            res.code = "400";
+            res.value = "Problem saving Folder";
+        }
+        callback(null,res);
+    })
+
+
+
+}
+
+//*******************************************************************************************************************
 
 
 
@@ -72,6 +100,7 @@ function handle_Validate_request(msg,callback) {
 
 }
 
+//*******************************************************************************************************************
 
 function handle_SignUp_request(msg,callback) {
     console.log("inside the Signup function")
@@ -95,23 +124,10 @@ var user = new User();
         else{
         console.log("inside the else of save");
         console.log("****************");
-          fs.mkdir(FilePath, function(err) {
-             if (!err) {
-                 console.log("Inside the file creation");
-                 res.code = "200";
-                 res.value = "User Created";
-                 console.log(res.code);
-             }
-             else {
-                 res.code = "401";
-                 res.value = "User not registered";
-                 console.log("inside creating directory error");
+        res.code = "200";
+        res.value = "User succesfully registered";
+        callback(null,res);
 
-             }
-                  callback(null,res);
-           }
-
-           );
         //  console.log(res.code+"the code is this");
 
         }
@@ -119,6 +135,7 @@ var user = new User();
 
 }
 
+//*******************************************************************************************************************
 
 function file_Upload(msg,callback) {
 
@@ -142,7 +159,9 @@ function file_Upload(msg,callback) {
 })
 }
 
+//*******************************************************************************************************************
 
+exports.handle_Folder_delete = handle_Folder_delete;
 exports.handle_Folder_upload = handle_Folder_Upload;
 exports.file_Upload = file_Upload;
 exports.handle_SignUp_request = handle_SignUp_request;
