@@ -6,11 +6,20 @@ FormControl,
 ControlLabel} from 'react-bootstrap';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import '../App.css';
+import Img from 'react-image'
+import VisibilitySensor from 'react-visibility-sensor'
 
 
 class About extends Component{
     componentWillMount(){
         console.log("About component mounted");
+    }
+
+    myComponent(){
+        return(   <VisibilitySensor>
+            <Img className= "size" src='https://cfl.dropboxstatic.com/static/images/paper/landing_page/features/dropbox-m1@2x-vflsoq9KT.png'/>
+        </VisibilitySensor>);
     }
 
 
@@ -26,7 +35,7 @@ class About extends Component{
                                 <li>
                                     <a href="#">
                                         <h2>Dropbox</h2>
-                                        <h4>logo should come here</h4>
+                                        {this.myComponent()}
                                     </a>
                                 </li>
                                 <br/>

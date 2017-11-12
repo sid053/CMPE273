@@ -14,6 +14,9 @@ import {Panel,
     Popover,
     FormGroup,
     FormControl} from 'react-bootstrap';
+import Img from 'react-image'
+import VisibilitySensor from 'react-visibility-sensor'
+
 
 
 
@@ -102,6 +105,11 @@ class Groups extends Component{
         })
     }
 
+    myComponent(){
+     return(   <VisibilitySensor>
+            <Img className= "size" src='https://cfl.dropboxstatic.com/static/images/paper/landing_page/features/dropbox-m1@2x-vflsoq9KT.png'/>
+        </VisibilitySensor>);
+    }
     rendermembers(group){
         return group.members.map((member,index)=>{
             return(<div>{member}</div>);
@@ -189,7 +197,7 @@ class Groups extends Component{
                                 <li>
                                     <a href="#">
                                         <h2>Dropbox</h2>
-                                        <h4>{this.props.userdata.username}</h4>
+                                        {this.myComponent()}
                                     </a>
                                 </li>
                                 <br/>
