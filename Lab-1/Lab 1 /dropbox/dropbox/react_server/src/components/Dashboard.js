@@ -98,7 +98,7 @@ class Dashboard extends Component {
 //*********************************************************************************
     myComponent(){
         return(   <VisibilitySensor>
-            <Img className= "size" src='https://cfl.dropboxstatic.com/static/images/paper/landing_page/features/dropbox-m1@2x-vflsoq9KT.png'/>
+            <Img className= "size" src='https://cfl.dropboxstatic.com/static/images/logo_catalog/dropbox_logo_glyph_2015_m1-vfleInWIl.svg'/>
         </VisibilitySensor>);
     }
     //*********************************************************************************
@@ -276,6 +276,11 @@ console.log(file);
                                         share
                                     </Button>
                                 </OverlayTrigger>
+                                <Button
+                                    bsStyle="success"
+                                    active>
+                                    Download
+                                </Button>
                             </ButtonToolbar>
                         </Panel>
                     </Accordion>
@@ -395,7 +400,7 @@ console.log(file);
     return(
       <div className="row">
 
-         <div className="col-md-4">
+         <div className="col-md-3">
 
           <div>
               <div>
@@ -436,7 +441,7 @@ console.log(file);
          </div>
 
           {/* ************************************************************************************* */}
-          <div className="col-md-6">
+          <div className="col-md-8">
               <h1>Dashboard</h1>
                   <br/>
               <br/>
@@ -448,7 +453,7 @@ console.log(file);
               <br/>
 
                   <div className="row">
-                      <div className="col-md-8">
+                      <div className="col-md-9">
                           <label className="custom-file">
                               <input type="file" id="file"
                                      name="mypic"
@@ -456,6 +461,7 @@ console.log(file);
                                      onChange={this.handleFileUpload}/>
                               <span className="custom-file-control"></span>
                           </label>
+                          <div className="row">
                           <div className="col-md-6">
                           <h3> User Files </h3>
                               {this.renderListFiles()}
@@ -464,11 +470,11 @@ console.log(file);
                           <h3> Folders </h3>
                           {this.renderListFolders()}
                           </div>
-
+                          </div>
                       </div>
 
 
-                      <div className="col-md-4">
+                      <div className="col-md-3">
 
                           <Jumbotron>
                               <OverlayTrigger trigger="click" rootClose placement="right" overlay={
@@ -515,20 +521,11 @@ console.log(file);
 
                   </div>
 
-
-
-
-
-
-
-
-
-
           </div>
 
           {/* ************************************************************************************* */}
 
-       <div className="col-md-2">
+       <div className="col-md-1">
            <br/>
            <Button
                bsStyle="danger"

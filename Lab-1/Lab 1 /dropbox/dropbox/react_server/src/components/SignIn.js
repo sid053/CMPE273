@@ -66,7 +66,7 @@ class SignIn extends Component {
                                 onClick={() => this.props.handleSubmit(this.state)}>
                                 Submit
                             </Button>
-                        <br/>
+                            <img className="sizespace" src= "https://cfl.dropboxstatic.com/static/images/icons/icon_spacer-vflN3BYt2.gif" />
                             <Button
                                 bsStyle="success"
                                 onClick={() => this.props.loginSignUp("SignUp")}>

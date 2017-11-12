@@ -9,16 +9,26 @@ import {connect} from 'react-redux';
 import '../App.css';
 import Img from 'react-image'
 import VisibilitySensor from 'react-visibility-sensor'
-
+import * as API from '../api/API'
 
 class About extends Component{
     componentWillMount(){
         console.log("About component mounted");
-    }
+
+            API.checkSession().then((status)=>{
+                if(status===201){
+
+                }
+                else {
+                    this.props.history.push("/")
+                }
+            })
+        }
+
 
     myComponent(){
         return(   <VisibilitySensor>
-            <Img className= "size" src='https://cfl.dropboxstatic.com/static/images/paper/landing_page/features/dropbox-m1@2x-vflsoq9KT.png'/>
+            <Img className= "size" src='https://cfl.dropboxstatic.com/static/images/logo_catalog/dropbox_logo_glyph_2015_m1-vfleInWIl.svg'/>
         </VisibilitySensor>);
     }
 

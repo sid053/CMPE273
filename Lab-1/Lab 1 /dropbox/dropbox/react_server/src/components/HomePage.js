@@ -125,10 +125,11 @@ class HomePage extends Component {
             <div className="col-md-12">
                 <div className="col-md-12">
                     <div className="row justify-content-md-center">
-                        <div className="col-md-10">
-                            <Message message={this.state.message}/>
+                        <div className="col-md-10 left" >
+                            <img  className="size" src = "https://cfl.dropboxstatic.com/static/images/logo_catalog/dropbox_logo_glyph_2015_m1-vfleInWIl.svg"/>
+                            <img className="sizespace" src= "https://cfl.dropboxstatic.com/static/images/icons/icon_spacer-vflN3BYt2.gif" />
+                            <img className="sizelogo" src = "https://cfl.dropboxstatic.com/static/images/logo_catalog/dropbox_logo_text_2015_m1-vflV-vZRB.svg"/>
                         </div>
-
                     </div>
                     <hr/>
                 </div>
@@ -138,7 +139,7 @@ class HomePage extends Component {
                 <div>
                     <div className="col-lg-6">
 
-                        <img src = "https://dropboxmainblog.files.wordpress.com/2015/09/team-feature.png?w=650&h=325"/>
+                        <img src = "https://cfl.dropboxstatic.com/static/images/empty_states/sign-in-vflARyFIg.png"/>
 
                     </div>
 

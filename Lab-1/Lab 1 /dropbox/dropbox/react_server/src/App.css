@@ -186,11 +186,17 @@ body {
 }
 
 .size{
-    height: 100px;
-    width: 100px;
+    height: 60px;
+    width: 60px;
 }
-
-
+.sizelogo{
+    height: 100px;
+    width : 100px;
+}
+.sizespace{
+    height:10px;
+    width:10px;
+}
 
 
 

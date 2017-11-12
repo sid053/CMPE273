@@ -31,7 +31,18 @@ class Groups extends Component{
                     this.props.getGroups(data);
 
                 })
+            }
+            else {
+                this.props.history.push("/")
+            }
+        })
+    }
 
+    logout = () => {
+        console.log("inside logout function");
+        API.doLogout().then((status)=>{
+            if(status===201){
+                this.props.history.push("/");
             }
         })
     }
@@ -107,12 +118,22 @@ class Groups extends Component{
 
     myComponent(){
      return(   <VisibilitySensor>
-            <Img className= "size" src='https://cfl.dropboxstatic.com/static/images/paper/landing_page/features/dropbox-m1@2x-vflsoq9KT.png'/>
+            <Img className= "size" src='https://cfl.dropboxstatic.com/static/images/logo_catalog/dropbox_logo_glyph_2015_m1-vfleInWIl.svg'/>
         </VisibilitySensor>);
     }
     rendermembers(group){
         return group.members.map((member,index)=>{
-            return(<div>{member}</div>);
+            return(<Accordion>
+                <Panel header={member} eventKey={index} key={index}>
+                    <ButtonToolbar>
+                        <Button
+                            bsStyle="danger"
+                        >
+                            Delete
+                        </Button>
+                    </ButtonToolbar>
+                </Panel>
+            </Accordion>);
         });
     }
     renderListGroups(){
@@ -128,9 +149,8 @@ class Groups extends Component{
                                key={index}
                                eventKey={index}
                                bsStyle="primary"
-                        >    Members:
+                        >   <h4>Members</h4>
                             {this.rendermembers(group)}
-
                             <ButtonToolbar>
                                 <Button
                                     bsStyle="danger"
@@ -153,6 +173,7 @@ class Groups extends Component{
                                                     onChange={(event) => {
                                                         this.setState({member: event.target.value});
                                                     }}
+
                                                 />
 
                                                 <Button
@@ -174,6 +195,11 @@ class Groups extends Component{
 
 
                                 </OverlayTrigger>
+                                <Button
+                                    bsStyle="primary"
+                                    active>
+                                    Add File
+                                </Button>
 
                             </ButtonToolbar>
                         </Panel>
@@ -257,13 +283,29 @@ class Groups extends Component{
                     </div>
                 </div>
                 {/***********************************************************************************/}
-                  <div className="col-md-6">
-
-                          <h3>Groups</h3>
+                  <div className="col-md-3">
+                      <br/>
+                      <br/>
+                          <h2>Groups</h2>
+                          <br/>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <br/>
+                      <br/>
                       {this.renderListGroups()}
 
                   </div>
-
+                <div className="col-md-5">
+                    <br/>
+                    <Button
+                        bsStyle="danger"
+                        onClick={()=>{this.logout()}}
+                    >
+                        logout
+                    </Button>
+                </div>
 
             </div>
         );
