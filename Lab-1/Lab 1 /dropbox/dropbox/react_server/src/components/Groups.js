@@ -102,27 +102,27 @@ class Groups extends Component{
         })
     }
 
+    rendermembers(group){
+        return group.members.map((member,index)=>{
+            return(<div>{member}</div>);
+        });
+    }
     renderListGroups(){
+
         if(this.props.userdata.groups.length===0){
             return(<h4>You have no Groups</h4>);
         }
         else {
             return this.props.userdata.groups.map((group, index) => {
-
-                console.log("inside Accordion for folders");
-                //var check = folders.split('/');
-                //console.log(check , check.length);
-
-                console.log("after folder ");
-                 console.log(this.props.userdata.groups);
-                //var head = (check[check.length-1]).toUpperCase() + "   Parent-> "  + check[check.length-2]
                 return (
                     <Accordion>
                         <Panel collapsible header={group.groupname}
                                key={index}
                                eventKey={index}
                                bsStyle="primary"
-                        >
+                        >    Members:
+                            {this.rendermembers(group)}
+
                             <ButtonToolbar>
                                 <Button
                                     bsStyle="danger"
@@ -140,7 +140,7 @@ class Groups extends Component{
                                             >
                                                 <FormControl
                                                     type="text"
-                                                    value={this.state.groupName}
+                                                    value={this.state.member}
                                                     placeholder="Enter Member's Name"
                                                     onChange={(event) => {
                                                         this.setState({member: event.target.value});
@@ -163,6 +163,8 @@ class Groups extends Component{
                                         active>
                                         Add Member
                                     </Button>
+
+
                                 </OverlayTrigger>
 
                             </ButtonToolbar>
@@ -175,14 +177,7 @@ class Groups extends Component{
 
         }
     }
-
-
-
-
     render () {
-
-
-
         return (
             <div className="row">
 
@@ -194,7 +189,7 @@ class Groups extends Component{
                                 <li>
                                     <a href="#">
                                         <h2>Dropbox</h2>
-                                        <h4>logo should come here</h4>
+                                        <h4>{this.props.userdata.username}</h4>
                                     </a>
                                 </li>
                                 <br/>
@@ -207,7 +202,7 @@ class Groups extends Component{
                                 <li>
                                     <a href="/dashboard"><h3>Dashboard</h3></a>
                                 </li>
-
+                                {/**************this is for creating a new group */}
                                 <li>
                                         <OverlayTrigger trigger="click" rootClose placement="right" overlay={
 
@@ -239,11 +234,12 @@ class Groups extends Component{
                                         <h3>Create a group</h3>
                                         </OverlayTrigger>
                                 </li>
+                                {/**************this is for creating a new group */}
                                 <li>
                                     <a href=""><h3>Logs</h3></a>
                                 </li>
                                 <li>
-                                    <a href=""><h3>About</h3></a>
+                                    <a href="/About"><h3>About</h3></a>
                                 </li>
                                 <li>
                                     <a href=""><h3>Contact</h3></a>
@@ -251,11 +247,8 @@ class Groups extends Component{
                             </ul>
                         </div>
                     </div>
-
                 </div>
-
                 {/***********************************************************************************/}
-
                   <div className="col-md-6">
 
                           <h3>Groups</h3>

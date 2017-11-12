@@ -113,10 +113,6 @@ export const uploadFile = (payload) =>
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json'
-        },
         body: payload
     }).then(res => {
         return res.status;

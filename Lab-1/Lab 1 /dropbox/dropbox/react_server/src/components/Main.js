@@ -4,7 +4,7 @@ import Dashboard from "./Dashboard" ;
 import HomePage from "./HomePage";
 import Groups from "./Groups";
 import {Jumbotron} from 'react-bootstrap';
-
+import About from "./About";
 
 class Main extends Component {
 
@@ -29,6 +29,12 @@ class Main extends Component {
                 <Route exact path="/Groups" render={() => (
                     <div>
                         <Groups/>
+                    </div>
+                )}/>
+
+                <Route exact path="/About" render={() => (
+                    <div>
+                        <About/>
                     </div>
                 )}/>
             </div>

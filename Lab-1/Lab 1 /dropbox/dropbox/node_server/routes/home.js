@@ -16,24 +16,36 @@ require('./passport')(passport);
 
 function afterRegister(req,res){
 
+    var FilePath = "./UserFiles/"+req.body.username ;
 
-    kafka.make_request('signUp',req.body,'SignUp', function(err,results){
-        console.log('response from kafka for user validation');
-        console.log(results);
-        if(err){
-            console.log(err);
+
+    fs.mkdir(FilePath,function (err) {
+        if(!err){
+
+            kafka.make_request('signUp',req.body,'SignUp', function(err,results){
+                console.log('response from kafka for user validation');
+                console.log(results);
+                if(err){
+                    console.log(err);
+                }
+                else
+                {
+
+                    if(results.code==='200'){
+                        res.status(201).send("User Registered");
+                    }
+                    else{
+                        res.status(401).send("User not Registered");
+                    }
+                }
+            });
         }
         else
         {
-
-            if(results.code==='200'){
-                res.status(201).send("User Registered");
-            }
-            else{
-                res.status(401).send("User not Registered");
-            }
+            res.status(401).send("error while creating directory");
         }
-    });
+
+    })
 
 
 	

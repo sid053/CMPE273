@@ -9,7 +9,7 @@ import UserDetails from './UserDetails';
 
 
 import { withRouter } from 'react-router-dom';
-import {getData, fileDelete, handleFolder,folderDelete} from '../action/index';
+import {getData, fileDelete, handleFolder,folderDelete,star} from '../action/index';
 import {connect} from 'react-redux';
 
 import {Panel,
@@ -20,7 +20,9 @@ import {Panel,
         OverlayTrigger,
         Popover,
         FormGroup,
-        FormControl} from 'react-bootstrap';
+        FormControl,
+        Glyphicon,
+        Addon} from 'react-bootstrap';
  
 class Dashboard extends Component {
 
@@ -76,14 +78,13 @@ class Dashboard extends Component {
     //*********************************************************************************
     handleDelete = (data,index) =>{
         console.log("inside handleDelete");
-
-        var payload = {
-            file : data
-        }
-        console.log(payload);
-        API.deleteFile(payload).then((status)=>
+          console.log("ddddddddddddddddddddddddddddddddddddddddddddd")
+   console.log(data);
+        API.deleteFile(data).then((status)=>
         {
+
             if(status===201){
+                console.log("inside here after delete");
                 this.props.fileDelete(index);
             }
         })
@@ -112,6 +113,7 @@ class Dashboard extends Component {
     state={
         shareUsername:'',
         foldername:''
+
 
     }
     //*********************************************************************************
@@ -188,69 +190,92 @@ class Dashboard extends Component {
 
     }
 
+
+    Panelheader(file,index){
+    var star;
+    console.log("*****************************************************")
+console.log(file);
+        console.log("*****************************************************")
+    if(file.starred ===true){
+        star = "star"
+    }
+    else {
+        star = "star-empty"
+    }
+        return(<div>
+        <h5><Glyphicon glyph={star}
+            onClick={()=>{
+                console.log("the star is clicked");
+                this.props.star(index)}}
+        />{file.filename}</h5>
+    </div>);}
+
     //*********************************************************************************
     renderListFiles(){
 
-        return this.props.userdata.files.map((file,index)=>{
+        if(this.props.userdata.files.length===0){
+            return(<h4>You have no Files...</h4>);
+        }
+        else {
+            return this.props.userdata.files.map((file, index) => {
+                return (
+                    <Accordion>
 
-             return (
-                 <Accordion>
-                     <Panel collapsible header={file.filename}
-                            key={index}
-                            eventKey={index}
-                     >
-                         <ButtonToolbar>
-                             <Button
-                                 bsStyle="danger"
-                                 onClick={() => this.handleDelete(file.filename, index)}>
-                                 Delete
-                             </Button>
+                        <Panel collapsible header={this.Panelheader(file, index)}
+                               key={index}
+                               eventKey={index}
+                        >
+                            <ButtonToolbar>
+                                <Button
+                                    bsStyle="danger"
+                                    onClick={() => this.handleDelete(file, index)}>
+                                    Delete
+                                </Button>
 
-                             <OverlayTrigger trigger="click" rootClose placement="right" overlay={
+                                <OverlayTrigger trigger="click" rootClose placement="right" overlay={
 
-                                 <Popover id="popover-trigger-click-root-close" title="Enter Username">
-                                     <form>
-                                         <FormGroup
-                                             controlId="formBasicText"
-                                         >
-                                             <FormControl
-                                                 type="text"
-                                                 value={this.state.shareUsername}
-                                                 placeholder="Enter username"
-                                                 onChange={(event) => {
-                                                     this.setState({shareUsername: event.target.value});
-                                                 }}
-                                             />
+                                    <Popover id="popover-trigger-click-root-close" title="Enter Username">
+                                        <form>
+                                            <FormGroup
+                                                controlId="formBasicText"
+                                            >
+                                                <FormControl
+                                                    type="text"
+                                                    value={this.state.shareUsername}
+                                                    placeholder="Enter username"
+                                                    onChange={(event) => {
+                                                        this.setState({shareUsername: event.target.value});
+                                                    }}
+                                                />
 
-                                             <Button
-                                                 bsStyle="primary"
-                                                 onClick={() => this.validate(this.state.shareUsername, file.filename)}
-                                                 active>
-                                                 share
-                                             </Button>
+                                                <Button
+                                                    bsStyle="primary"
+                                                    onClick={() => this.validate(this.state.shareUsername, file.filename)}
+                                                    active>
+                                                    share
+                                                </Button>
 
-                                         </FormGroup>
-                                     </form>
+                                            </FormGroup>
+                                        </form>
 
-                                 </Popover>
+                                    </Popover>
 
-                             }>
-                                 <Button
-                                     bsStyle="primary"
-                                     active>
-                                     share
-                                 </Button>
-                             </OverlayTrigger>
-                         </ButtonToolbar>
-                     </Panel>
-                 </Accordion>
+                                }>
+                                    <Button
+                                        bsStyle="primary"
+                                        active>
+                                        share
+                                    </Button>
+                                </OverlayTrigger>
+                            </ButtonToolbar>
+                        </Panel>
+                    </Accordion>
 
-             );
+                );
 
 
-
-        });
-
+            });
+        }
     }
 
     //*********************************************************************************
@@ -390,7 +415,7 @@ class Dashboard extends Component {
                           <a href=""><h3>Logs</h3></a>
                       </li>
                       <li>
-                          <a href=""><h3>About</h3></a>
+                          <a href="/About"><h3>About</h3></a>
                       </li>
                       <li>
                           <a href=""><h3>Contact</h3></a>
@@ -414,7 +439,7 @@ class Dashboard extends Component {
               <br/>
 
                   <div className="row">
-                      <div className="col-md-6">
+                      <div className="col-md-8">
                           <label className="custom-file">
                               <input type="file" id="file"
                                      name="mypic"
@@ -422,16 +447,19 @@ class Dashboard extends Component {
                                      onChange={this.handleFileUpload}/>
                               <span className="custom-file-control"></span>
                           </label>
-
+                          <div className="col-md-6">
                           <h3> User Files </h3>
-                          {this.renderListFiles()}
+                              {this.renderListFiles()}
+                          </div>
+                          <div className="col-md-6">
                           <h3> Folders </h3>
                           {this.renderListFolders()}
+                          </div>
 
                       </div>
 
 
-                      <div className="col-md-6">
+                      <div className="col-md-4">
 
                           <Jumbotron>
                               <OverlayTrigger trigger="click" rootClose placement="right" overlay={
@@ -522,6 +550,7 @@ function mapStateToProps(userdata) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        star: (data) => dispatch(star(data)),
         getData : (data) => dispatch(getData(data)),
         fileDelete : (data) => dispatch(fileDelete(data)),
         handleFolder : (data) => dispatch(handleFolder(data)),

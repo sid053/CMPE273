@@ -58,3 +58,11 @@ export function deleteGroup(data){
     }
 }
 
+export function star(data){
+    console.log("inside the star thing");
+    return {
+        type : 'STAR',
+        payload : data
+    }
+}
+

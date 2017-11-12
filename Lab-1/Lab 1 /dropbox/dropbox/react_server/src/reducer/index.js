@@ -93,7 +93,14 @@ const userdata = (state = initialState, action) => {
             //console.log(state.files);
             break;
 
-
+        case 'STAR' :
+            console.log("inside the star clicked function ");
+            var temp = state.files;
+            var flag = temp[action.payload].starred ;
+            console.log(flag);
+            temp[action.payload].starred = !flag ;
+            files:temp;
+            break;
 
 
 

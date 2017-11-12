@@ -38,7 +38,7 @@
       <file leaf-file-name="kafkarpc.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/kafka/kafkarpc.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
+            <state relative-caret-position="960">
               <caret line="64" column="30" lean-forward="false" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
               <folding />
             </state>
@@ -48,18 +48,18 @@
       <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+            <state relative-caret-position="240">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fileUpload.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="fileUpload.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/fileUpload.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="-2579">
+              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -68,19 +68,30 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
+            <state relative-caret-position="1035">
               <caret line="69" column="25" lean-forward="false" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="259" column="5" lean-forward="false" selection-start-line="259" selection-start-column="5" selection-end-line="259" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="-61">
+              <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+              <folding>
+                <element signature="n#!!block;n#afterRegister#0" expanded="false" />
+                <element signature="e#596#1331#0" expanded="false" />
+                <element signature="n#!!block;n#logout#0" expanded="false" />
+                <element signature="n#!!block;n#loginPassport#0" expanded="false" />
+                <element signature="n#!!block;n#getFiles#0" expanded="false" />
+                <element signature="n#!!block;n#validateUser#0" expanded="false" />
+                <element signature="n#!!block;n#getGroups#0" expanded="false" />
+                <element signature="n#!!block;n#createGroup#0" expanded="false" />
+                <element signature="n#!!block;n#addMember#0" expanded="false" />
+                <element signature="n#!!block;n#deleteGroup#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,9 +115,9 @@
         <option value="$PROJECT_DIR$/UserFiles/sid/testforsending" />
         <option value="$PROJECT_DIR$/routes/passport.js" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/routes/fileUpload.js" />
         <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/routes/home.js" />
+        <option value="$PROJECT_DIR$/routes/fileUpload.js" />
       </list>
     </option>
   </component>
@@ -141,7 +152,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,21 +170,11 @@
               <item name="routes" type="462c0819:PsiDirectoryNode" />
               <item name="kafka" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="node_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="node_server" type="462c0819:PsiDirectoryNode" />
-              <item name="UserFiles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="node_server" type="b2602c69:ProjectViewProjectNode" />
-              <item name="node_server" type="462c0819:PsiDirectoryNode" />
-              <item name="UserFiles" type="462c0819:PsiDirectoryNode" />
-              <item name="sid" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -228,12 +228,13 @@
       <workItem from="1509776292622" duration="181000" />
       <workItem from="1509917519197" duration="8292000" />
       <workItem from="1510089066647" duration="96000" />
-      <workItem from="1510097584946" duration="16673000" />
+      <workItem from="1510097584946" duration="19406000" />
+      <workItem from="1510436148028" duration="3682000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89493000" />
+    <option name="totallyTimeSpent" value="95908000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -286,7 +287,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
           <caret line="59" column="7" lean-forward="false" selection-start-line="43" selection-start-column="4" selection-end-line="59" selection-end-column="7" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#afterRegister#0" expanded="false" />
+            <element signature="e#596#1331#0" expanded="false" />
+            <element signature="n#!!block;n#logout#0" expanded="false" />
+            <element signature="n#!!block;n#loginPassport#0" expanded="false" />
+            <element signature="n#!!block;n#getFiles#0" expanded="false" />
+            <element signature="n#!!block;n#validateUser#0" expanded="false" />
+            <element signature="n#!!block;n#getGroups#0" expanded="false" />
+            <element signature="n#!!block;n#createGroup#0" expanded="false" />
+            <element signature="n#!!block;n#addMember#0" expanded="false" />
+            <element signature="n#!!block;n#deleteGroup#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -343,7 +355,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
           <caret line="59" column="7" lean-forward="false" selection-start-line="43" selection-start-column="4" selection-end-line="59" selection-end-column="7" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#afterRegister#0" expanded="false" />
+            <element signature="e#596#1331#0" expanded="false" />
+            <element signature="n#!!block;n#logout#0" expanded="false" />
+            <element signature="n#!!block;n#loginPassport#0" expanded="false" />
+            <element signature="n#!!block;n#getFiles#0" expanded="false" />
+            <element signature="n#!!block;n#validateUser#0" expanded="false" />
+            <element signature="n#!!block;n#getGroups#0" expanded="false" />
+            <element signature="n#!!block;n#createGroup#0" expanded="false" />
+            <element signature="n#!!block;n#addMember#0" expanded="false" />
+            <element signature="n#!!block;n#deleteGroup#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -394,7 +417,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
           <caret line="59" column="7" lean-forward="false" selection-start-line="43" selection-start-column="4" selection-end-line="59" selection-end-column="7" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#afterRegister#0" expanded="false" />
+            <element signature="e#596#1331#0" expanded="false" />
+            <element signature="n#!!block;n#logout#0" expanded="false" />
+            <element signature="n#!!block;n#loginPassport#0" expanded="false" />
+            <element signature="n#!!block;n#getFiles#0" expanded="false" />
+            <element signature="n#!!block;n#validateUser#0" expanded="false" />
+            <element signature="n#!!block;n#getGroups#0" expanded="false" />
+            <element signature="n#!!block;n#createGroup#0" expanded="false" />
+            <element signature="n#!!block;n#addMember#0" expanded="false" />
+            <element signature="n#!!block;n#deleteGroup#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -451,7 +485,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1005">
           <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="n#!!block;n#afterRegister#0" expanded="false" />
+            <element signature="e#596#1331#0" expanded="false" />
+            <element signature="n#!!block;n#logout#0" expanded="false" />
+            <element signature="n#!!block;n#loginPassport#0" expanded="false" />
+            <element signature="n#!!block;n#getFiles#0" expanded="false" />
+            <element signature="n#!!block;n#validateUser#0" expanded="false" />
+            <element signature="n#!!block;n#getGroups#0" expanded="false" />
+            <element signature="n#!!block;n#createGroup#0" expanded="false" />
+            <element signature="n#!!block;n#addMember#0" expanded="false" />
+            <element signature="n#!!block;n#deleteGroup#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -519,19 +564,11 @@
     <entry file="file://$PROJECT_DIR$/UserFiles/sid/testforsending" />
     <entry file="file://$PROJECT_DIR$/UserFiles/sid/testforsending.txt" />
     <entry file="file://$PROJECT_DIR$/models/User.js" />
+    <entry file="file://$PROJECT_DIR$/models/Files.js" />
     <entry file="file://$PROJECT_DIR$/routes/passport.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/Files.js" />
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="69" column="25" lean-forward="false" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -546,32 +583,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/kafka/kafkarpc.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
+        <state relative-caret-position="960">
           <caret line="64" column="30" lean-forward="false" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/fileUpload.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="1035">
+          <caret line="69" column="25" lean-forward="false" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="1" lean-forward="false" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="259" column="5" lean-forward="false" selection-start-line="259" selection-start-column="5" selection-end-line="259" selection-end-column="5" />
+        <state relative-caret-position="-61">
+          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!block;n#afterRegister#0" expanded="false" />
+            <element signature="e#596#1331#0" expanded="false" />
+            <element signature="n#!!block;n#logout#0" expanded="false" />
+            <element signature="n#!!block;n#loginPassport#0" expanded="false" />
+            <element signature="n#!!block;n#getFiles#0" expanded="false" />
+            <element signature="n#!!block;n#validateUser#0" expanded="false" />
+            <element signature="n#!!block;n#getGroups#0" expanded="false" />
+            <element signature="n#!!block;n#createGroup#0" expanded="false" />
+            <element signature="n#!!block;n#addMember#0" expanded="false" />
+            <element signature="n#!!block;n#deleteGroup#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/fileUpload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2579">
+          <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
           <folding />
         </state>
       </provider>

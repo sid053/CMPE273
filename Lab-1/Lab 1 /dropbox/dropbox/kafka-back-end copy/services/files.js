@@ -14,13 +14,13 @@ function handle_Get_Files(msg, callback) {
     var res = {};
     User.findOne({username:username},{_id:0},function (err,results) {
         if(!err){
-            console.log(results);
+          console.log(results);
            // console.log("asdf.asdf")
 
 
             res.code = "200";
             res.value = results;
-            console.log(res.value);
+         //   console.log(res.value);
             callback(null,res);
         }
 
@@ -165,13 +165,35 @@ function handle_Delete_Group(msg, callback) {
 
 //*******************************************************************************************************************
 
+function handle_Delete_File(msg, callback) {
+    // console.log("inside get groups function");
+    console.log("***************************************");
+      console.log(msg);
+    var res = {}
+    console.log(msg.file);
+    console.log("++++++++++++++++++++++++++++++++++");
+    User.updateOne({"username":msg.username},{"$pull": {file:msg.file}}, function(err) {
+        if(err){
+            console.log("Error while deleting the user , either the user is not the owner of the group");
+            res.code = 401;
+            res.value = "User not the owner of the group";
+        }
+        else {
+            console.log("file deleted");
+            res.code = "200" ;
+            res.value = "file deleted";
+        } callback(null,res);
+    })
+
+
+}
+
+
+//*******************************************************************************************************************
 
 
 
-
-
-
-
+exports.handle_Delete_File = handle_Delete_File;
 exports.handle_Delete_Group = handle_Delete_Group;
 exports.handle_Add_Member = handle_Add_Member;
 exports.handle_Create_Group = handle_Create_Group;

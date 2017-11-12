@@ -10,7 +10,7 @@ var rimraf = require('rimraf');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-           console.log("about to upload");
+
       const username ="./UserFiles/"+req.session.username;
 
         cb(null,username);
@@ -30,25 +30,26 @@ router.post('/upload', upload.single('mypic'),function (req, res, next) {
     var username = req.session.username ;
     console.log("inside post upload");
    // console.log(req.body.username);
-    console.log(req.file);
 
-    // kafka.make_request('uploadFiles',{file:req.file,username:username},'fileUpload', function(err,results){
-    //
-    //     console.log(results);
-    //     if(err){
-    //         console.log(err);
-    //     }
-    //     else
-    //     {
-    //
-    //         if(results.code==='200'){
-    //             res.status(201).send();
-    //         }
-    //         else{
-    //             res.status(401).send();
-    //         }
-    //     }
-    // });
+    req.file.starred = false ;
+    console.log(req.file);
+    kafka.make_request('fileUpload',{file:req.file,username:username},'fileUpload', function(err,results){
+        console.log('response from kafka for user validation');
+        console.log(results);
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+
+            if(results.code==='200'){
+                res.status(201).send();
+            }
+            else{
+                res.status(401).send();
+            }
+        }
+    });
 
 
 
@@ -130,17 +131,53 @@ router.post('/uploadFolder' , function (req,res) {
 
 router.post('/delete' , function (req,res) {
     console.log("inside Delete");
-    var FilePath = "./"+req.body.file ;
-    console.log(FilePath);
-    fs.unlink(FilePath, function(err) {
+    var username = req.session.username;
+    fs.unlink(req.body.path, function(err) {
         if (!err) {
               console.log("File deleteing");
-            //console.log(req.sessionID);
-            res.status(201).send();
+
+            kafka.make_request('deleteFile',{file:req.body,username:username},'filedelete', function(err,results){
+                console.log('response from kafka for user validation');
+                console.log(results);
+                if(err){
+                    console.log(err);
+                }
+                else
+                {
+
+                    if(results.code==='200'){
+                        res.status(201).send();
+                    }
+                    else{
+                        res.status(401).send();
+                    }
+                }
+            });
+
+            //res.status(201).send();
         }
         else {
-            return res.end("deletion failed : " + err);
-            res.status(401).send();
+
+            console.log("inside the else of the function delete file");
+            kafka.make_request('deleteFile',{file:req.body,username:username},'filedelete', function(err,results){
+                console.log('response from kafka for user validation');
+                console.log(results);
+                if(err){
+                    console.log(err);
+                }
+                else
+                {
+
+                    if(results.code==='200'){
+                        res.status(201).send();
+                    }
+                    else{
+                        res.status(401).send();
+                    }
+                }
+            });
+
+
         }
     });
 })

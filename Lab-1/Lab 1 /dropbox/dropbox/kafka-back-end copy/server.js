@@ -143,7 +143,7 @@ switch(message.topic) {
 
     //*******************************************************************************************************************
 
-    case 'uploadFiles' :
+    case 'fileUpload' :
 
         login.file_Upload(data.data, function (err, res) {
             console.log('after handle' + res.code);
@@ -219,6 +219,31 @@ switch(message.topic) {
 
     //*******************************************************************************************************************
 
+    case 'deleteFile':
+        files.handle_Delete_File(data.data , function(err,res){
+            console.log("inside the delete file function");
+            var payloads = [
+                {
+                    topic: data.replyTo,
+                    messages: JSON.stringify({
+                        correlationId: data.correlationId,
+                        data: res
+                    }),
+                    partition: 0
+                }
+            ];
+            producer.send(payloads, function (err, data) {
+                console.log("***************************************");
+                console.log(data);
+                console.log("After the data is sent");
+                console.log("***************************************");
+            });
+            return;
+
+        });
+      break;
+
+    //*******************************************************************************************************************
     case 'groups':
         if(data.data.action==="getGroups") {
             files.handle_Get_Groups(data.data, function (err, res) {

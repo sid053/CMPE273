@@ -15,7 +15,6 @@ router.post('/doLogout' , home.logout);
 
 router.post('/login', home.loginPassport);
 
-
 router.get('/getFiles',home.getFiles);
 
 router.post('/validateUser' , home.validateUser);
