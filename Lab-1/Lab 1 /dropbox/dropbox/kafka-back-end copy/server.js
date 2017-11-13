@@ -32,7 +32,7 @@ switch(message.topic) {
     case 'login':
 
         login.handle_Login_request(data.data, function (err, res) {
-            console.log('after handle' + res);
+         //   console.log('after handle' + res);
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -43,9 +43,9 @@ switch(message.topic) {
                     partition: 0
                 }
             ];
-            console.log("here I am");
-            console.log(payloads);
-            console.log("about to send response");
+            // console.log("here I am");
+            // console.log(payloads);
+            // console.log("about to send response");
             producer.send(payloads, function (err, data) {
 
                 console.log(data);
@@ -61,8 +61,8 @@ switch(message.topic) {
     case 'validate' :
 
         login.handle_Validate_request(data.data, function (err, res) {
-            console.log("After processing the data");
-            console.log(res.code + "  " + res.value);
+            // console.log("After processing the data");
+            // console.log(res.code + "  " + res.value);
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -73,11 +73,11 @@ switch(message.topic) {
                     partition: 0
                 }
             ];
-            console.log("after the payload is formed");
-            console.log(payloads);
-            console.log("about to send response");
+            // console.log("after the payload is formed");
+            // console.log(payloads);
+            // console.log("about to send response");
             producer.send(payloads, function (err, data) {
-                console.log(data);
+                //console.log(data);
             });
             return;
 
@@ -90,7 +90,7 @@ switch(message.topic) {
 
     case 'files':
         files.handle_Get_Files(data.data, function (err, res) {
-            console.log("After processing the data");
+          //  console.log("After processing the data");
             // console.log(res.file+"  ");
             //   var files = "Empty";
             var payloads = [
@@ -103,9 +103,9 @@ switch(message.topic) {
                     partition: 0
                 }
             ];
-            console.log("after the payload is formed");
-            // console.log(payloads);
-            console.log("about to send response");
+            // console.log("after the payload is formed");
+            // // console.log(payloads);
+            // console.log("about to send response");
             producer.send(payloads, function (err, data) {
                 //   console.log(data);
             });
@@ -117,7 +117,7 @@ switch(message.topic) {
 
     case 'signUp':
         login.handle_SignUp_request(data.data, function (err, res) {
-            console.log('after handle' + res.code);
+           // console.log('after handle' + res.code);
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -128,13 +128,13 @@ switch(message.topic) {
                     partition: 0
                 }
             ];
-            console.log("here I am");
-            console.log(payloads);
-            console.log("about to send response");
+            // console.log("here I am");
+            // console.log(payloads);
+            // console.log("about to send response");
             producer.send(payloads, function (err, data) {
 
-                console.log(data);
-                console.log("After the data is sent");
+                // console.log(data);
+                // console.log("After the data is sent");
             });
             return;
         });
@@ -146,7 +146,7 @@ switch(message.topic) {
     case 'fileUpload' :
 
         login.file_Upload(data.data, function (err, res) {
-            console.log('after handle' + res.code);
+         //   console.log('after handle' + res.code);
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -157,13 +157,13 @@ switch(message.topic) {
                     partition: 0
                 }
             ];
-            console.log("here I am");
-            console.log(payloads);
-            console.log("about to send response");
+            // console.log("here I am");
+            // console.log(payloads);
+            // console.log("about to send response");
             producer.send(payloads, function (err, data) {
 
-                console.log(data);
-                console.log("After the data is sent");
+                // console.log(data);
+                // console.log("After the data is sent");
             });
             return;
         });
@@ -197,7 +197,7 @@ switch(message.topic) {
 
     case 'deleteFolder':
         login.handle_Folder_delete(data.data, function (err, res) {
-            console.log("inside the upload folder function");
+        //    console.log("inside the upload folder function");
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -210,8 +210,8 @@ switch(message.topic) {
             ];
             producer.send(payloads, function (err, data) {
 
-                console.log(data);
-                console.log("After the data is sent");
+              //  console.log(data);
+                //console.log("After the data is sent");
             });
             return;
         });
@@ -221,7 +221,7 @@ switch(message.topic) {
 
     case 'deleteFile':
         files.handle_Delete_File(data.data , function(err,res){
-            console.log("inside the delete file function");
+           // console.log("inside the delete file function");
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -233,11 +233,10 @@ switch(message.topic) {
                 }
             ];
             producer.send(payloads, function (err, data) {
-                console.log("***************************************");
-                console.log(data);
-                console.log("After the data is sent");
-                console.log("***************************************");
-            });
+//                console.log(data);
+//                 console.log("After the data is sent");
+//                 console.log("***************************************");
+             });
             return;
 
         });
@@ -247,7 +246,7 @@ switch(message.topic) {
     case 'groups':
         if(data.data.action==="getGroups") {
             files.handle_Get_Groups(data.data, function (err, res) {
-                console.log("inside the get Groups function");
+               // console.log("inside the get Groups function");
                 var payloads = [
                     {
                         topic: data.replyTo,
@@ -259,10 +258,10 @@ switch(message.topic) {
                     }
                 ];
                 producer.send(payloads, function (err, data) {
-                    console.log("***************************************");
-                    console.log(data);
-                    console.log("After the data is sent");
-                    console.log("***************************************");
+                   // console.log("***************************************");
+                    //console.log(data);
+                    //console.log("After the data is sent");
+                    //console.log("***************************************");
                 });
                 return;
             });
@@ -272,7 +271,7 @@ switch(message.topic) {
 
        else if(data.data.action==='create') {
         files.handle_Create_Group(data.data, function (err, res) {
-            console.log("inside creation of group");
+            //console.log("inside creation of group");
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -283,12 +282,12 @@ switch(message.topic) {
                     partition: 0
                 }
             ];
-                console.log(payloads);
+             //   console.log(payloads);
             producer.send(payloads, function (err, data) {
-                console.log("***************************************");
-                console.log(data);
-                console.log("After the data is sent");
-                console.log("***************************************");
+                // console.log("***************************************");
+                // console.log(data);
+                // console.log("After the data is sent");
+                // console.log("***************************************");
             });
             return;
         });
@@ -314,10 +313,10 @@ switch(message.topic) {
                 ];
                 console.log(payloads);
                 producer.send(payloads, function (err, data) {
-                    console.log("***************************************");
-                    console.log(data);
-                    console.log("After the data is sent");
-                    console.log("***************************************");
+                    // console.log("***************************************");
+                    // console.log(data);
+                    // console.log("After the data is sent");
+                    // console.log("***************************************");
                 });
                 return;
             });
@@ -330,7 +329,7 @@ switch(message.topic) {
     else if (data.data.action ==='deleteGroup'){
 
         files.handle_Delete_Group(data.data, function (err, res) {
-            console.log("inside creation of group");
+            //console.log("inside creation of group");
             var payloads = [
                 {
                     topic: data.replyTo,
@@ -341,13 +340,13 @@ switch(message.topic) {
                     partition: 0
                 }
             ];
-            console.log("---------------------------------------------");
-            console.log(payloads);
+            // console.log("---------------------------------------------");
+            // console.log(payloads);
             producer.send(payloads, function (err, data) {
-                console.log("***************************************");
-                console.log(data);
-                console.log("After the data is sent");
-                console.log("***************************************");
+                // console.log("***************************************");
+                // console.log(data);
+                // console.log("After the data is sent");
+                // console.log("***************************************");
             });
             return;
         });
@@ -359,7 +358,7 @@ switch(message.topic) {
     //*******************************************************************************************************************
 
     default:
-        console.log("inside the default thingy");
+     //   console.log("inside the default thingy");
         break;
 
 }

@@ -28,16 +28,16 @@ var upload = multer({storage:storage});
 
 router.post('/upload', upload.single('mypic'),function (req, res, next) {
     var username = req.session.username ;
-    console.log("inside post upload");
+   // console.log("inside post upload");
    // console.log(req.body.username);
 
     req.file.starred = false ;
-    console.log(req.file);
+    //console.log(req.file);
     kafka.make_request('fileUpload',{file:req.file,username:username},'fileUpload', function(err,results){
-        console.log('response from kafka for user validation');
-        console.log(results);
+      //  console.log('response from kafka for user validation');
+        //console.log(results);
         if(err){
-            console.log(err);
+          //  console.log(err);
         }
         else
         {
@@ -63,13 +63,13 @@ router.post('/upload', upload.single('mypic'),function (req, res, next) {
 
 router.get('/check', function(req,res){
      var username = req.session.username ;
-     console.log("inside check function at node ");
-     console.log(req.sessionID);
-     console.log(req.session);
-     console.log(req.session.loggedin);
-     console.log("ppppppppppppppppppppppppp");
-     if(req.session.loggedin=== true){
-         console.log("foobar")
+     // console.log("inside check function at node ");
+     // console.log(req.sessionID);
+     // console.log(req.session);
+     // console.log(req.session.loggedin);
+     // console.log("ppppppppppppppppppppppppp");
+      if(req.session.loggedin=== true){
+       //  console.log("foobar")
          const username = req.session.user;
          res.status(201).send();
      }
@@ -86,19 +86,19 @@ router.get('/check', function(req,res){
 router.post('/uploadFolder' , function (req,res) {
 
     var username = req.session.username ;
-    console.log("inside post upload");
+ //   console.log("inside post upload");
     // console.log(req.body.username);
-    console.log(req.body);
+  //  console.log(req.body);
     var folderpath = req.body.folder ;
 
     fs.mkdir(folderpath, function(err) {
              if (!err) {
 
                  kafka.make_request('uploadFolder',{folder:folderpath,username:username},'folderUpload', function(err,results){
-                     console.log('response from kafka for user validation');
-                     console.log(results);
+                    // console.log('response from kafka for user validation');
+                  //   console.log(results);
                      if(err){
-                         console.log(err);
+                      //   console.log(err);
                      }
                      else
                      {
@@ -158,10 +158,10 @@ router.post('/delete' , function (req,res) {
         }
         else {
 
-            console.log("inside the else of the function delete file");
+          //  console.log("inside the else of the function delete file");
             kafka.make_request('deleteFile',{file:req.body,username:username},'filedelete', function(err,results){
-                console.log('response from kafka for user validation');
-                console.log(results);
+           //     console.log('response from kafka for user validation');
+             //   console.log(results);
                 if(err){
                     console.log(err);
                 }
@@ -195,18 +195,18 @@ router.post('/share' , function(req,res){
     console.log(filePathDestination);
     fs.access(destDirectory, function(err){
         if(err) {
-            console.log("inside accesing destination directory")
+          //  console.log("inside accesing destination directory")
             res.status(401).send(err);
         }
         else{
             const readStream = fs.createReadStream(filePathOriginal);
-               console.log("inside else of share");
+            //   console.log("inside else of share");
             readStream.once('error', function(err){
-                console.log(err);
+              //  console.log(err);
         });
 
             readStream.once('end', function() {
-                console.log('done copying');
+                //console.log('done copying');
         });
 
             readStream.pipe(fs.createWriteStream(filePathDestination));
@@ -225,14 +225,14 @@ router.post('/deleteFolder' , function(req,res){
 
     console.log(req.body.folderpath);
     var folderpath = req.body.folder;
-    var username = req.session.username;
-    console.log("the username of the account is : " + req.session.username);
+    var username = "sid";
+    //console.log("the username of the account is : " + req.session.username);
     rimraf(folderpath , function (err) {
 
             if (!err) {
-                   console.log("about to send the delete folder request")
+                   //console.log("about to send the delete folder request")
                 kafka.make_request('deleteFolder',{folder:folderpath,username:username},'deleteFolder', function(err,results){
-                    console.log(results);
+                  //  console.log(results);
                     if(err){
                         console.log(err);
                     }

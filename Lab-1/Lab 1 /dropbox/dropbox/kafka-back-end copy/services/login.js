@@ -5,7 +5,7 @@ var fs = require('fs');
 
 function handle_Login_request(msg, callback){
 
-    console.log("In handle request:"+ JSON.stringify(msg));
+ //   console.log("In handle request:"+ JSON.stringify(msg));
 
     User.findOne({username: msg.username, password: msg.password}, function (err, user) {
         var res = {};
@@ -34,7 +34,7 @@ function handle_Folder_Upload(msg, callback) {
 
 
     User.updateOne({"username":msg.username}, {"$push": {folder:msg.folder}} ,function (err) {
-        console.log("After the updateone query");
+      //  console.log("After the updateone query");
         if(!err){
             res.code = "200";
             res.value = "Folder Saved in the database";
@@ -51,18 +51,18 @@ function handle_Folder_Upload(msg, callback) {
 
 //*******************************************************************************************************************
 function handle_Folder_delete(msg, callback) {
-    console.log(msg.folder);
-    console.log("**************");
-    console.log(msg.username);
+    // console.log(msg.folder);
+    // console.log("**************");
+    // console.log(msg.username);
     var res = {};
 
 
     User.updateOne({"username":msg.username}, {"$pull": {folder:msg.folder}} ,function (err) {
-        console.log("After the updateone query");
+    //    console.log("After the updateone query");
         if(!err){
             res.code = "200";
             res.value = "Folder Saved in the database";
-            console.log("foobarfoobar");
+          //  console.log("foobarfoobar");
         }
         else{
             res.code = "400";

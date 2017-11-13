@@ -23,10 +23,10 @@ function afterRegister(req,res){
         if(!err){
 
             kafka.make_request('signUp',req.body,'SignUp', function(err,results){
-                console.log('response from kafka for user validation');
-                console.log(results);
+               // console.log('response from kafka for user validation');
+             //   console.log(results);
                 if(err){
-                    console.log(err);
+                //    console.log(err);
                 }
                 else
                 {
@@ -65,7 +65,7 @@ function logout(req,res){
 
 //login Function
 function loginPassport(req,res,next){
-
+ console.log("inside the login request in passport")
 	passport.authenticate('login', function(err, user, info) {
     if(err) {
       return next(err);
@@ -83,9 +83,9 @@ function loginPassport(req,res,next){
       req.session.username = user.username;
       req.session.loggedin = true;
       var username = user.username;
-      console.log(req.session.username);
-      console.log("session initilized");
-       console.log("outside glob");
+     // console.log(req.session.username);
+      //console.log("session initilized");
+      // console.log("outside glob");
       return res.status(201).send();
     })
   })(req, res, next);
@@ -100,10 +100,10 @@ function getFiles(req,res,next){
 
 
     kafka.make_request('files',{"username":username},'getfiles', function(err,results){
-        console.log('response from kafka for user validation');
-        console.log(results);
+       // console.log('response from kafka for user validation');
+        //console.log(results);
         if(err){
-            console.log(err);
+          //  console.log(err);
         }
         else
         {
@@ -127,15 +127,15 @@ function getFiles(req,res,next){
 
 
  function validateUser(req,res,next) {
-       console.log(req.body.shareUsername);
+     //  console.log(req.body.shareUsername);
        var shareUsername = req.body.shareUsername;
      //  var callingFunction = validateUser1 ;
-      console.log("Inside validate user function")
+     // console.log("Inside validate user function")
     kafka.make_request('validate',{"username":shareUsername},'validateuser1', function(err,results){
-        console.log('response from kafka for user validation');
-        console.log(results);
+      //  console.log('response from kafka for user validation');
+        //console.log(results);
         if(err){
-           console.log(err);
+        //   console.log(err);
         }
         else
         {
@@ -163,20 +163,20 @@ function getFiles(req,res,next){
           action: "getGroups"
       }
      kafka.make_request('groups',body,'groups', function(err,results){
-         console.log('response from kafka for user validation');
-         console.log(results);
+         //console.log('response from kafka for user validation');
+       //  console.log(results);
          if(err){
-             console.log(err);
+            // console.log(err);
          }
          else
          {
-               console.log("inside else fo error for , about to send response");
+             //  console.log("inside else fo error for , about to send response");
              if(results.code==="200"){
-                   console.log("yay.i am here good thing");
+                //   console.log("yay.i am here good thing");
                  res.status(201).send(results.value);
              }
              else{
-                 console.log("i shouldnt be here");
+                // console.log("i shouldnt be here");
                  res.status(401).send("no files to return");
              }
          }
@@ -197,7 +197,7 @@ function getFiles(req,res,next){
 
      }
      kafka.make_request('groups',body,'groups', function(err,results){
-         console.log('response from kafka for user validation for groups');
+       //  console.log('response from kafka for user validation for groups');
          //console.log(results);
          if(err){
              console.log(err);
@@ -227,7 +227,7 @@ function addMember(req,res,next){
      }
 
     kafka.make_request('groups',body,'groups', function(err,results){
-        console.log('response from kafka for user validation for groups');
+     //   console.log('response from kafka for user validation for groups');
         //console.log(results);
         if(err){
             console.log(err);
@@ -259,11 +259,11 @@ function addMember(req,res,next){
          username:req.session.username,
          action: "deleteGroup"
      }
-     console.log("Sssssssssssssssssssssssssssssssssssssssssssssss");
+   //  console.log("Sssssssssssssssssssssssssssssssssssssssssssssss");
 
      kafka.make_request('groups',body,'groups', function(err,results){
-         console.log('response from kafka for user validation');
-         console.log(results);
+        // console.log('response from kafka for user validation');
+      //   console.log(results);
          if(err){
              console.log(err);
          }
@@ -271,11 +271,11 @@ function addMember(req,res,next){
          {
              console.log("inside else fo error for , about to send response");
              if(results.code==="200"){
-                 console.log("yay.i am here good thing");
+                 //console.log("yay.i am here good thing");
                  res.status(201).send("Group deleted");
              }
              else{
-                 console.log("i shouldnt be here");
+              //   console.log("i shouldnt be here");
                  res.status(401).send("no files to return");
              }
          }

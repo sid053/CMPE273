@@ -1,7 +1,7 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-mongoose.connect('mongodb://127.0.0.1:27017/cmpe_273');
+//mongoose.connect('mongodb://127.0.0.1:27017/cmpe_273');
 
 var groupSchema   = new Schema({
     groupname:String,
