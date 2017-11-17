@@ -1,6 +1,7 @@
 package com.controller;
 
-import com.entity.User;
+import com.entity.*;
+import com.service.FileService;
 import com.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,11 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private FileService fileService;
 
-    @PostMapping(path="/add",consumes = MediaType.APPLICATION_JSON_VALUE) // Map ONLY POST Requests
+    //*********************************************************************************************************************
+    @PostMapping(path="/doRegister",consumes = MediaType.APPLICATION_JSON_VALUE) // Map ONLY POST Requests
     public  ResponseEntity<?> addNewUser (@RequestBody User user) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
@@ -30,12 +34,34 @@ public class UserController {
         return new ResponseEntity(null,HttpStatus.CREATED);
     }
 
-    @GetMapping(path="/all",produces = MediaType.APPLICATION_JSON_VALUE)
+    //*********************************************************************************************************************
+
+
+    @PostMapping(path = "/addFiles" ,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> addFiles(@RequestBody Files file){
+        fileService.addFile(file);
+        System.out.println("The file has been added");
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
+    //*********************************************************************************************************************
+
+    @GetMapping(path="/getUsers",produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Iterable<User> getAllUsers() {
         // This returns a JSON with the users
         return userService.getAllUsers();
     }
 
+    //*********************************************************************************************************************
+
+    @GetMapping(path = "/getFiles",produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Iterable<Files> getAllFiles(){
+        return fileService.getAllFiles();
+    }
+
+
+    //*********************************************************************************************************************
     @PostMapping(path="/login",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(@RequestBody String user, HttpSession session)
     {
@@ -44,6 +70,7 @@ public class UserController {
         return new ResponseEntity(userService.login(jsonObject.getString("username"),jsonObject.getString("password")),HttpStatus.OK);
     }
 
+    //*********************************************************************************************************************
     @PostMapping(value = "/logout")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<?> logout(HttpSession session) {
@@ -51,4 +78,8 @@ public class UserController {
         session.invalidate();
         return  new ResponseEntity(HttpStatus.OK);
     }
+    //*********************************************************************************************************************
+
+
+
 }
