@@ -1,1 +1,19 @@
-insert into USER (name,email,password) values ('Bhavan','bhavan@b.com','a');
+-- insert into USER (name,email,password) values ('Bhavan','bhavan@b.com','a');
+--
+--
+--
+-- select userid from user where username = "session.username";
+--
+-- select fileid from files where filename = "req.filename";
+--
+--
+--
+-- insert into userfiles (fileid,userid) values(userid , fileid);
+--
+--
+--
+--
+-- name this query as getfiles query
+-- select filepath,filename from files where fileid
+-- = (select fileid from userfiles where userid
+--  = ("select userid from user where username = session.username"))

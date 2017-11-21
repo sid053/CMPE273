@@ -1,4 +1,4 @@
-const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
+const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:8080'
 
 
 const headers = {
@@ -8,7 +8,7 @@ const headers = {
 //****************************************************
 
 export const doLogin = (payload) =>
-    fetch(`${api}/users/login`, {
+    fetch(`${api}/user/login`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -68,7 +68,7 @@ export const doRegister = (payload) =>
         });
 //****************************************************
 export const getImages = () =>
-    fetch(`${api}/users/getFiles`, {
+    fetch(`${api}/user/getFiles`, {
         method: 'GET',
         credentials: 'include',
         mode: 'cors',

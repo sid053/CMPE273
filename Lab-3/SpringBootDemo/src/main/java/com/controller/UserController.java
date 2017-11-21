@@ -2,6 +2,7 @@ package com.controller;
 
 import com.entity.*;
 import com.service.FileService;
+import com.service.UserFileService;
 import com.service.UserService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.html.HTMLParagraphElement;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+
 
 @Controller    // This means that this class is a Controller
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(path="/user") // This means URL's start with /demo (after Application path)
 public class UserController {
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -41,6 +42,10 @@ public class UserController {
     public ResponseEntity<?> addFiles(@RequestBody Files file){
         fileService.addFile(file);
         System.out.println("The file has been added");
+//
+//         Userfiles userfiles = new Userfiles();
+//         userfiles.setFileid(file.getFileId());
+//         userfiles.setUserid(1);
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -67,7 +72,14 @@ public class UserController {
     {
         JSONObject jsonObject = new JSONObject(user);
         session.setAttribute("name",jsonObject.getString("username"));
-        return new ResponseEntity(userService.login(jsonObject.getString("username"),jsonObject.getString("password")),HttpStatus.OK);
+        List<User> User = userService.login(jsonObject.getString("username")
+                ,jsonObject.getString("password"));
+
+        if (User.size()>0){
+            return new ResponseEntity(HttpStatus.OK);
+        }
+
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
     //*********************************************************************************************************************

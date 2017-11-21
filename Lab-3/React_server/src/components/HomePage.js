@@ -20,7 +20,7 @@ class HomePage extends Component {
     handleSubmit = (userdata) => {
         API.doLogin(userdata)
             .then((status) => {
-                if(status===201){
+                if(status===200){
                     console.log("after SignIn response");
                     this.setState({
                         isLoggedIn: true,
@@ -96,22 +96,22 @@ class HomePage extends Component {
     }
     componentWillMount(){
 
-        API.checkSession().then((status)=>{
-            if(status===201){
-                this.setState({
-                    isLoggedIn: true,
-                    message: "LoggedIn",
+        // API.checkSession().then((status)=>{
+        //     if(status===201){
+        //         this.setState({
+        //             isLoggedIn: true,
+        //             message: "LoggedIn",
 
-                });
-                this.props.history.push("/dashboard");
-            }
-            else{
-                this.props.history.push("/")
-            }
+        //         });
+        //         this.props.history.push("/dashboard");
+        //     }
+        //     else{
+        //         this.props.history.push("/")
+        //     }
 
-        }).catch((error)=>{
-            this.props.history.push("/")
-        })
+        // }).catch((error)=>{
+        //     this.props.history.push("/")
+        // })
 
     }
 
