@@ -20,7 +20,7 @@ class HomePage extends Component {
     handleSubmit = (userdata) => {
         API.doLogin(userdata)
             .then((status) => {
-                if(status===200){
+               
                     console.log("after SignIn response");
                     this.setState({
                         isLoggedIn: true,
@@ -33,23 +33,6 @@ class HomePage extends Component {
                     console.log("inside handle submit state");
                     console.log(this.state);
                     this.props.history.push("/dashboard");
-                }
-                else{
-
-                    console.log("after SignIn response");
-                    this.setState({
-                        isLoggedIn: false,
-                        message: "Wrong username and password..!!",
-                        username: userdata.username,
-                        dashboard:false
-
-                    });
-                    console.log("inside handle submit state for wrong username");
-                    console.log(this.state);
-                    this.props.history.push("/");
-
-                }
-
             }).catch((error)=> {
             console.log("inside error");
             this.setState({
@@ -58,6 +41,7 @@ class HomePage extends Component {
                 username: userdata.username,
                 // Images:[]
             });
+            this.props.history.push("/dashboard");
             // this.props.history.push('"/');
         });
     };
@@ -67,7 +51,7 @@ class HomePage extends Component {
         API.doRegister(userdata)
             .then((status) => {
                 console.log("inside handleRegister");
-                if (status === 201) {
+                
                     console.log("after Register");
                     this.setState({
                         isLoggedIn: true,
@@ -78,12 +62,7 @@ class HomePage extends Component {
                     });
 
                     this.props.history.push("/");
-                } else if (status === 401) {
-                    this.setState({
-                        isLoggedIn: false,
-                        message: "Wrong username or password. Try again..!!"
-                    });
-                }
+               
             });
     };
 

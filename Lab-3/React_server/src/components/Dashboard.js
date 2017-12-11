@@ -31,12 +31,7 @@ class Dashboard extends Component {
     //*********************************************************************************
 
     componentWillMount(){
-      API.getImages().then((data)=>{
-          console.log("************************************");
-        console.log(data);
-          console.log("************************************");
-       // this.props.getData(data);
-      })
+   
 
       
 
