@@ -60,7 +60,7 @@
         <entry file="file://$PROJECT_DIR$/JUnitTest.iml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+              <caret line="77" column="9" lean-forward="false" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -343,12 +343,12 @@
       <workItem from="1511200980825" duration="5201000" />
       <workItem from="1511225276703" duration="1197000" />
       <workItem from="1511400052454" duration="2272000" />
-      <workItem from="1513012434968" duration="1357000" />
+      <workItem from="1513012434968" duration="1599000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15265000" />
+    <option name="totallyTimeSpent" value="15507000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -800,7 +800,7 @@
     <entry file="file://$PROJECT_DIR$/JUnitTest.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <caret line="77" column="9" lean-forward="false" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
           <folding />
         </state>
       </provider>
